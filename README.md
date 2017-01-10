@@ -1,2 +1,2 @@
 # TooManyCubes
-C++ Qt3D minecraft like game.
+Sandbox game with blocks only.
