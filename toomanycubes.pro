@@ -1,10 +1,7 @@
 QT += 3dcore 3drender 3dinput 3dextras
+include(src/surroundings/surroundings.pri)
+include(src/materials/materials.pri)
 
 SOURCES += \
-    main.cpp \
-    block.cpp \
-    blocksscene.cpp
+    src/main.cpp \
 
-HEADERS += \
-    block.h \
-    blocksscene.h
