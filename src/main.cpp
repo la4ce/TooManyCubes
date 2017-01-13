@@ -75,13 +75,13 @@ int main(int argc, char* argv[]) {
     Qt3DExtras::Qt3DWindow view;
 
     Scene scene;
-    scene.addBlock(QVector3D(0.0, 0.0, 0.0));
-    scene.addBlock(QVector3D(1.0, 0.0, 0.0));
-    scene.addBlock(QVector3D(2.0, 0.0, 0.0));
-    scene.addBlock(QVector3D(1.0, 0.0, 1.0));
-    scene.addBlock(QVector3D(1.0, 0.0, -1.0));
+    scene.addBlock(Vec3i(0.0, 0.0, 0.0));
+    scene.addBlock(Vec3i(1.0, 0.0, 0.0));
+    scene.addBlock(Vec3i(2.0, 0.0, 0.0));
+    scene.addBlock(Vec3i(1.0, 0.0, 1.0));
+    scene.addBlock(Vec3i(1.0, 0.0, -1.0));
 
-    scene.addBlock(QVector3D(1.0, 1.0, 0.0));
+    scene.addBlock(Vec3i(1.0, 1.0, 0.0));
 
     // Camera and CameraContoller
     Qt3DRender::QCamera *camera = view.camera();

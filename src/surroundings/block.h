@@ -5,6 +5,8 @@
 #include <Qt3DRender>
 #include <Qt3DExtras>
 
+#include "vec3i.h"
+
 namespace TooManyCubes {
 
 enum BlockType {
@@ -14,11 +16,11 @@ enum BlockType {
 /* Block is an atomic unit of surrounding in the game. */
 class Block {
 public:
-    Block(QVector3D pos, Qt3DCore::QEntity &parent, BlockType type);
+    Block(Vec3i pos, Qt3DCore::QEntity &parent, BlockType type);
 
 private:
     const BlockType type;
-    const QVector3D pos;
+    const Vec3i pos;
 
     Qt3DCore::QEntity blockEntity;
 
