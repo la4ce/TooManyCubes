@@ -4,7 +4,7 @@
 namespace TooManyCubes {
 class Vec3i {
 public:
-    Vec3i() {}
+    Vec3i();
     Vec3i(int oneValue) : xp(oneValue), yp(oneValue), zp(oneValue) {}
     Vec3i(int x, int y, int z) : xp(x), yp(y), zp(z) {}
 

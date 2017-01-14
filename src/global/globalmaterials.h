@@ -1,5 +1,5 @@
-#ifndef MATERIALS_H
-#define MATERIALS_H
+#ifndef TMC_MATERIALS_H
+#define TMC_MATERIALS_H
 
 #include <Qt3DExtras>
 
@@ -17,4 +17,4 @@ Qt3DExtras::QPhongMaterial GlobalMaterials::DEFAULT_MATERIAL;
 
 }
 
-#endif // MATERIALS_H
+#endif // TMC_MATERIALS_H

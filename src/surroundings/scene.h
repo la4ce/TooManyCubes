@@ -1,5 +1,5 @@
-#ifndef TMC_BLOCKS_SCENE_H
-#define TMC_BLOCKS_SCENE_H
+#ifndef TMC_SCENE_H
+#define TMC_SCENE_H
 
 #include <unordered_map>
 
@@ -40,4 +40,4 @@ private:
 
 } // namespace TooManyCubes
 
-#endif // TMC_BLOCKS_SCENE_H
+#endif // TMC_SCENE_H

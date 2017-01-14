@@ -5,4 +5,5 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/vec3i.h \
-    $$PWD/vec3i.h
+    $$PWD/globalmaterials.h
+
