@@ -7,14 +7,13 @@ namespace TooManyCubes {
 
 class GlobalMaterials {
 public:
+    GlobalMaterials() = delete;
     static Qt3DExtras::QPhongMaterial DEFAULT_MATERIAL; // TODO: figure out how to prevent changing without const qualifier
-
-private:
-    GlobalMaterials() {}
 };
 
 Qt3DExtras::QPhongMaterial GlobalMaterials::DEFAULT_MATERIAL;
 
 }
+
 
 #endif // TMC_MATERIALS_H
