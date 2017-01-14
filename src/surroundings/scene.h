@@ -31,7 +31,7 @@ public:
     void addBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
     void removeBlock(Vec3i pos);
 
-    Qt3DCore::QEntity *getRootEntity();
+    Qt3DCore::QEntity* getRootEntity();
 
 private:
     Qt3DCore::QEntity rootEntity;

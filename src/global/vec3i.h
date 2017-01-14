@@ -1,6 +1,8 @@
 #ifndef TMC_VEC3I_H
 #define TMC_VEC3I_H
 
+#include <iostream>
+
 namespace TooManyCubes {
 class Vec3i {
 public:
@@ -16,7 +18,17 @@ public:
     void setY(int y);
     void setZ(int z);
 
+    const Vec3i& operator+();
+    const Vec3i operator-();
+    const Vec3i& operator+=(const Vec3i& vec);
+    const Vec3i& operator-=(const Vec3i& vec);
+
     friend bool operator==(const Vec3i& left, const Vec3i& right);
+    friend bool operator!=(const Vec3i& left, const Vec3i& right);
+    friend const Vec3i operator+(const Vec3i& left, const Vec3i& right);
+    friend const Vec3i operator-(const Vec3i& left, const Vec3i& right);
+    friend std::ostream& operator<<(std::ostream& os, const Vec3i& obj); // TODO: impement output for qDebug too
+
 private:
     int xp;
     int yp;

@@ -13,7 +13,7 @@ void Scene::removeBlock(Vec3i pos) {
     this->blocks.erase(pos);
 }
 
-Qt3DCore::QEntity *Scene::getRootEntity() {
+Qt3DCore::QEntity* Scene::getRootEntity() {
     return &(this->rootEntity);
 }
 
