@@ -10,7 +10,8 @@
 namespace TooManyCubes {
 
 enum BlockType {
-    DEFAULT_BLOCK = 1 // More types of blocks will be added with materials
+    DEFAULT_BLOCK = 1,
+    DEFAULT_TRANSP_BLOCK
 };
 
 /* Block is an atomic unit of surrounding in the game. */

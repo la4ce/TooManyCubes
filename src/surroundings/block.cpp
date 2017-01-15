@@ -14,7 +14,15 @@ Block::Block(Vec3i pos, Qt3DCore::QEntity &parent, BlockType type)
 
     this->blockEntity.addComponent(&(this->blockTransform));
     this->blockEntity.addComponent(&(this->blockMesh));
-    this->blockEntity.addComponent(&(GlobalMaterials::DEFAULT_MATERIAL));
+
+    switch (type) {
+        case DEFAULT_BLOCK:
+            this->blockEntity.addComponent(&(GlobalMaterials::DEFAULT_MATERIAL));
+            break;
+        case DEFAULT_TRANSP_BLOCK:
+            this->blockEntity.addComponent(&(GlobalMaterials::DEFAULT_TRANSP_MATERIAL));
+            break;
+    }
 
     this->blockEntity.setParent(&parent);
 }
