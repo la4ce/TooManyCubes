@@ -13,7 +13,7 @@ struct hash<TooManyCubes::Vec3i> {
         size_t h1 = std::hash<int>()(v.x());
         size_t h2 = std::hash<int>()(v.y());
         size_t h3 = std::hash<int>()(v.z());
-        return (h1 ^ (h2 << 1)) ^ (h3 << 2); // Good enough, eh?
+        return (h1 ^ (h2 << 1)) ^ (h3 << 2);
     }
 };
 } // namespace std
@@ -22,10 +22,9 @@ namespace TooManyCubes {
 
 typedef std::unordered_map<Vec3i, std::unique_ptr<Block>> BlocksContainer;
 
-/* BlocksScene - holds and maintains blocks.
+/* Scene - holds and maintains blocks.
  * Nothing except for a block is expected to be an object. */
 class Scene {
-
 public:
     static Scene& getInstance() {
         static Scene instance;
