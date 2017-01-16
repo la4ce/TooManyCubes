@@ -67,11 +67,14 @@
 
 #include "qt3dwindow.h"
 #include "scene.h"
+#include "playercontroller.h"
 
 using namespace TooManyCubes;
 
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
+    //QGuiApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
+
     Qt3DExtras::Qt3DWindow view;
 
     Scene &scene = Scene::getInstance();
@@ -90,12 +93,13 @@ int main(int argc, char* argv[]) {
     camera->setPosition(QVector3D(0, 0, 40.0f));
     camera->setViewCenter(QVector3D(0, 0, 0));
 
-    Qt3DExtras::QFirstPersonCameraController *camController = new Qt3DExtras::QFirstPersonCameraController(scene.getRootEntity());
+    PlayerController *camController = new PlayerController(scene.getRootEntity());
     camController->setLinearSpeed(15.0f);
-    camController->setLookSpeed(360.0f);
+    camController->setLookSpeed(150.0f);
     camController->setCamera(camera);
 
     view.setRootEntity(scene.getRootEntity());
+
     view.show();
 
     return app.exec();
