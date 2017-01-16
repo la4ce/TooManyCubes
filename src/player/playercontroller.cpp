@@ -124,6 +124,9 @@ void PlayerController::onTriggered(float dt) {
             lookSpeed *= 0.2f;
         m_camera->pan(m_rxAxis->value() * lookSpeed * dt, m_firstPersonUp);
         m_camera->tilt(m_ryAxis->value() * lookSpeed * dt);
+
+        QSizeF screenDimensions = QGuiApplication::primaryScreen()->size();
+        QCursor::setPos(QPoint(screenDimensions.width() / 2.0, screenDimensions.height() / 2.0));
     }
 }
 

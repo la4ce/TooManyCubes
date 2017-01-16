@@ -73,7 +73,7 @@ using namespace TooManyCubes;
 
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
-    //QGuiApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
+    QGuiApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
 
     Qt3DExtras::Qt3DWindow view;
 
@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
 
     view.setRootEntity(scene.getRootEntity());
 
-    view.show();
+    view.showFullScreen();
 
     return app.exec();
 }
