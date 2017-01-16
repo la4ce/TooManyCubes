@@ -74,7 +74,8 @@ int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
     Qt3DExtras::Qt3DWindow view;
 
-    Scene scene;
+    Scene &scene = Scene::getInstance();
+
     scene.addBlock(Vec3i(0.0, 0.0, 0.0));
     scene.addBlock(Vec3i(1.0, 0.0, 0.0));
     scene.addBlock(Vec3i(2.0, 0.0, 0.0));

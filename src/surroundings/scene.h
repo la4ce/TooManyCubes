@@ -25,8 +25,12 @@ typedef std::unordered_map<Vec3i, std::unique_ptr<Block>> BlocksContainer;
 /* BlocksScene - holds and maintains blocks.
  * Nothing except for a block is expected to be an object. */
 class Scene {
+
 public:
-    Scene(); //TODO: singleton
+    static Scene& getInstance() {
+        static Scene instance;
+        return instance;
+    }
 
     void addBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
     void removeBlock(Vec3i pos);
@@ -34,6 +38,12 @@ public:
     Qt3DCore::QEntity* getRootEntity();
 
 private:
+    Scene() {}
+    ~Scene() {}
+
+    Scene(const Scene &s) = delete;
+    const Scene& operator=(const Scene& s) = delete;
+
     Qt3DCore::QEntity rootEntity;
     BlocksContainer blocks;
 };
