@@ -37,6 +37,8 @@ PlayerController::PlayerController(Qt3DCore::QNode *parent)
 }
 
 void PlayerController::init() {
+    // TODO: slow simultaneous movement by two axis
+
     // Left mouse button action
     m_leftMouseButtonInput->setButtons(QVector<int>() << Qt::LeftButton);
     m_leftMouseButtonInput->setSourceDevice(m_mouseDevice);

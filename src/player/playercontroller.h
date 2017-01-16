@@ -34,6 +34,7 @@ public:
 
     Qt3DRender::QCamera *m_camera;
 
+    Qt3DLogic::QFrameAction *m_frameAction;
     float m_linearSpeed;
     float m_lookSpeed;
     QVector3D m_firstPersonUp;
@@ -64,7 +65,6 @@ public:
 
     Qt3DInput::QLogicalDevice *m_logicalDevice;
 
-    Qt3DLogic::QFrameAction *m_frameAction;
 
 signals:
     void cameraChanged();

@@ -94,13 +94,14 @@ int main(int argc, char* argv[]) {
     camera->setViewCenter(QVector3D(0, 0, 0));
 
     PlayerController *camController = new PlayerController(scene.getRootEntity());
-    camController->setLinearSpeed(15.0f);
-    camController->setLookSpeed(150.0f);
+    camController->setLinearSpeed(12.0f);
+    camController->setLookSpeed(180.0f);
     camController->setCamera(camera);
 
     view.setRootEntity(scene.getRootEntity());
 
-    view.showFullScreen();
+    //view.showFullScreen();
+    view.show();
 
     return app.exec();
 }
