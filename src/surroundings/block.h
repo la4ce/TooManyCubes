@@ -17,21 +17,16 @@ enum BlockType {
 /* Block is an atomic unit of surrounding in the game. */
 class Block {
 public:
-    Block(Vec3i pos, Qt3DCore::QEntity &parent, BlockType type);
+    Block(Vec3i pos, Qt3DCore::QEntity *parent, BlockType type);
 
 private:
     const BlockType type;
     const Vec3i pos;
 
-    Qt3DCore::QEntity blockEntity;
+    static Qt3DExtras::QCuboidMesh *blockMesh;
 
-    static Qt3DExtras::QCuboidMesh blockMesh;
-    Qt3DCore::QTransform blockTransform;
-
-    // Future experiments
-    // bool isCollidable;
-    // bool isGravityAffected;
-    // bool isLiquid;
+    Qt3DCore::QEntity *blockEntity;
+    Qt3DCore::QTransform *blockTransform;
 };
 
 }

@@ -11,12 +11,12 @@ public:
     GlobalMaterials() = delete;
 
     // TODO: figure out how to prevent changing without const qualifier
-    static Qt3DExtras::QPhongMaterial DEFAULT_MATERIAL;
-    static CustomAlphaPhong DEFAULT_TRANSP_MATERIAL;
+    static Qt3DExtras::QPhongMaterial* DEFAULT_MATERIAL;
+    static CustomAlphaPhong* DEFAULT_TRANSP_MATERIAL;
 };
 
-Qt3DExtras::QPhongMaterial GlobalMaterials::DEFAULT_MATERIAL;
-CustomAlphaPhong GlobalMaterials::DEFAULT_TRANSP_MATERIAL;
+Qt3DExtras::QPhongMaterial* GlobalMaterials::DEFAULT_MATERIAL = new Qt3DExtras::QPhongMaterial();
+CustomAlphaPhong* GlobalMaterials::DEFAULT_TRANSP_MATERIAL = new CustomAlphaPhong();
 
 }
 

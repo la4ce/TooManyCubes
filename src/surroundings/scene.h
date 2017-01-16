@@ -37,13 +37,13 @@ public:
     Qt3DCore::QEntity* getRootEntity();
 
 private:
-    Scene() {}
-    ~Scene() {}
+    Scene();
+    ~Scene();
 
     Scene(const Scene &s) = delete;
     const Scene& operator=(const Scene& s) = delete;
 
-    Qt3DCore::QEntity rootEntity;
+    Qt3DCore::QEntity* rootEntity;
     BlocksContainer blocks;
 };
 
