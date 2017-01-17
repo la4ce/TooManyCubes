@@ -1,14 +1,14 @@
 #include "block.h"
-#include "globalmaterials.h"
+#include "customalphaphong.h"
 
 namespace TooManyCubes {
 
-Qt3DExtras::QCuboidMesh* Block::blockMesh = new Qt3DExtras::QCuboidMesh();
-
 Block::Block(Vec3i pos, Qt3DCore::QEntity *parent, BlockType type)
     : type(type)
-    , blockEntity(new Qt3DCore::QEntity)
-    , blockTransform(new Qt3DCore::QTransform) {
+    , blockMesh(new Qt3DExtras::QCuboidMesh())
+    , blockEntity(new Qt3DCore::QEntity())
+    , blockTransform(new Qt3DCore::QTransform())
+    , blockMaterial(nullptr) {
 
     this->blockTransform->setScale(1.0);
     this->blockTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0, 0, 0), 0.0f));
@@ -19,12 +19,17 @@ Block::Block(Vec3i pos, Qt3DCore::QEntity *parent, BlockType type)
 
     switch (type) {
         case DEFAULT_BLOCK:
-            this->blockEntity->addComponent(GlobalMaterials::DEFAULT_MATERIAL);
+            this->blockMaterial = new Qt3DExtras::QPhongMaterial();
             break;
         case DEFAULT_TRANSP_BLOCK:
-            this->blockEntity->addComponent(GlobalMaterials::DEFAULT_TRANSP_MATERIAL);
+            this->blockMaterial = new CustomAlphaPhong();
             break;
+        default:
+            this->blockMaterial = new Qt3DExtras::QPhongMaterial();
     }
+
+    this->blockEntity->addComponent(this->blockMaterial);
+
 
     this->blockEntity->setParent(parent);
 }

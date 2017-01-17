@@ -24,10 +24,10 @@ private:
     const BlockType type;
     const Vec3i pos;
 
-    static Qt3DExtras::QCuboidMesh *blockMesh;
-
+    Qt3DExtras::QCuboidMesh *blockMesh;
     Qt3DCore::QEntity *blockEntity;
     Qt3DCore::QTransform *blockTransform;
+    Qt3DRender::QMaterial *blockMaterial;
 };
 
 }
