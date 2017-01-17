@@ -43,4 +43,8 @@ Block::~Block() {
     }
 }
 
+BlockType Block::getBlockType() {
+    return this->m_type;
+}
+
 }

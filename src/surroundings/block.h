@@ -20,6 +20,7 @@ public:
     Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type);
     ~Block();
 
+    BlockType getBlockType();
 private:
     const BlockType m_type;
     const Vec3i m_discretePos;
