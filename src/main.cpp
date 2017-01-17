@@ -83,9 +83,12 @@ int main(int argc, char* argv[]) {
     scene.addBlock(Vec3i(1.0, 0.0, 0.0));
     scene.addBlock(Vec3i(2.0, 0.0, 0.0));
     scene.addBlock(Vec3i(1.0, 0.0, 1.0));
-    scene.addBlock(Vec3i(1.0, 0.0, -1.0), DEFAULT_TRANSP_BLOCK);
+    scene.addBlock(Vec3i(1.0, 0.0, -1.0));
 
     scene.addBlock(Vec3i(1.0, 1.0, 0.0), DEFAULT_TRANSP_BLOCK);
+
+    //scene.removeBlock(Vec3i(0.0, 0.0, 0.0));
+    scene.addBlock(Vec3i(5.0, 0.0, 0.0));
 
     // Camera and CameraContoller
     Qt3DRender::QCamera *camera = view.camera();

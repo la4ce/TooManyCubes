@@ -18,6 +18,7 @@ enum BlockType {
 class Block {
 public:
     Block(Vec3i pos, Qt3DCore::QEntity *parent, BlockType type);
+    ~Block();
 
 private:
     const BlockType type;

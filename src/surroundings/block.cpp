@@ -29,4 +29,12 @@ Block::Block(Vec3i pos, Qt3DCore::QEntity *parent, BlockType type)
     this->blockEntity->setParent(parent);
 }
 
+Block::~Block() {
+    if (blockEntity != nullptr) {
+        // Deleting automatically notifies QEnity's parents and all connections
+        // that it was deleted in QNode and QObject destructors
+        delete blockEntity;
+    }
+}
+
 }

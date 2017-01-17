@@ -7,7 +7,8 @@ Scene::Scene() {
 }
 
 Scene::~Scene() {
-    if (this->rootEntity) {
+    // Parent QEntity, should be destroyed
+    if (this->rootEntity != nullptr && this->rootEntity->parent() == nullptr) {
         delete rootEntity;
     }
 }
