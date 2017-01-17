@@ -43,8 +43,8 @@ private:
     Scene(const Scene &s) = delete;
     const Scene& operator=(const Scene& s) = delete;
 
-    Qt3DCore::QEntity* rootEntity;
-    BlocksContainer blocks;
+    Qt3DCore::QEntity* m_rootEntity;
+    BlocksContainer m_blocksContainer;
 };
 
 } // namespace TooManyCubes
