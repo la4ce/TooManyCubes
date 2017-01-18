@@ -1,6 +1,6 @@
 #include "scene.h"
 
-namespace TooManyCubes {
+namespace TMC {
 
 Scene::Scene() {
     this->m_rootEntity = new Qt3DCore::QEntity();

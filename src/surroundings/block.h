@@ -7,7 +7,7 @@
 
 #include "vec3i.h"
 
-namespace TooManyCubes {
+namespace TMC {
 
 enum BlockType {
     DEFAULT_BLOCK = 1,

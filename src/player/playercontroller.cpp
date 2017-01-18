@@ -4,7 +4,7 @@
 
 #include "playercontroller.h"
 
-namespace TooManyCubes {
+namespace TMC {
 
 PlayerController::PlayerController(Qt3DCore::QNode *parent)
     : Qt3DCore::QEntity(parent)

@@ -1,6 +1,6 @@
 #include "customalphaphong.h"
 
-namespace TooManyCubes {
+namespace TMC {
 
 CustomAlphaPhong::CustomAlphaPhong() {
     this->setAlpha(0.3);

@@ -1,7 +1,7 @@
 #include "vec3i.h"
 #include <iostream>
 
-namespace TooManyCubes {
+namespace TMC {
 
 Vec3i::Vec3i() {
     this->xp = 0;

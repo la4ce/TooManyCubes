@@ -9,7 +9,7 @@
 #include <QVector3D>
 #include <Qt3DLogic>
 
-namespace TooManyCubes {
+namespace TMC {
 
 class PlayerController : public Qt3DCore::QEntity
 {
@@ -33,11 +33,6 @@ public:
     void init();
 
     Qt3DRender::QCamera *m_camera;
-
-    Qt3DLogic::QFrameAction *m_frameAction;
-    float m_linearSpeed;
-    float m_lookSpeed;
-    QVector3D m_firstPersonUp;
 
     Qt3DInput::QAction *m_leftMouseButtonAction;
     Qt3DInput::QAction *m_fineMotionAction;
@@ -64,7 +59,11 @@ public:
     Qt3DInput::QMouseDevice *m_mouseDevice;
 
     Qt3DInput::QLogicalDevice *m_logicalDevice;
+    Qt3DLogic::QFrameAction *m_frameAction;
 
+    float m_linearSpeed;
+    float m_lookSpeed;
+    QVector3D m_firstPersonUp;
 
 signals:
     void cameraChanged();

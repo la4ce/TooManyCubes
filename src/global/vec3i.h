@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-namespace TooManyCubes {
+namespace TMC {
 class Vec3i {
 public:
     Vec3i();

@@ -3,7 +3,7 @@
 
 #include <Qt3DExtras>
 
-namespace TooManyCubes {
+namespace TMC {
 
 class CustomAlphaPhong : public Qt3DExtras::QPhongAlphaMaterial {
 public:

@@ -8,8 +8,8 @@
 
 namespace std {
 template <>
-struct hash<TooManyCubes::Vec3i> {
-    size_t operator()(const TooManyCubes::Vec3i& v) const {
+struct hash<TMC::Vec3i> {
+    size_t operator()(const TMC::Vec3i& v) const {
         size_t h1 = std::hash<int>()(v.x());
         size_t h2 = std::hash<int>()(v.y());
         size_t h3 = std::hash<int>()(v.z());
@@ -18,7 +18,7 @@ struct hash<TooManyCubes::Vec3i> {
 };
 } // namespace std
 
-namespace TooManyCubes {
+namespace TMC {
 
 typedef std::unordered_map<Vec3i, std::unique_ptr<Block>> BlocksContainer;
 
@@ -26,7 +26,7 @@ typedef std::unordered_map<Vec3i, std::unique_ptr<Block>> BlocksContainer;
  * Nothing except for a block is expected to be an object. */
 class Scene {
 public:
-    static Scene& getInstance() {
+    static Scene& getInstance() { // Don't like this pattern. Consideer other creational patterns for preventing multiple instantiation
         static Scene instance;
         return instance;
     }

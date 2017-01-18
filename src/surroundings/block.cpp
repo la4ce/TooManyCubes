@@ -1,7 +1,7 @@
 #include "block.h"
 #include "customalphaphong.h"
 
-namespace TooManyCubes {
+namespace TMC {
 
 Block::Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type)
     : m_type(type)
