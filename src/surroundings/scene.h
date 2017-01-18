@@ -26,11 +26,12 @@ typedef std::unordered_map<Vec3i, std::unique_ptr<Block>> BlocksContainer;
  * Nothing except for a block is expected to be an object. */
 class Scene {
 public:
-    static Scene& getInstance() { // Don't like this pattern. Consideer other creational patterns for preventing multiple instantiation
+    static Scene& getInstance() { // Bad pattern. Consideer other creational patterns for preventing multiple instantiation
         static Scene instance;
         return instance;
     }
 
+    void initScene();
     void addBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
     void removeBlock(Vec3i pos);
 
