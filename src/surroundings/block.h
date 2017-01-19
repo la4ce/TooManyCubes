@@ -11,24 +11,30 @@ namespace TMC {
 
 enum BlockType {
     DEFAULT_BLOCK = 1,
-    DEFAULT_TRANSP_BLOCK
+    DEFAULT_TRANSP_BLOCK,
+    PHANTOM_BLOCK
 };
 
 /* Block is an atomic unit of surrounding in the game. */
 class Block {
 public:
-    Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type);
+    Block(Qt3DCore::QEntity* parent, BlockType type = DEFAULT_BLOCK);
+    Block(Vec3i discretePos, Qt3DCore::QEntity* parent, BlockType type = DEFAULT_BLOCK, bool isHided = false);
     ~Block();
 
     BlockType getBlockType();
+    void setPos(Vec3i newPos);
+    bool isHided();
 private:
     const BlockType m_type;
-    const Vec3i m_discretePos;
+    Vec3i m_discretePos;
 
-    Qt3DExtras::QCuboidMesh *m_blockMesh;
-    Qt3DCore::QEntity *m_blockEntity;
-    Qt3DCore::QTransform *m_blockTransform;
-    Qt3DRender::QMaterial *m_blockMaterial;
+    bool m_hided;
+
+    Qt3DExtras::QCuboidMesh* m_blockMesh;
+    Qt3DCore::QEntity* m_blockEntity;
+    Qt3DCore::QTransform* m_blockTransform;
+    Qt3DRender::QMaterial* m_blockMaterial;
 };
 
 }
