@@ -1,5 +1,5 @@
-#ifndef TMC_PLAYERCONTOLLER_H
-#define TMC_PLAYERCONTOLLER_H
+#ifndef TMC_CAMERACONTOLLER_H
+#define TMC_CAMERACONTOLLER_H
 
 #include <Qt3DExtras>
 #include <Qt3DCore>
@@ -11,7 +11,7 @@
 
 namespace TMC {
 
-class PlayerController : public Qt3DCore::QEntity
+class CameraController : public Qt3DCore::QEntity
 {
     Q_OBJECT
 
@@ -20,8 +20,8 @@ class PlayerController : public Qt3DCore::QEntity
     Q_PROPERTY(float lookSpeed READ lookSpeed WRITE setLookSpeed NOTIFY lookSpeedChanged)
 
 public:
-    explicit PlayerController(Qt3DCore::QNode *parent = nullptr);
-    ~PlayerController();
+    explicit CameraController(Qt3DCore::QNode *parent = nullptr);
+    ~CameraController();
 
     Qt3DRender::QCamera *camera() const;
     float linearSpeed() const;
@@ -32,6 +32,7 @@ public:
     void setLookSpeed(float lookSpeed);
     void init();
 
+private:
     Qt3DRender::QCamera *m_camera;
 
     Qt3DInput::QAction *m_leftMouseButtonAction;
@@ -77,4 +78,4 @@ public slots:
 
 }
 
-#endif // TMC_PLAYERCONTOLLER_H
+#endif // TMC_CAMERACONTOLLER_H

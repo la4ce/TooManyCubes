@@ -2,11 +2,11 @@
 #include <Qt3DInput>
 #include <Qt3DLogic>
 
-#include "playercontroller.h"
+#include "cameracontroller.h"
 
 namespace TMC {
 
-PlayerController::PlayerController(Qt3DCore::QNode *parent)
+CameraController::CameraController(Qt3DCore::QNode *parent)
     : Qt3DCore::QEntity(parent)
     , m_camera(nullptr)
     , m_leftMouseButtonAction(new Qt3DInput::QAction())
@@ -36,7 +36,7 @@ PlayerController::PlayerController(Qt3DCore::QNode *parent)
     this->init();
 }
 
-void PlayerController::init() {
+void CameraController::init() {
     // TODO: slow simultaneous movement by two axis
 
     // Left mouse button action
@@ -116,7 +116,7 @@ void PlayerController::init() {
     this->addComponent(m_logicalDevice);
 }
 
-void PlayerController::onTriggered(float dt) {
+void CameraController::onTriggered(float dt) {
     if (m_camera != nullptr) {
         m_camera->translate(QVector3D(m_txAxis->value() * m_linearSpeed,
                                       m_tyAxis->value() * m_linearSpeed,
@@ -132,23 +132,23 @@ void PlayerController::onTriggered(float dt) {
     }
 }
 
-PlayerController::~PlayerController() {
+CameraController::~CameraController() {
 }
 
-Qt3DRender::QCamera *PlayerController::camera() const {
+Qt3DRender::QCamera *CameraController::camera() const {
     return this->m_camera;
 }
 
-float PlayerController::linearSpeed() const {
+float CameraController::linearSpeed() const {
     return this->m_linearSpeed;
 }
 
-float PlayerController::lookSpeed() const {
+float CameraController::lookSpeed() const {
     return this->m_lookSpeed;
 }
 
 // Note: this block had calls to QEntityPrivate, just in case
-void PlayerController::setCamera(Qt3DRender::QCamera *camera) {
+void CameraController::setCamera(Qt3DRender::QCamera *camera) {
     if (this->m_camera != camera) {
         if (camera && !camera->parent())
             camera->setParent(this);
@@ -159,14 +159,14 @@ void PlayerController::setCamera(Qt3DRender::QCamera *camera) {
     }
 }
 
-void PlayerController::setLinearSpeed(float linearSpeed) {
+void CameraController::setLinearSpeed(float linearSpeed) {
     if (this->m_linearSpeed != linearSpeed) {
         this->m_linearSpeed = linearSpeed;
         emit linearSpeedChanged();
     }
 }
 
-void PlayerController::setLookSpeed(float lookSpeed) {
+void CameraController::setLookSpeed(float lookSpeed) {
     if (this->m_lookSpeed != lookSpeed) {
         this->m_lookSpeed = lookSpeed;
         emit lookSpeedChanged();

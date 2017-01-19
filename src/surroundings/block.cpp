@@ -13,9 +13,9 @@ Block::Block(Vec3i discretePos, Qt3DCore::QEntity* parent, BlockType type, bool 
     : m_type(type)
     , m_discretePos(discretePos)
     , m_hided(isHided)
-    , m_blockMesh(new Qt3DExtras::QCuboidMesh())
     , m_blockEntity(new Qt3DCore::QEntity())
     , m_blockTransform(new Qt3DCore::QTransform())
+    , m_blockMesh(new Qt3DExtras::QCuboidMesh())
     , m_blockMaterial(nullptr) {
 
     if (m_hided) {

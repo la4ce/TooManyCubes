@@ -4,7 +4,8 @@
 #include <Qt3DRender>
 #include <Qt3DCore>
 
-#include "playercontroller.h"
+#include "cameracontroller.h"
+#include "phantomblock.h"
 #include "scene.h"
 
 namespace TMC {
@@ -12,14 +13,16 @@ namespace TMC {
 class Player
 {
 public:
-    Player(Qt3DCore::QEntity* rootEntity, Qt3DRender::QCamera* viewCamera);
+    Player(Qt3DCore::QEntity *rootEntity, Qt3DRender::QCamera *viewCamera);
 
 private:
     void initPlayerCamera();
     void initPlayerController();
 
-    Qt3DRender::QCamera* m_playerCamera;
-    PlayerController* m_playerController;
+    Qt3DRender::QCamera *m_playerCamera;
+    CameraController *m_cameraContoller;
+    PhantomBlockController *m_phantomBlock;
+
 };
 
 }

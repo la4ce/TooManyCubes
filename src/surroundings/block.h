@@ -25,15 +25,18 @@ public:
     BlockType getBlockType();
     void setPos(Vec3i newPos);
     bool isHided();
-private:
+
+protected:
     const BlockType m_type;
     Vec3i m_discretePos;
 
     bool m_hided;
 
-    Qt3DExtras::QCuboidMesh* m_blockMesh;
     Qt3DCore::QEntity* m_blockEntity;
     Qt3DCore::QTransform* m_blockTransform;
+
+private:
+    Qt3DExtras::QCuboidMesh* m_blockMesh;
     Qt3DRender::QMaterial* m_blockMaterial;
 };
 
