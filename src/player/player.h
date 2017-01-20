@@ -10,10 +10,9 @@
 
 namespace TMC {
 
-class Player
-{
+class Player {
 public:
-    Player(Qt3DCore::QEntity *rootEntity, Qt3DRender::QCamera *viewCamera);
+    Player(Scene *scene, Qt3DRender::QCamera *viewCamera);
 
 private:
     void initPlayerCamera();

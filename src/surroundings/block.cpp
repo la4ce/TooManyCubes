@@ -60,6 +60,8 @@ bool Block::isHided() {
 }
 
 void Block::setHided(bool hided) {
+    if (m_hided == hided) return;
+
     m_hided = hided;
 
     const float transfScale = hided ? 0.0f : 1.0f;

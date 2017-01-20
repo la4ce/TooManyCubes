@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
 
     Scene &scene = Scene::getInstance();
 
-    Player player(scene.getRootEntity(), view.camera());
+    Player player(&scene, view.camera());
 
     view.setRootEntity(scene.getRootEntity());
 

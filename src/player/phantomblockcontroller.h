@@ -12,14 +12,16 @@ namespace TMC {
 class PhantomBlockController : public Qt3DCore::QEntity {
 
     Q_OBJECT
+
 public:
     static constexpr float PHANTOM_BLOCK_DISTANCE = 4.0f;
 
 public:
-    explicit PhantomBlockController(Qt3DCore::QEntity *parent, const Qt3DRender::QCamera *playerCamera);
+    explicit PhantomBlockController(Scene *scene, const Qt3DRender::QCamera *playerCamera);
     ~PhantomBlockController();
 
 private:
+    Scene *m_scene;
     PhantomBlock *m_phantomBlock;
     const Qt3DRender::QCamera *m_camera;
     Qt3DLogic::QFrameAction *m_frameAction;

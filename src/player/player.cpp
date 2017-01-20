@@ -2,10 +2,10 @@
 
 namespace TMC {
 
-Player::Player(Qt3DCore::QEntity *rootEntity, Qt3DRender::QCamera *viewCamera)
+Player::Player(Scene *scene, Qt3DRender::QCamera *viewCamera)
     : m_playerCamera(viewCamera)
-    , m_cameraContoller(new CameraController(rootEntity))
-    , m_phantomBlockController(new PhantomBlockController(rootEntity, viewCamera)){
+    , m_cameraContoller(new CameraController(scene->getRootEntity()))
+    , m_phantomBlockController(new PhantomBlockController(scene, viewCamera)){
 
     initPlayerCamera();
     initPlayerController();
