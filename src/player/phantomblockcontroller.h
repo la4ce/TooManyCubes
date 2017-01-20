@@ -1,7 +1,10 @@
-#ifndef TMC_PHANTOMBLOCK_H
-#define TMC_PHANTOMBLOCK_H
+#ifndef TMC_PHANTOMBLOCKCONTROLLER_H
+#define TMC_PHANTOMBLOCKCONTROLLER_H
 
-#include "scene.h"
+#include <Qt3DLogic>
+#include <Qt3DRender>
+
+#include "phantomblock.h"
 
 namespace TMC {
 
@@ -14,7 +17,7 @@ public:
     ~PhantomBlockController();
 
 private:
-    Block *m_phantomBlock;
+    PhantomBlock *m_phantomBlock;
     const Qt3DRender::QCamera *m_camera;
     Qt3DLogic::QFrameAction *m_frameAction;
 
@@ -25,6 +28,6 @@ public slots:
 
 }
 
-#endif // TMC_PHANTOMBLOCK_H
+#endif // TMC_PHANTOMBLOCKCONTROLLER_H
 
 

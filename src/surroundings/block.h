@@ -23,12 +23,11 @@ enum HidedState {
 /* Block is an atomic unit of surrounding in the game. */
 class Block {
 public:
-    Block(Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK);
+    Block(Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK); // Hided object constructor (no pos)
     Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK, bool isHided = BLOCK_VISIBLE);
-    ~Block();
+    virtual ~Block();
 
     BlockType getBlockType();
-    void setPos(Vec3i newPos);
     bool isHided();
     void setHided(bool hided);
 

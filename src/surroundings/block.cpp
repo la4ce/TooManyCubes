@@ -55,10 +55,6 @@ BlockType Block::getBlockType() {
     return m_type;
 }
 
-void Block::setPos(Vec3i newPos) {
-    m_discretePos = newPos;
-}
-
 bool Block::isHided() {
     return m_hided;
 }

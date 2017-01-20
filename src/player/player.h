@@ -21,7 +21,7 @@ private:
 
     Qt3DRender::QCamera *m_playerCamera;
     CameraController *m_cameraContoller;
-    PhantomBlockController *m_phantomBlock;
+    PhantomBlockController *m_phantomBlockController;
 
 };
 
