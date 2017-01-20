@@ -3,7 +3,7 @@
 namespace TMC {
 
 PhantomMaterial::PhantomMaterial() {
-    this->setAlpha(0.15);
+    this->setAlpha(0.35);
 }
 
 }
