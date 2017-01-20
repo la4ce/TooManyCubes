@@ -15,16 +15,22 @@ enum BlockType {
     PHANTOM_BLOCK
 };
 
+enum HidedState {
+    BLOCK_HIDED = true,
+    BLOCK_VISIBLE = false
+};
+
 /* Block is an atomic unit of surrounding in the game. */
 class Block {
 public:
-    Block(Qt3DCore::QEntity* parent, BlockType type = DEFAULT_BLOCK);
-    Block(Vec3i discretePos, Qt3DCore::QEntity* parent, BlockType type = DEFAULT_BLOCK, bool isHided = false);
+    Block(Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK);
+    Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK, bool isHided = BLOCK_VISIBLE);
     ~Block();
 
     BlockType getBlockType();
     void setPos(Vec3i newPos);
     bool isHided();
+    void setHided(bool hided);
 
 protected:
     const BlockType m_type;
@@ -32,12 +38,12 @@ protected:
 
     bool m_hided;
 
-    Qt3DCore::QEntity* m_blockEntity;
-    Qt3DCore::QTransform* m_blockTransform;
+    Qt3DCore::QEntity *m_blockEntity;
+    Qt3DCore::QTransform *m_blockTransform;
 
 private:
-    Qt3DExtras::QCuboidMesh* m_blockMesh;
-    Qt3DRender::QMaterial* m_blockMaterial;
+    Qt3DExtras::QCuboidMesh *m_blockMesh;
+    Qt3DRender::QMaterial *m_blockMaterial;
 };
 
 }

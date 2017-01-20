@@ -5,24 +5,19 @@
 namespace TMC {
 
 // Block created and attached to scene, but hided (no position specified)
-Block::Block(Qt3DCore::QEntity* parent, BlockType type)
-    :Block(Vec3i(0, 0, 0), parent, type, true) {
+Block::Block(Qt3DCore::QEntity *parent, BlockType type)
+    :Block(Vec3i(0, 0, 0), parent, type, BLOCK_HIDED) {
 }
 
-Block::Block(Vec3i discretePos, Qt3DCore::QEntity* parent, BlockType type, bool isHided)
+Block::Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type, bool isHided)
     : m_type(type)
     , m_discretePos(discretePos)
-    , m_hided(isHided)
     , m_blockEntity(new Qt3DCore::QEntity())
     , m_blockTransform(new Qt3DCore::QTransform())
     , m_blockMesh(new Qt3DExtras::QCuboidMesh())
     , m_blockMaterial(nullptr) {
 
-    if (m_hided) {
-        m_blockTransform->setScale(0.0);
-    } else {
-        m_blockTransform->setScale(1.0);
-    }
+    this->setHided(isHided);
 
     m_blockTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0, 0, 0), 0.0f));
     m_blockTransform->setTranslation(QVector3D(discretePos.x(), discretePos.y(), discretePos.z()));
@@ -39,8 +34,7 @@ Block::Block(Vec3i discretePos, Qt3DCore::QEntity* parent, BlockType type, bool 
             break;
         case PHANTOM_BLOCK:
             m_blockMaterial = new PhantomMaterial();
-        default:
-            m_blockMaterial = new Qt3DExtras::QPhongMaterial();
+            break;
     }
 
     m_blockEntity->addComponent(m_blockMaterial);
@@ -69,5 +63,11 @@ bool Block::isHided() {
     return m_hided;
 }
 
+void Block::setHided(bool hided) {
+    m_hided = hided;
+
+    const float transfScale = hided ? 0.0f : 1.0f;
+    m_blockTransform->setScale(transfScale);
+}
 
 }
