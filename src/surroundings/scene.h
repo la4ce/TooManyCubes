@@ -26,7 +26,12 @@ typedef std::unordered_map<Vec3i, std::unique_ptr<Block>> BlocksContainer;
  * Nothing except for a block is expected to be an object. */
 class Scene {
 public:
-    static Scene& getInstance() { // Bad pattern. Consideer other creational patterns for preventing multiple instantiation
+    static constexpr float BLOCK_EDGE_LENGTH = 1.0f; // Scene global atomic length unit
+    static Vec3i worldToDiscreteCoordinates(QVector3D worldCoordinates);
+    static QVector3D discreteToWorldCoordinates(Vec3i discreteCoordinates);
+
+public:
+    static Scene& getInstance() { // TODO: Bad pattern. Consideer other creational patterns for preventing multiple instantiation
         static Scene instance;
         return instance;
     }
