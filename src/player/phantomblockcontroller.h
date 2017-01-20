@@ -4,6 +4,7 @@
 #include <Qt3DLogic>
 #include <Qt3DRender>
 
+#include "scene.h"
 #include "phantomblock.h"
 
 namespace TMC {
@@ -11,6 +12,8 @@ namespace TMC {
 class PhantomBlockController : public Qt3DCore::QEntity {
 
     Q_OBJECT
+public:
+    static constexpr float PHANTOM_BLOCK_DISTANCE = 4.0f;
 
 public:
     explicit PhantomBlockController(Qt3DCore::QEntity *parent, const Qt3DRender::QCamera *playerCamera);

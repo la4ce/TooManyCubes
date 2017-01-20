@@ -23,7 +23,8 @@ PhantomBlockController::~PhantomBlockController() {
 void PhantomBlockController::onTriggered(float) {
     if (m_camera != nullptr) {
         m_phantomBlock->setHided(BLOCK_VISIBLE);
-        m_phantomBlock->setPos(Vec3i(m_camera->position() + m_camera->viewVector() / m_camera->viewVector().length() * 2.5f));
+        QVector3D newWorldPos = m_camera->position() + m_camera->viewVector() / m_camera->viewVector().length() * PHANTOM_BLOCK_DISTANCE;
+        m_phantomBlock->setPos(Scene::worldToDiscreteCoordinates(newWorldPos));
     }
 }
 
