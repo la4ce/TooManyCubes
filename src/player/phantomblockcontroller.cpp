@@ -22,6 +22,7 @@ PhantomBlockController::~PhantomBlockController() {
 }
 
 void PhantomBlockController::onTriggered(float) {
+    // TODO: implement smart block placer
     if (m_camera != nullptr) {
         Vec3i newDiscretePos = Scene::worldToDiscreteCoordinates(
                     m_camera->position() + m_camera->viewVector() / m_camera->viewVector().length() * PHANTOM_BLOCK_DISTANCE);

@@ -2,11 +2,11 @@ INCLUDEPATH += $$PWD
 
 SOURCES += \
     $$PWD/player.cpp \
-    $$PWD/cameracontroller.cpp \
-    $$PWD/phantomblockcontroller.cpp
+    $$PWD/phantomblockcontroller.cpp \
+    $$PWD/inputcontroller.cpp
 
 HEADERS += \
     $$PWD/player.h \
-    $$PWD/cameracontroller.h \
-    $$PWD/phantomblockcontroller.h
+    $$PWD/phantomblockcontroller.h \
+    $$PWD/inputcontroller.h
 

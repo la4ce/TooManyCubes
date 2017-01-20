@@ -1,5 +1,5 @@
-#ifndef TMC_CAMERACONTOLLER_H
-#define TMC_CAMERACONTOLLER_H
+#ifndef TMC_INPUTCONTROLLER_H
+#define TMC_INPUTCONTROLLER_H
 
 #include <Qt3DExtras>
 #include <Qt3DCore>
@@ -11,7 +11,7 @@
 
 namespace TMC {
 
-class CameraController : public Qt3DCore::QEntity
+class InputController : public Qt3DCore::QEntity
 {
     Q_OBJECT
 
@@ -20,8 +20,8 @@ class CameraController : public Qt3DCore::QEntity
     Q_PROPERTY(float lookSpeed READ lookSpeed WRITE setLookSpeed NOTIFY lookSpeedChanged)
 
 public:
-    explicit CameraController(Qt3DCore::QNode *parent = nullptr);
-    ~CameraController();
+    explicit InputController(Qt3DCore::QNode *parent = nullptr);
+    ~InputController();
 
     Qt3DRender::QCamera *camera() const;
     float linearSpeed() const;
@@ -78,4 +78,4 @@ public slots:
 
 }
 
-#endif // TMC_CAMERACONTOLLER_H
+#endif // TMC_INPUTCONTROLLER_H

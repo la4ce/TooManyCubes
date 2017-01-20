@@ -2,11 +2,11 @@
 #include <Qt3DInput>
 #include <Qt3DLogic>
 
-#include "cameracontroller.h"
+#include "inputcontroller.h"
 
 namespace TMC {
 
-CameraController::CameraController(Qt3DCore::QNode *parent)
+InputController::InputController(Qt3DCore::QNode *parent)
     : Qt3DCore::QEntity(parent)
     , m_camera(nullptr)
     , m_leftMouseButtonAction(new Qt3DInput::QAction())
@@ -36,7 +36,7 @@ CameraController::CameraController(Qt3DCore::QNode *parent)
     this->init();
 }
 
-void CameraController::init() {
+void InputController::init() {
     // TODO: slow simultaneous movement by two axis
 
     // Left mouse button action
@@ -116,7 +116,7 @@ void CameraController::init() {
     this->addComponent(m_logicalDevice);
 }
 
-void CameraController::onTriggered(float dt) {
+void InputController::onTriggered(float dt) {
     if (m_camera != nullptr) {
         m_camera->translate(QVector3D(m_txAxis->value() * m_linearSpeed,
                                       m_tyAxis->value() * m_linearSpeed,
@@ -132,23 +132,23 @@ void CameraController::onTriggered(float dt) {
     }
 }
 
-CameraController::~CameraController() {
+InputController::~InputController() {
 }
 
-Qt3DRender::QCamera *CameraController::camera() const {
+Qt3DRender::QCamera *InputController::camera() const {
     return this->m_camera;
 }
 
-float CameraController::linearSpeed() const {
+float InputController::linearSpeed() const {
     return this->m_linearSpeed;
 }
 
-float CameraController::lookSpeed() const {
+float InputController::lookSpeed() const {
     return this->m_lookSpeed;
 }
 
 // Note: this block had calls to QEntityPrivate, just in case
-void CameraController::setCamera(Qt3DRender::QCamera *camera) {
+void InputController::setCamera(Qt3DRender::QCamera *camera) {
     if (this->m_camera != camera) {
         if (camera && !camera->parent())
             camera->setParent(this);
@@ -159,14 +159,14 @@ void CameraController::setCamera(Qt3DRender::QCamera *camera) {
     }
 }
 
-void CameraController::setLinearSpeed(float linearSpeed) {
+void InputController::setLinearSpeed(float linearSpeed) {
     if (this->m_linearSpeed != linearSpeed) {
         this->m_linearSpeed = linearSpeed;
         emit linearSpeedChanged();
     }
 }
 
-void CameraController::setLookSpeed(float lookSpeed) {
+void InputController::setLookSpeed(float lookSpeed) {
     if (this->m_lookSpeed != lookSpeed) {
         this->m_lookSpeed = lookSpeed;
         emit lookSpeedChanged();

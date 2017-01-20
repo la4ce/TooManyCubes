@@ -4,7 +4,7 @@
 #include <Qt3DRender>
 #include <Qt3DCore>
 
-#include "cameracontroller.h"
+#include "inputcontroller.h"
 #include "phantomblockcontroller.h"
 #include "scene.h"
 
@@ -19,7 +19,7 @@ private:
     void initPlayerController();
 
     Qt3DRender::QCamera *m_playerCamera;
-    CameraController *m_cameraContoller;
+    InputController *m_inputController;
     PhantomBlockController *m_phantomBlockController;
 
 };

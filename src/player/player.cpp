@@ -4,7 +4,7 @@ namespace TMC {
 
 Player::Player(Scene *scene, Qt3DRender::QCamera *viewCamera)
     : m_playerCamera(viewCamera)
-    , m_cameraContoller(new CameraController(scene->getRootEntity()))
+    , m_inputController(new InputController(scene->getRootEntity()))
     , m_phantomBlockController(new PhantomBlockController(scene, viewCamera)){
 
     initPlayerCamera();
@@ -18,9 +18,9 @@ void Player::initPlayerCamera() {
 }
 
 void Player::initPlayerController() {
-    m_cameraContoller->setLinearSpeed(12.0f);
-    m_cameraContoller->setLookSpeed(180.0f);
-    m_cameraContoller->setCamera(m_playerCamera);
+    m_inputController->setLinearSpeed(12.0f);
+    m_inputController->setLookSpeed(180.0f);
+    m_inputController->setCamera(m_playerCamera);
 }
 
 } // namespace TooManyCubes
