@@ -3,7 +3,7 @@ INCLUDEPATH += $$PWD
 SOURCES += \
     $$PWD/player.cpp \
     $$PWD/phantomblock.cpp \
-    $$PWD/cameracontoller.cpp
+    $$PWD/cameracontroller.cpp
 
 HEADERS += \
     $$PWD/player.h \
