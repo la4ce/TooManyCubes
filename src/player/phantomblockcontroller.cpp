@@ -1,6 +1,6 @@
 #include <Qt3DLogic>
 
-#include "phantomblock.h"
+#include "phantomblockcontroller.h"
 
 namespace TMC {
 
@@ -14,6 +14,8 @@ PhantomBlockController::PhantomBlockController(Qt3DCore::QEntity *parent, const 
                      this, SLOT(onTriggered(float)));
 
     this->addComponent(m_frameAction);
+    m_phantomBlock->setHided(BLOCK_VISIBLE);
+    m_phantomBlock->setPos(Vec3i(2.0));
 
 }
 
@@ -21,7 +23,10 @@ PhantomBlockController::~PhantomBlockController() {
 }
 
 void PhantomBlockController::onTriggered(float) {
-    // We can access camera's directionVector and update block's position accordingly
+    if (m_camera != nullptr) {
+        //m_phantomBlock->setHided(BLOCK_VISIBLE);
+        //m_phantomBlock->setPos(Vec3i(2.0));
+    }
 }
 
 }

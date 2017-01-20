@@ -5,7 +5,7 @@
 #include <Qt3DCore>
 
 #include "cameracontroller.h"
-#include "phantomblock.h"
+#include "phantomblockcontroller.h"
 #include "scene.h"
 
 namespace TMC {
