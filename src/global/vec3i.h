@@ -2,13 +2,15 @@
 #define TMC_VEC3I_H
 
 #include <iostream>
+#include <QVector3D>
 
 namespace TMC {
 class Vec3i {
 public:
-    Vec3i();
+    Vec3i() : xp(0), yp(0), zp(0) {}
     Vec3i(int oneValue) : xp(oneValue), yp(oneValue), zp(oneValue) {}
     Vec3i(int x, int y, int z) : xp(x), yp(y), zp(z) {}
+    Vec3i(QVector3D vec) : xp((int)vec.x()), yp((int)vec.y()), zp((int)vec.z()) {}
 
     int x() const;
     int y() const;

@@ -3,34 +3,28 @@
 
 namespace TMC {
 
-Vec3i::Vec3i() {
-    this->xp = 0;
-    this->yp = 0;
-    this->zp = 0;
-}
-
 int Vec3i::x() const {
-    return this->xp;
+    return xp;
 }
 
 int Vec3i::y() const {
-    return this->yp;
+    return yp;
 }
 
 int Vec3i::z() const {
-    return this->zp;
+    return zp;
 }
 
 void Vec3i::setX(int x) {
-    this->xp= x;
+    xp= x;
 }
 
 void Vec3i::setY(int y) {
-    this->yp = y;
+    yp = y;
 }
 
 void Vec3i::setZ(int z) {
-    this->zp = z;
+    zp = z;
 }
 
 const Vec3i& Vec3i::operator+() {
@@ -38,21 +32,21 @@ const Vec3i& Vec3i::operator+() {
 }
 
 const Vec3i Vec3i::operator-() {
-    return Vec3i(-this->xp, -this->yp, -this->zp);
+    return Vec3i(-xp, -yp, -zp);
 }
 
 const Vec3i& Vec3i::operator+=(const Vec3i& vec) {
-    this->xp += vec.xp;
-    this->yp += vec.yp;
-    this->zp += vec.zp;
+    xp += vec.xp;
+    yp += vec.yp;
+    zp += vec.zp;
 
     return *this;
 }
 
 const Vec3i& Vec3i::operator-=(const Vec3i& vec) {
-    this->xp -= vec.xp;
-    this->yp -= vec.yp;
-    this->zp -= vec.zp;
+    xp -= vec.xp;
+    yp -= vec.yp;
+    zp -= vec.zp;
 
     return *this;
 }
