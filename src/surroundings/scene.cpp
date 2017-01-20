@@ -23,11 +23,11 @@ void Scene::initScene() {
 
     addBlock(Vec3i(1.0, 1.0, 0.0), DEFAULT_TRANSP_BLOCK);
 
-    removeBlock(Vec3i(0.0, 0.0, 0.0));
-    addBlock(Vec3i(5.0, 0.0, 0.0));
+    //removeBlock(Vec3i(0.0, 0.0, 0.0));
 }
 
 void Scene::addBlock(Vec3i pos, BlockType type) {
+    // Inserts new block only if no block in pos
    this->m_blocksContainer.emplace(pos, ::std::unique_ptr<Block>(new Block(pos, this->m_rootEntity, type)));
 }
 

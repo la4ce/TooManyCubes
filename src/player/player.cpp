@@ -13,7 +13,7 @@ Player::Player(Qt3DCore::QEntity *rootEntity, Qt3DRender::QCamera *viewCamera)
 
 void Player::initPlayerCamera() {
     m_playerCamera->lens()->setPerspectiveProjection(45.0f, 16.0f / 9.0f, 0.1f, 1000.0f);
-    m_playerCamera->setPosition(QVector3D(0, 0, 40.0f));
+    m_playerCamera->setPosition(QVector3D(20.0f, 20.0f, 20.0f));
     m_playerCamera->setViewCenter(QVector3D(0, 0, 0));
 }
 
