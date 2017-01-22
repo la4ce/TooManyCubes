@@ -6,8 +6,10 @@
 
 namespace TMC {
 
-InputController::InputController(Qt3DCore::QNode *parent)
-    : Qt3DCore::QEntity(parent)
+InputController::InputController(Scene *scene, PhantomBlockController *phantomBlockController)
+    : Qt3DCore::QEntity(scene->getRootEntity())
+    , m_scene(scene)
+    , m_phantomBlockController(phantomBlockController)
     , m_camera(nullptr)
     , m_leftMouseButtonAction(new Qt3DInput::QAction())
     , m_fineMotionAction(new Qt3DInput::QAction())
@@ -118,15 +120,36 @@ void InputController::init() {
 
 void InputController::onTriggered(float dt) {
     if (m_camera != nullptr) {
+
+        // Camera translation
         m_camera->translate(QVector3D(m_txAxis->value() * m_linearSpeed,
                                       m_tyAxis->value() * m_linearSpeed,
                                       m_tzAxis->value() * m_linearSpeed) * dt);
         float lookSpeed = m_lookSpeed;
         if (m_fineMotionAction->isActive())
             lookSpeed *= 0.2f;
+
+        // Camera rotation
         m_camera->pan(m_rxAxis->value() * lookSpeed * dt, m_firstPersonUp);
         m_camera->tilt(m_ryAxis->value() * lookSpeed * dt);
 
+        // Block placement
+        static bool leftClickWasActive = false;
+
+        // Left click released
+        if (leftClickWasActive && !m_leftMouseButtonAction->isActive()) {
+            // TODO: add delta counting
+            leftClickWasActive = false;
+
+            if (m_scene->blockCouldBePlaced(m_phantomBlockController->getPhantomBlockPos())) {
+                m_scene->addBlock(m_phantomBlockController->getPhantomBlockPos());
+            }
+
+        }
+
+        if (m_leftMouseButtonAction->isActive()) {
+            leftClickWasActive = true;
+        }
         //QSizeF screenDimensions = QGuiApplication::primaryScreen()->size();
         //QCursor::setPos(QPoint(screenDimensions.width() / 2.0, screenDimensions.height() / 2.0));
     }

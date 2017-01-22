@@ -20,6 +20,8 @@ public:
     explicit PhantomBlockController(Scene *scene, const Qt3DRender::QCamera *playerCamera);
     ~PhantomBlockController();
 
+    Vec3i getPhantomBlockPos();
+
 private:
     Scene *m_scene;
     PhantomBlock *m_phantomBlock;

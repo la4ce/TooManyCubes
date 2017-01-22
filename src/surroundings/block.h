@@ -31,6 +31,8 @@ public:
     bool isHided();
     void setHided(bool hided);
 
+    Vec3i getDiscretePos();
+
 protected:
     const BlockType m_type;
     Vec3i m_discretePos;

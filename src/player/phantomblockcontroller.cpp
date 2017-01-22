@@ -21,6 +21,10 @@ PhantomBlockController::PhantomBlockController(Scene *scene, const Qt3DRender::Q
 PhantomBlockController::~PhantomBlockController() {
 }
 
+Vec3i PhantomBlockController::getPhantomBlockPos() {
+    return m_phantomBlock->getDiscretePos();
+}
+
 void PhantomBlockController::onTriggered(float) {
     // TODO: implement smart block placer
     if (m_camera != nullptr) {

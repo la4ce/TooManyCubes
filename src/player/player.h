@@ -16,11 +16,11 @@ public:
 
 private:
     void initPlayerCamera();
-    void initPlayerController();
+    void initInputController();
 
     Qt3DRender::QCamera *m_playerCamera;
-    InputController *m_inputController;
     PhantomBlockController *m_phantomBlockController;
+    InputController *m_inputController;
 
 };
 

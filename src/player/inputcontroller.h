@@ -9,6 +9,9 @@
 #include <QVector3D>
 #include <Qt3DLogic>
 
+#include "scene.h"
+#include "phantomblockcontroller.h"
+
 namespace TMC {
 
 class InputController : public Qt3DCore::QEntity
@@ -20,7 +23,7 @@ class InputController : public Qt3DCore::QEntity
     Q_PROPERTY(float lookSpeed READ lookSpeed WRITE setLookSpeed NOTIFY lookSpeedChanged)
 
 public:
-    explicit InputController(Qt3DCore::QNode *parent = nullptr);
+    explicit InputController(Scene *scene, PhantomBlockController *phantomBlockController);
     ~InputController();
 
     Qt3DRender::QCamera *camera() const;
@@ -33,6 +36,9 @@ public:
     void init();
 
 private:
+    Scene *m_scene;
+    PhantomBlockController *m_phantomBlockController;
+
     Qt3DRender::QCamera *m_camera;
 
     Qt3DInput::QAction *m_leftMouseButtonAction;

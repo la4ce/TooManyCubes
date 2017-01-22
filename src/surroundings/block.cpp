@@ -68,4 +68,8 @@ void Block::setHided(bool hided) {
     m_blockTransform->setScale(transfScale);
 }
 
+Vec3i Block::getDiscretePos() {
+    return m_discretePos;
+}
+
 }
