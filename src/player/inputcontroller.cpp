@@ -135,23 +135,27 @@ void InputController::onTriggered(float dt) {
 
         // Block placement
         static bool leftClickWasActive = false;
+        static QTime leftClickPressed;
 
         // Left click released
         if (leftClickWasActive && !m_leftMouseButtonAction->isActive()) {
-            // TODO: add delta counting
             leftClickWasActive = false;
 
-            Vec3i phantomBlockPos = m_phantomBlockController->getPhantomBlockPos();
+            if (!(leftClickPressed.elapsed() > CLICK_DURATION)) {
+                Vec3i phantomBlockPos = m_phantomBlockController->getPhantomBlockPos();
 
-            if (m_scene->blockCouldBePlaced(phantomBlockPos)) {
-                m_scene->addBlock(phantomBlockPos);
-            } else if (m_scene->blockCouldBeRemoved(phantomBlockPos)) {
-                m_scene->removeBlock(phantomBlockPos);
+                if (m_scene->blockCouldBePlaced(phantomBlockPos)) {
+                    m_scene->addBlock(phantomBlockPos);
+                } else if (m_scene->blockCouldBeRemoved(phantomBlockPos)) {
+                    m_scene->removeBlock(phantomBlockPos);
+                }
             }
-
         }
 
         if (m_leftMouseButtonAction->isActive()) {
+            if (!leftClickWasActive) {
+                leftClickPressed.restart();
+            }
             leftClickWasActive = true;
         }
         //QSizeF screenDimensions = QGuiApplication::primaryScreen()->size();

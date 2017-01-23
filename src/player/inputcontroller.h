@@ -23,6 +23,9 @@ class InputController : public Qt3DCore::QEntity
     Q_PROPERTY(float lookSpeed READ lookSpeed WRITE setLookSpeed NOTIFY lookSpeedChanged)
 
 public:
+    static constexpr float CLICK_DURATION = 400; // milliseconds
+
+public:
     explicit InputController(Scene *scene, PhantomBlockController *phantomBlockController);
     ~InputController();
 
