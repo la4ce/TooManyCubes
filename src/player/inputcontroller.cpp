@@ -141,8 +141,12 @@ void InputController::onTriggered(float dt) {
             // TODO: add delta counting
             leftClickWasActive = false;
 
-            if (m_scene->blockCouldBePlaced(m_phantomBlockController->getPhantomBlockPos())) {
-                m_scene->addBlock(m_phantomBlockController->getPhantomBlockPos());
+            Vec3i phantomBlockPos = m_phantomBlockController->getPhantomBlockPos();
+
+            if (m_scene->blockCouldBePlaced(phantomBlockPos)) {
+                m_scene->addBlock(phantomBlockPos);
+            } else if (m_scene->blockCouldBeRemoved(phantomBlockPos)) {
+                m_scene->removeBlock(phantomBlockPos);
             }
 
         }

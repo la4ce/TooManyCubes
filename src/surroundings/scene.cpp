@@ -69,6 +69,11 @@ bool Scene::blockCouldBePlaced(Vec3i pos) {
     return false;
 }
 
+bool Scene::blockCouldBeRemoved(Vec3i pos) {
+    // May be additional restrictions in the future
+    return hasBlock(pos);
+}
+
 Qt3DCore::QEntity* Scene::getRootEntity() {
     return m_rootEntity;
 }

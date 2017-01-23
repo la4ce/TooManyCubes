@@ -23,10 +23,10 @@ using namespace TMC;
 
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
+
     //QGuiApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
 
     Qt3DExtras::Qt3DWindow view;
-
     Scene &scene = Scene::getInstance();
 
     Player player(&scene, view.camera());
