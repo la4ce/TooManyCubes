@@ -31,10 +31,8 @@ public:
     static QVector3D discreteToWorldCoordinates(Vec3i discreteCoordinates);
 
 public:
-    static Scene& getInstance() { // TODO: Bad pattern. Consideer other creational patterns for preventing multiple instantiation
-        static Scene instance;
-        return instance;
-    }
+    Scene();
+    ~Scene();
 
     void initScene();
 
@@ -47,9 +45,6 @@ public:
     Qt3DCore::QEntity* getRootEntity();
 
 private:
-    Scene();
-    ~Scene();
-
     Scene(const Scene &s) = delete;
     const Scene& operator=(const Scene& s) = delete;
 

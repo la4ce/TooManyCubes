@@ -27,8 +27,7 @@ int main(int argc, char* argv[]) {
     //QGuiApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
 
     Qt3DExtras::Qt3DWindow view;
-    Scene &scene = Scene::getInstance();
-
+    Scene scene;
     Player player(&scene, view.camera());
 
     view.setRootEntity(scene.getRootEntity());
