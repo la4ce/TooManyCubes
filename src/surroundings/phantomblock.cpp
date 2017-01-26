@@ -2,11 +2,7 @@
 
 namespace TMC {
 
-void PhantomBlock::setPos(Vec3i newDiscretePos) {
-    if (m_discretePos == newDiscretePos) return;
-
-    m_discretePos = newDiscretePos;
-    m_blockTransform->setTranslation(QVector3D(newDiscretePos.x(), newDiscretePos.y(), newDiscretePos.z()));
+PhantomBlock::PhantomBlock(Qt3DCore::QEntity *parent, BlockType type) : Block(parent, type) {
 }
 
 }

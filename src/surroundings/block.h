@@ -36,6 +36,7 @@ public:
     void setHided(bool hided);
 
     Vec3i getDiscretePos();
+    void setDiscretePos(Vec3i newDiscretePos);
 
 protected:
     const BlockType m_type;

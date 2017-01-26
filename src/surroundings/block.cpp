@@ -72,4 +72,11 @@ Vec3i Block::getDiscretePos() {
     return m_discretePos;
 }
 
+void Block::setDiscretePos(Vec3i newDiscretePos) {
+    if (m_discretePos == newDiscretePos) return;
+
+    m_discretePos = newDiscretePos;
+    m_blockTransform->setTranslation(QVector3D(newDiscretePos.x(), newDiscretePos.y(), newDiscretePos.z()));
+}
+
 }

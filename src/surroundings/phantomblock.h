@@ -7,9 +7,9 @@ namespace TMC {
 
 class PhantomBlock : public Block {
 public:
-    PhantomBlock(Qt3DCore::QEntity *parent, BlockType type = PHANTOM_BLOCK) : Block(parent, type) {}
+    PhantomBlock(Qt3DCore::QEntity *parent, BlockType type = PHANTOM_BLOCK);
 
-    void setPos(Vec3i newDiscretePos);
+    // TODO: if no new custom behaviour relatively to TMC::Block expected - remove class
 };
 
 }
