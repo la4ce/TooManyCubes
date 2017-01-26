@@ -20,8 +20,12 @@ enum HidedState {
     BLOCK_VISIBLE = false
 };
 
+class BlockAnimation;
+
 /* Block is an atomic unit of surrounding in the game. */
 class Block {
+    friend class BlockAnimation;
+
 public:
     Block(Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK); // Hided object constructor (no pos)
     Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK, bool isHided = BLOCK_VISIBLE);
