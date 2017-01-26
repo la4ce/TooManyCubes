@@ -37,8 +37,17 @@ public:
     void initScene();
 
     bool hasBlock(Vec3i pos);
+
+    void addBlock(int x, int y, int z, BlockType type = DEFAULT_BLOCK);
     void addBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
+
+    void removeBlock(int x, int y, int z);
     void removeBlock(Vec3i pos);
+
+    void moveBlock(Vec3i blockPos, Vec3i newBlockPos);
+
+    void animatedMove(Vec3i blockPos, Vec3i shift);
+
     bool blockCouldBePlaced(Vec3i pos);
     bool blockCouldBeRemoved(Vec3i pos);
 
