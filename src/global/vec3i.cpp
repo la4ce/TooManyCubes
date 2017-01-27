@@ -1,5 +1,7 @@
-#include "vec3i.h"
 #include <iostream>
+#include <Qt3DCore>
+
+#include "vec3i.h"
 
 namespace TMC {
 
@@ -51,6 +53,20 @@ const Vec3i& Vec3i::operator-=(const Vec3i& vec) {
     return *this;
 }
 
+int Vec3i::operator[](std::size_t id) {
+    switch (id) {
+        case 0:
+            return this->xp;
+        case 1:
+            return this->yp;
+        case 2:
+            return this->zp;
+        default:
+            qDebug() << "Trying to access out of Vec3i bounds: " << (int)id << endl;
+            return 0;
+    }
+}
+
 bool operator==(const Vec3i& left, const Vec3i& right) {
     return left.xp == right.xp && left.yp == right.yp && left.zp == right.zp;
 }
@@ -68,9 +84,7 @@ const Vec3i operator-(const Vec3i& left, const Vec3i& right) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Vec3i& obj) {
-    std::cout << "x: " << obj.xp << " y: " << obj.yp << " z: " << obj.zp;
-    return os;
+    return os << "x: " << obj.xp << " y: " << obj.yp << " z: " << obj.zp << endl;
 }
-
 
 }
