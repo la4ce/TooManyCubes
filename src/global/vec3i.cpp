@@ -84,7 +84,7 @@ const Vec3i operator-(const Vec3i& left, const Vec3i& right) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Vec3i& obj) {
-    return os << "x: " << obj.xp << " y: " << obj.yp << " z: " << obj.zp << endl;
+    return os << "x: " << obj.xp << " y: " << obj.yp << " z: " << obj.zp << "\n";
 }
 
 }
