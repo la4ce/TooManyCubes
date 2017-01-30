@@ -33,8 +33,12 @@ const Vec3i& Vec3i::operator+() {
     return *this;
 }
 
-const Vec3i Vec3i::operator-() {
-    return Vec3i(-xp, -yp, -zp);
+const Vec3i& Vec3i::operator-() {
+    xp = -xp;
+    yp = -yp;
+    zp = -zp;
+
+    return *this;
 }
 
 const Vec3i& Vec3i::operator+=(const Vec3i& vec) {

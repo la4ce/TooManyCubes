@@ -1,5 +1,3 @@
-#include "vec3i.h"
-#include "axisvec3i.h"
 #include "blockchain.h"
 
 namespace TMC {

@@ -39,7 +39,6 @@ Block::Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type, bool 
 
     m_blockEntity->addComponent(m_blockMaterial);
 
-
     m_blockEntity->setParent(parent);
 }
 
@@ -93,6 +92,10 @@ void Block::setDiscretePos(Vec3i newDiscretePos) {
 
     m_discretePos = newDiscretePos;
     updateTranslation();
+}
+
+void Block::translateFromPos(QMatrix4x4 translMatr) {
+
 }
 
 // TODO: make this function notified when m_discretePos changed. Safer.

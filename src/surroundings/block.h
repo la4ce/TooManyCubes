@@ -20,12 +20,12 @@ enum HidedState {
     BLOCK_VISIBLE = false
 };
 
-//class BlockAnimation;
+class BlockAnimation;
 
 /* Block is an atomic unit of surrounding in the game. */
 class Block {
+    friend class BlockAnimation;
 
-    //friend class BlockAnimation;
 public:
     static constexpr float BLOCK_LENGTH = 1.0f; // Scene global atomic length unit
 
@@ -55,6 +55,7 @@ protected:
 
 private:
     void updateTranslation();
+    void translateFromPos(QMatrix4x4 translMatr); // Only for animations, otherwise discretePos and transform's translation shouldn't diverge
 
     Qt3DExtras::QCuboidMesh *m_blockMesh;
     Qt3DRender::QMaterial *m_blockMaterial;

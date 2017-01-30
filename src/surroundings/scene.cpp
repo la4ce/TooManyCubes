@@ -1,7 +1,11 @@
 #include <cmath>
 #include "scene.h"
+#include "blockanimation.h"
+#include "blockchain.h"
 
 namespace TMC {
+
+const AxisVec3i Scene::NO_SHIFT = AxisVec3i(DEFAULT_AXIS, 0);
 
 Scene::Scene() {
     m_rootEntity = new Qt3DCore::QEntity();
@@ -28,7 +32,7 @@ void Scene::initScene() {
     //removeBlock(Vec3i(1.0, 1.0, 0.0));
 }
 
-bool Scene::hasBlock(Vec3i pos) {
+bool Scene::hasBlock(Vec3i pos) const {
     return !(m_blocksContainer.find(pos) == m_blocksContainer.end());
 }
 
@@ -66,21 +70,21 @@ void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
     m_blocksContainer.emplace(newBlockPos, std::move(tempPtr));
 }
 
-void Scene::animatedMove(Vec3i blockPos, Vec3i shift) {
-    if (!this->hasBlock(blockPos)) {
-        qDebug() << "Trying to animate movement of a nonexistent block: " << blockPos.x() << " " << blockPos.y() << " " << blockPos.z() << endl; // TODO: overload qDebug() << operator and use it
-        return;
-    }
-
-    if (abs(shift.x() / shift.x()) + abs(shift.y() / shift.y()) + abs(shift.z() / shift.z())) {
-        qDebug() << "Trying to move block on more than one axis: " << blockPos.x() << " " << blockPos.y() << " " << blockPos.z() << endl; // TODO: overload qDebug() << operator and use it
-        return;
-    }
+void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
+    animatedMove(Blockchain(blockToMove, NO_SHIFT), animatedShift);
 }
 
-/* We can place block only if there is no block at pos
+void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
+    // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks, path, and destination for all blocks to move
+
+    // self-destructed animation
+    BlockAnimation *animation = new BlockAnimation(m_rootEntity, blocksToMove, animatedShift, DEFAULT_BLOCK_MOVE_DUR);
+    animation->animate();
+}
+
+/* We are able to place a block only if there is no block at pos
  * and if there are face-adjacent blocks nearby. */
-bool Scene::blockCouldBePlaced(Vec3i pos) {
+bool Scene::blockCouldBePlaced(Vec3i pos) const {
     const int CHECK_NUM = 7;
     const Vec3i shifts[] = { Vec3i(-1, 0, 0), Vec3i(1, 0, 0), // x face-adjacent
                              Vec3i(0, -1, 0), Vec3i(0, 1, 0), // y face-adjacent
@@ -96,7 +100,7 @@ bool Scene::blockCouldBePlaced(Vec3i pos) {
     return false;
 }
 
-bool Scene::blockCouldBeRemoved(Vec3i pos) {
+bool Scene::blockCouldBeRemoved(Vec3i pos) const {
     // May be additional restrictions in the future
     return hasBlock(pos);
 }

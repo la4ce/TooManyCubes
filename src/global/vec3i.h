@@ -26,7 +26,7 @@ public:
     void setZ(int z);
 
     const Vec3i& operator+();
-    const Vec3i operator-();
+    const Vec3i& operator-();
 
     const Vec3i& operator+=(const Vec3i& vec);
     const Vec3i& operator-=(const Vec3i& vec);

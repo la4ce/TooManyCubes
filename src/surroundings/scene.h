@@ -4,7 +4,7 @@
 #include <unordered_map>
 
 #include "block.h"
-#include "vec3i.h"
+#include "axisvec3i.h"
 
 namespace std {
 template <>
@@ -28,6 +28,7 @@ typedef std::unordered_map<Vec3i, std::unique_ptr<Block>> BlocksContainer;
  * Nothing except for a block is expected to be an object. */
 class Scene {
 public:
+    static constexpr float DEFAULT_BLOCK_MOVE_DUR = 0.5;
     static const AxisVec3i NO_SHIFT;
 
 public:
@@ -36,20 +37,28 @@ public:
 
     void initScene();
 
-    bool hasBlock(Vec3i pos);
+    bool hasBlock(Vec3i pos) const;
 
     void addBlock(int x, int y, int z, BlockType type = DEFAULT_BLOCK);
     void addBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
+    // TODO: void addBlockchain(Blockchain blocksToAdd, BlockType type = DEFAULT_BLOCK);
 
     void removeBlock(int x, int y, int z);
     void removeBlock(Vec3i pos);
+    // TODO: void removeBlockchain(Blockchain blocksToRemove);
 
     void moveBlock(Vec3i blockPos, Vec3i newBlockPos);
+    // TODO: void moveBlockchain(Blockchain blocksToMove, AxisVec3i shift);
 
-    void animatedMove(Vec3i blockPos, Vec3i shift);
+    void animatedMove(Vec3i blockToMove, AxisVec3i animatedShift);
+    void animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift);
 
-    bool blockCouldBePlaced(Vec3i pos);
-    bool blockCouldBeRemoved(Vec3i pos);
+    bool blockCouldBePlaced(Vec3i pos) const;
+    bool blockCouldBeRemoved(Vec3i pos) const;
+
+    // TODO: void blockchainCouldBePlaced(Blockchain blocksToPlace);
+    // TODO: void blockchainCouldBeRemoved(Blockchain blocksToRemove);
+    // TODO: void blockchainCouldBeMoved(Blockchain blocksToMove, AxisVec3i shift);
 
     Qt3DCore::QEntity* getRootEntity();
 

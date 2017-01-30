@@ -137,6 +137,7 @@ void InputController::onTriggered(float dt) {
         static bool leftClickWasActive = false;
         static QTime leftClickPressed;
 
+        // TODO: make dynamic distance positioning (closest), same for deleting objects but require object not the space
         // Left click released
         if (leftClickWasActive && !m_leftMouseButtonAction->isActive()) {
             leftClickWasActive = false;
