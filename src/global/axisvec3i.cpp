@@ -46,21 +46,52 @@ int AxisVec3i::z() const {
     return m_vec.zp;
 }
 
-void AxisVec3i::changeValue(int newValue) {
-    if (m_vec.xp != 0) {
+int AxisVec3i::getValue() const {
+    return m_vec.xp + m_vec.yp + m_vec.zp;
+}
+
+void AxisVec3i::setValue(int newValue) {
+    if (m_vec.xp) {
         m_vec.xp = newValue;
         return;
     }
 
-    if (m_vec.yp != 0) {
+    if (m_vec.yp) {
         m_vec.yp = newValue;
         return;
     }
 
-    if (m_vec.zp != 0) {
+    if (m_vec.zp) {
         m_vec.zp = newValue;
         return;
     }
+}
+
+AxisVec3i AxisVec3i::getNormalized() {
+    if (getValue() == 0) return AxisVec3i(this->getAxis(), 0);
+    else return AxisVec3i(this->getAxis(), 1);
+}
+
+AxisIndex AxisVec3i::getAxis() const {
+    if (m_vec.xp) return XAXIS;
+
+    if (m_vec.yp) return YAXIS;
+
+    if (m_vec.zp) return ZAXIS;
+
+    return DEFAULT_AXIS;
+}
+
+Vec3i AxisVec3i::getVec3i() const {
+    return m_vec;
+}
+
+const AxisVec3i AxisVec3i::operator*=(const int scalar) {
+    return AxisVec3i(this->getAxis(), this->getValue() * scalar);
+}
+
+const AxisVec3i AxisVec3i::operator/=(const int scalar) {
+    return AxisVec3i(this->getAxis(), this->getValue() / scalar);
 }
 
 const Vec3i operator+(const Vec3i &vec, const AxisVec3i &axisVec) {
@@ -69,6 +100,14 @@ const Vec3i operator+(const Vec3i &vec, const AxisVec3i &axisVec) {
 
 const Vec3i operator+(const AxisVec3i &axisVec, const Vec3i &vec) {
     return vec + axisVec.m_vec;
+}
+
+const AxisVec3i operator*(const AxisVec3i &axisVec, const int scalar) {
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() * scalar);
+}
+
+const AxisVec3i operator/(const AxisVec3i &axisVec, const int scalar) {
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() / scalar);
 }
 
 std::ostream& operator<<(std::ostream &os, const AxisVec3i &vec) {

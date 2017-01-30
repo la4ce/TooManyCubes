@@ -27,14 +27,25 @@ public:
     int y() const;
     int z() const;
 
-    void changeValue(int newValue);
+    int getValue() const;
+    void setValue(int newValue);
+
+    AxisVec3i getNormalized();
+    AxisIndex getAxis() const;
+    Vec3i getVec3i() const;
+
+    const AxisVec3i operator*=(const int scalar);
+    const AxisVec3i operator/=(const int scalar);
 
     friend const Vec3i operator+(const Vec3i &vec, const AxisVec3i &axisVec);
     friend const Vec3i operator+(const AxisVec3i &axisVec, const Vec3i &vec);
+    friend const AxisVec3i operator*(const AxisVec3i &axisVec, const int scalar);
+    friend const AxisVec3i operator/(const AxisVec3i &axisVec, const int scalar);
 
     friend std::ostream& operator<<(std::ostream &os, const AxisVec3i &axis);
 
 private:
+    // TODO: consider changing class' data representation
     Vec3i m_vec;
 };
 
