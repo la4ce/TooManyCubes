@@ -15,18 +15,6 @@ Scene::~Scene() {
     }
 }
 
-Vec3i Scene::worldToDiscreteCoordinates(QVector3D worldCoordinates) {
-    return Vec3i(round(worldCoordinates.x() / BLOCK_EDGE_LENGTH),
-                 round(worldCoordinates.y() / BLOCK_EDGE_LENGTH),
-                 round(worldCoordinates.z() / BLOCK_EDGE_LENGTH));
-}
-
-QVector3D Scene::discreteToWorldCoordinates(Vec3i discreteCoordinates) {
-    return QVector3D(discreteCoordinates.x() * BLOCK_EDGE_LENGTH,
-                     discreteCoordinates.y() * BLOCK_EDGE_LENGTH,
-                     discreteCoordinates.z() * BLOCK_EDGE_LENGTH);
-}
-
 void Scene::initScene() {
     addBlock(0.0, 0.0, 0.0);
     addBlock(1.0, 0.0, 0.0);

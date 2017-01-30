@@ -28,13 +28,13 @@ Vec3i PhantomBlockController::getPhantomBlockPos() {
 void PhantomBlockController::onTriggered(float) {
     // TODO: implement smart block placer
     if (m_camera != nullptr) {
-        Vec3i newDiscretePos = Scene::worldToDiscreteCoordinates(
+        Vec3i newDiscretePos = Block::worldToDiscreteCoordinates(
                     m_camera->position() + m_camera->viewVector() / m_camera->viewVector().length() * PHANTOM_BLOCK_DISTANCE);
 
         HidedState hidedState = m_scene->blockCouldBePlaced(newDiscretePos) ? BLOCK_VISIBLE : BLOCK_HIDED;
 
         m_phantomBlock->setHided(hidedState);
-        m_phantomBlock->setPos(newDiscretePos);
+        m_phantomBlock->setDiscretePos(newDiscretePos);
     }
 }
 

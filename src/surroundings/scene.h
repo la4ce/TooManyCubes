@@ -20,15 +20,15 @@ struct hash<TMC::Vec3i> {
 
 namespace TMC {
 
+class Blockchain;
+
 typedef std::unordered_map<Vec3i, std::unique_ptr<Block>> BlocksContainer;
 
 /* Scene - holds and maintains blocks.
  * Nothing except for a block is expected to be an object. */
 class Scene {
 public:
-    static constexpr float BLOCK_EDGE_LENGTH = 1.0f; // Scene global atomic length unit
-    static Vec3i worldToDiscreteCoordinates(QVector3D worldCoordinates);
-    static QVector3D discreteToWorldCoordinates(Vec3i discreteCoordinates);
+    static const AxisVec3i NO_SHIFT;
 
 public:
     Scene();

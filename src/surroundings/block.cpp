@@ -18,9 +18,9 @@ Block::Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type, bool 
     , m_blockMaterial(nullptr) {
 
     this->setHided(isHided);
+    this->updateTranslation();
 
     m_blockTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0, 0, 0), 0.0f));
-    m_blockTransform->setTranslation(QVector3D(discretePos.x(), discretePos.y(), discretePos.z()));
 
     m_blockEntity->addComponent(m_blockTransform);
     m_blockEntity->addComponent(m_blockMesh);
@@ -51,24 +51,40 @@ Block::~Block() {
     }
 }
 
-BlockType Block::getBlockType() {
+
+Vec3i Block::worldToDiscreteCoordinates(QVector3D worldCoordinates) {
+    return Vec3i(round(worldCoordinates.x() / BLOCK_LENGTH),
+                 round(worldCoordinates.y() / BLOCK_LENGTH),
+                 round(worldCoordinates.z() / BLOCK_LENGTH));
+}
+
+QVector3D Block::discreteToWorldCoordinates(Vec3i discreteCoordinates) {
+    return QVector3D(discreteCoordinates.x() * BLOCK_LENGTH,
+                     discreteCoordinates.y() * BLOCK_LENGTH,
+                     discreteCoordinates.z() * BLOCK_LENGTH);
+}
+
+
+BlockType Block::getBlockType() const {
     return m_type;
 }
 
-bool Block::isHided() {
+bool Block::isHided() const {
     return m_hided;
 }
+
 
 void Block::setHided(bool hided) {
     if (m_hided == hided) return;
 
     m_hided = hided;
 
+    // TODO: make this a method that is notified when m_hided changes
     const float transfScale = hided ? 0.0f : 1.0f;
     m_blockTransform->setScale(transfScale);
 }
 
-Vec3i Block::getDiscretePos() {
+Vec3i Block::getDiscretePos() const {
     return m_discretePos;
 }
 
@@ -76,7 +92,13 @@ void Block::setDiscretePos(Vec3i newDiscretePos) {
     if (m_discretePos == newDiscretePos) return;
 
     m_discretePos = newDiscretePos;
-    m_blockTransform->setTranslation(QVector3D(newDiscretePos.x(), newDiscretePos.y(), newDiscretePos.z()));
+    updateTranslation();
+}
+
+// TODO: make this function notified when m_discretePos changed. Safer.
+void Block::updateTranslation() {
+    QVector3D newTranslation = this->discreteToWorldCoordinates(m_discretePos);
+    m_blockTransform->setTranslation(newTranslation);
 }
 
 }
