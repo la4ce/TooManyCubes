@@ -1,9 +1,11 @@
 #include "blockchain.h"
+#include "blockchainaxisshiftcontroller.h"
 
 namespace TMC {
 
-Blockchain::Blockchain(Vec3i basePos, AxisVec3i range)
-    : m_basePos(basePos)
+Blockchain::Blockchain(Scene &scene, Vec3i basePos, AxisVec3i range)
+    : m_scene(scene)
+    , m_basePos(basePos)
     , m_range(range) {
 }
 
