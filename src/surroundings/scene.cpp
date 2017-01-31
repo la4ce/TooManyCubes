@@ -64,14 +64,12 @@ void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
         return;
     }
 
-    std::unique_ptr<Block> tempPtr = std::move(m_blocksContainer[blockPos]);
-    tempPtr->setDiscretePos(newBlockPos);
+    m_blocksContainer.emplace(newBlockPos, m_blocksContainer[blockPos]);
     m_blocksContainer.erase(blockPos);
-    m_blocksContainer.emplace(newBlockPos, std::move(tempPtr));
 }
 
 void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
-    animatedMove(Blockchain(blockToMove, NO_SHIFT), animatedShift);
+    animatedMove(Blockchain(*this, blockToMove, NO_SHIFT), animatedShift);
 }
 
 void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {

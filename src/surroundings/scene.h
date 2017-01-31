@@ -22,7 +22,7 @@ namespace TMC {
 
 class Blockchain;
 
-typedef std::unordered_map<Vec3i, std::unique_ptr<Block>> BlocksContainer;
+typedef std::unordered_map<Vec3i, std::shared_ptr<Block>> BlocksContainer;
 
 /* Scene - holds and maintains blocks.
  * Nothing except for a block is expected to be an object. */
