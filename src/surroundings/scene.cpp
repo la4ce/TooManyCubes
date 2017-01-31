@@ -45,6 +45,15 @@ void Scene::addBlock(Vec3i pos, BlockType type) {
     m_blocksContainer.emplace(pos, std::unique_ptr<Block>(new Block(pos, m_rootEntity, type)));
 }
 
+std::shared_ptr<Block> Scene::getBlock(int x, int y, int z) {
+    Vec3i pos(x, y, z);
+    return m_blocksContainer[pos];
+}
+
+std::shared_ptr<Block> Scene::getBlock(Vec3i pos) {
+    return m_blocksContainer[pos];
+}
+
 void Scene::removeBlock(int x, int y, int z) {
     this->removeBlock(Vec3i(x, y, z));
 }
@@ -65,6 +74,7 @@ void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
     }
 
     m_blocksContainer.emplace(newBlockPos, m_blocksContainer[blockPos]);
+    m_blocksContainer[blockPos]->setDiscretePos(newBlockPos);
     m_blocksContainer.erase(blockPos);
 }
 

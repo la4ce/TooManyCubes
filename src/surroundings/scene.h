@@ -43,6 +43,9 @@ public:
     void addBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
     // TODO: void addBlockchain(Blockchain blocksToAdd, BlockType type = DEFAULT_BLOCK);
 
+    std::shared_ptr<Block> getBlock(int x, int y, int z);
+    std::shared_ptr<Block> getBlock(Vec3i pos);
+
     void removeBlock(int x, int y, int z);
     void removeBlock(Vec3i pos);
     // TODO: void removeBlockchain(Blockchain blocksToRemove);
