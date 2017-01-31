@@ -95,7 +95,8 @@ void Block::setDiscretePos(Vec3i newDiscretePos) {
 }
 
 void Block::translateFromPos(QMatrix4x4 translMatr) {
-
+    updateTranslation();
+    m_blockTransform->setMatrix(m_blockTransform->matrix() * translMatr);
 }
 
 // TODO: make this function notified when m_discretePos changed. Safer.
