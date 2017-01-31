@@ -29,6 +29,8 @@ void Scene::initScene() {
 
     moveBlock(Vec3i(1.0, 1.0, 0.0), Vec3i(2.0, 2.0, 0.0));
 
+    animatedMove(Vec3i(2.0, 0.0, 0.0), AxisVec3i(XAXIS, 3));
+
     //removeBlock(Vec3i(1.0, 1.0, 0.0));
 }
 
@@ -88,6 +90,11 @@ void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
     // self-destructed animation
     BlockAnimation *animation = new BlockAnimation(m_rootEntity, blocksToMove, animatedShift, DEFAULT_BLOCK_MOVE_DUR);
     animation->animate();
+
+    // BLOCKER TODO: clean up after animation ends (with delay): move all blocks accordingly,
+    // freeze all blocks while animating and add placeholder blocks to animation end.
+
+    // TODO: split animation on one-block animations to not freeze all block's path during block animation (dynamic movement availability check).
 }
 
 /* We are able to place a block only if there is no block at pos

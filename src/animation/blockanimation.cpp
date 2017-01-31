@@ -14,7 +14,7 @@ BlockAnimation::BlockAnimation(QObject *parent, Blockchain blocks, AxisVec3i ani
     this->setPropertyName("discreteShift");
     this->setStartValue(QVariant::fromValue(0.0f));
     this->setEndValue(QVariant::fromValue((float)animatedShift.getValue()));
-    this->setDuration(animationLengthUnit * animatedShift.getValue());
+    this->setDuration(animationLengthUnit * animatedShift.getValue() * 1000.0f);
     this->setLoopCount(1);
 }
 

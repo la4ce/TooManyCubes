@@ -25,6 +25,8 @@ float BlockchainAxisShiftController::getDiscreteShift() const {
 void BlockchainAxisShiftController::setDiscreteShift(float newDiscreteShift) {
     if (qFuzzyCompare(m_discreteShift, newDiscreteShift)) return;
 
+    //qDebug() << "BlockchainAxisShiftController. DiscreteShift updated: " << newDiscreteShift << endl;
+
     m_discreteShift = newDiscreteShift;
 
     m_translationMatrix.setToIdentity();
@@ -52,12 +54,12 @@ void BlockchainAxisShiftController::setTranslationAxis(AxisIndex newTranslationA
 void BlockchainAxisShiftController::updateBlockchainTranslations() {
     AxisVec3i range = m_chain.getRange();
 
-    for (Vec3i it = m_chain.getBasePos();
-         it != (it + range);
-         it = it + range.getNormalized()) {
+    Vec3i it = m_chain.getBasePos();
 
-        // TODO: Implement blocks translation update here
-    }
+    do {
+        m_chain.m_scene.getBlock(it)->translateFromPos(m_translationMatrix);
+        it = it + range.getNormal();
+    } while (it != (it + range));
 }
 
 }

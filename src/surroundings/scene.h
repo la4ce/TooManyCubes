@@ -28,7 +28,7 @@ typedef std::unordered_map<Vec3i, std::shared_ptr<Block>> BlocksContainer;
  * Nothing except for a block is expected to be an object. */
 class Scene {
 public:
-    static constexpr float DEFAULT_BLOCK_MOVE_DUR = 0.5;
+    static constexpr float DEFAULT_BLOCK_MOVE_DUR = 0.5f; // in seconds
     static const AxisVec3i NO_SHIFT;
 
 public:
@@ -53,6 +53,7 @@ public:
     void moveBlock(Vec3i blockPos, Vec3i newBlockPos);
     // TODO: void moveBlockchain(Blockchain blocksToMove, AxisVec3i shift);
 
+    // TODO: void Scene::animatedMove(Vec3i blockToMovePos, Vec3i newPos);
     void animatedMove(Vec3i blockToMove, AxisVec3i animatedShift);
     void animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift);
 

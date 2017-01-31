@@ -42,7 +42,10 @@ Block::Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type, bool 
     m_blockEntity->setParent(parent);
 }
 
+// TODO: add more debugging on creation and destruction of your objects.
 Block::~Block() {
+    qDebug() << "Block destroyed." << endl;
+
     if (m_blockEntity != nullptr) {
         // Deleting automatically notifies QEnity's parents and all connections
         // that it was deleted in QNode and QObject destructors
