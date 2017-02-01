@@ -15,7 +15,7 @@ class Blockchain {
     friend BlockchainAxisShiftController;
 
 public:
-    Blockchain(Scene &scene, Vec3i basePos, AxisVec3i range);
+    Blockchain(Scene *scene, Vec3i basePos, AxisVec3i range);
 
     Vec3i getBasePos();
     void setBasePos(Vec3i newBasePos);
@@ -24,7 +24,7 @@ public:
     void setRange(AxisVec3i newRange);
 
 private:
-    Scene &m_scene;
+    Scene *m_scene;
     Vec3i m_basePos; // Blockchain has a base block and it occupies some area by one axis specified in m_range
     AxisVec3i m_range;
 };

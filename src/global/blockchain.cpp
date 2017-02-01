@@ -3,7 +3,7 @@
 
 namespace TMC {
 
-Blockchain::Blockchain(Scene &scene, Vec3i basePos, AxisVec3i range)
+Blockchain::Blockchain(Scene *scene, Vec3i basePos, AxisVec3i range)
     : m_scene(scene)
     , m_basePos(basePos)
     , m_range(range) {

@@ -81,7 +81,7 @@ void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
 }
 
 void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
-    animatedMove(Blockchain(*this, blockToMove, NO_SHIFT), animatedShift);
+    animatedMove(Blockchain(this, blockToMove, NO_SHIFT), animatedShift);
 }
 
 void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {

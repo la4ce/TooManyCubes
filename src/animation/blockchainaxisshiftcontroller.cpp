@@ -57,7 +57,7 @@ void BlockchainAxisShiftController::updateBlockchainTranslations() {
     Vec3i it = m_chain.getBasePos();
 
     do {
-        m_chain.m_scene.getBlock(it)->translateFromPos(m_translationMatrix);
+        m_chain.m_scene->getBlock(it)->translateFromPos(m_translationMatrix);
         it = it + range.getNormal();
     } while (it != (it + range));
 }
