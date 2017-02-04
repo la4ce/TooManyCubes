@@ -40,7 +40,7 @@ public:
     friend const Vec3i operator-(const Vec3i& left, const Vec3i& right);
 
     friend std::ostream& operator<<(std::ostream& os, const Vec3i& obj);
-    // TODO: impement output for qDebug too
+    friend QDebug operator<<(QDebug dbg, const Vec3i &vector);
 
 private:
     int xp;

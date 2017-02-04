@@ -43,6 +43,7 @@ public:
     friend const AxisVec3i operator/(const AxisVec3i &axisVec, const int scalar);
 
     friend std::ostream& operator<<(std::ostream &os, const AxisVec3i &axis);
+    friend QDebug operator<<(QDebug dbg, const AxisVec3i &axisVec);
 
 private:
     // TODO: consider changing class' data representation

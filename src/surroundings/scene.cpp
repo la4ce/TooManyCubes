@@ -66,12 +66,12 @@ void Scene::removeBlock(Vec3i pos) {
 
 void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
     if (!this->hasBlock(blockPos)) {
-        qDebug() << "Trying to move a nonexistent block: " << blockPos.x() << " " << blockPos.y() << " " << blockPos.z() << endl; // TODO: overload qDebug() << operator and use it
+        qDebug() << "Trying to move a nonexistent block: " << blockPos;
         return;
     }
 
     if (this->hasBlock(newBlockPos)) {
-        qDebug() << "Trying to move a block to an occupied position: " << newBlockPos.x() << " " << newBlockPos.y() << " " << newBlockPos.z() << endl; // TODO: overload qDebug() << operator and use it
+        qDebug() << "Trying to move a block to an occupied position: " << newBlockPos;
         return;
     }
 
@@ -124,7 +124,6 @@ bool Scene::blockCouldBePlaced(Vec3i pos) const {
 }
 
 bool Scene::blockCouldBeRemoved(Vec3i pos) const {
-    // May be additional restrictions in the future
     return hasBlock(pos);
 }
 
@@ -133,7 +132,7 @@ Qt3DCore::QEntity* Scene::getRootEntity() {
 }
 
 void Scene::animationCleanup(Blockchain movedBlocks, AxisVec3i shift) {
-    qDebug() << "Cleaning up animation..." << endl;
+    qDebug() << "Cleaning up animation.";
     this->moveBlockchain(movedBlocks, shift);
 }
 

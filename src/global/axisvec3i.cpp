@@ -25,7 +25,7 @@ AxisVec3i::AxisVec3i(Vec3i vec) {
 
     if (nonNulCount > 1) {
         m_vec = Vec3i(0);
-        qDebug() << "Trying to create AxisVec3i from Vec3i with more than one non zero component." << vec.x() << " " << vec.y() << " " << vec.z() << endl; // TODO: overload qDebug() << operator and use it
+        qDebug() << "Trying to create AxisVec3i from Vec3i with more than one non zero component." << vec;
     } else {
         m_vec = vec;
     }
@@ -111,6 +111,13 @@ const AxisVec3i operator/(const AxisVec3i &axisVec, const int scalar) {
 
 std::ostream& operator<<(std::ostream &os, const AxisVec3i &vec) {
     return os << vec.m_vec;
+}
+
+QDebug operator<<(QDebug dbg, const AxisVec3i &axisVec) {
+    QDebugStateSaver saver(dbg);
+       dbg.nospace() << "AxisVec3i("
+           << axisVec.m_vec.x() << ", " << axisVec.m_vec.y() << ", " << axisVec.m_vec.z() << ')';
+       return dbg;
 }
 
 }

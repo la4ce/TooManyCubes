@@ -24,7 +24,7 @@ BlockAnimation::BlockAnimation(QObject *parent, Blockchain blocks, AxisVec3i ani
 }
 
 BlockAnimation::~BlockAnimation() {
-    qDebug() << "BlockAnimation destroyed." << endl; // testing memory management
+    qDebug() << "BlockAnimation destroyed.";
 }
 
 void BlockAnimation::animate() {

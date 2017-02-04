@@ -16,7 +16,7 @@ BlockchainAxisShiftController::BlockchainAxisShiftController(QAbstractAnimation 
 }
 
 BlockchainAxisShiftController::~BlockchainAxisShiftController() {
-    qDebug() << "BlockchainController destroyed." << endl; // testing memory management
+    qDebug() << "BlockchainController destroyed.";
 }
 
 float BlockchainAxisShiftController::getDiscreteShift() const {

@@ -91,4 +91,12 @@ std::ostream& operator<<(std::ostream& os, const Vec3i& obj) {
     return os << "x: " << obj.xp << " y: " << obj.yp << " z: " << obj.zp << "\n";
 }
 
+QDebug operator<<(QDebug dbg, const Vec3i &vector)
+{
+    QDebugStateSaver saver(dbg);
+    dbg.nospace() << "Vec3i("
+        << vector.xp << ", " << vector.yp << ", " << vector.zp << ')';
+    return dbg;
+}
+
 }
