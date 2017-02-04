@@ -1,7 +1,8 @@
 #ifndef TMC_PHANTOMBLOCK_H
 #define TMC_PHANTOMBLOCK_H
 
-#include "scene.h"
+#include <Qt3DCore/QEntity>
+#include "block.h"
 
 namespace TMC {
 

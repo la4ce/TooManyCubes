@@ -1,7 +1,7 @@
 #ifndef TMC_CUSTOMALPHAPHONG_H
 #define TMC_CUSTOMALPHAPHONG_H
 
-#include <Qt3DExtras>
+#include <Qt3DExtras/QPhongAlphaMaterial>
 
 namespace TMC {
 

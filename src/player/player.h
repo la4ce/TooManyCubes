@@ -1,14 +1,15 @@
 #ifndef TMC_PLAYER_H
 #define TMC_PLAYER_H
 
-#include <Qt3DRender>
-#include <Qt3DCore>
-
-#include "inputcontroller.h"
-#include "phantomblockcontroller.h"
-#include "scene.h"
+namespace Qt3DRender {
+    class QCamera;
+}
 
 namespace TMC {
+
+class Scene;
+class InputController;
+class PhantomBlockController;
 
 class Player {
 public:
@@ -21,7 +22,6 @@ private:
     Qt3DRender::QCamera *m_playerCamera;
     PhantomBlockController *m_phantomBlockController;
     InputController *m_inputController;
-
 };
 
 }

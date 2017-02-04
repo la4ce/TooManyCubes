@@ -1,7 +1,7 @@
 #ifndef TMC_PHANTOMMATERIAL_H
 #define TMC_PHANTOMMATERIAL_H
 
-#include <Qt3DExtras>
+#include <Qt3DExtras/QPhongAlphaMaterial>
 
 namespace TMC {
 

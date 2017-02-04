@@ -1,7 +1,7 @@
 #ifndef BLOCKANIMATION_H
 #define BLOCKANIMATION_H
 
-#include <Qt3DCore>
+#include <QPropertyAnimation>
 
 #include "blockchain.h"
 #include "axisvec3i.h"

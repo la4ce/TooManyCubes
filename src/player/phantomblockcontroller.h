@@ -1,16 +1,24 @@
 #ifndef TMC_PHANTOMBLOCKCONTROLLER_H
 #define TMC_PHANTOMBLOCKCONTROLLER_H
 
-#include <Qt3DLogic>
-#include <Qt3DRender>
+#include <Qt3DCore/QEntity>
 
-#include "scene.h"
-#include "phantomblock.h"
+#include "vec3i.h"
+
+namespace Qt3DLogic {
+    class QFrameAction;
+}
+
+namespace Qt3DRender {
+    class QCamera;
+}
 
 namespace TMC {
 
-class PhantomBlockController : public Qt3DCore::QEntity {
+class Scene;
+class PhantomBlock;
 
+class PhantomBlockController : public Qt3DCore::QEntity {
     Q_OBJECT
 
 public:
@@ -30,7 +38,6 @@ private:
 
 public slots:
     void onTriggered(float);
-
 };
 
 }

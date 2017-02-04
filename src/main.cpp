@@ -1,25 +1,13 @@
 #include <QGuiApplication>
 
-#include <Qt3DCore/QEntity>
-#include <Qt3DRender/QCamera>
-#include <Qt3DRender/QCameraLens>
-#include <Qt3DCore/QAspectEngine>
-#include <Qt3DCore/QTransform>
-
-#include <Qt3DInput/QInputAspect>
-
-#include <Qt3DRender/QRenderAspect>
-#include <Qt3DExtras//QForwardRenderer>
-#include <Qt3DExtras//QPhongMaterial>
-#include <Qt3DExtras/QFirstPersonCameraController>
-
-#include <Qt3DExtras/QTorusMesh>
-
 #include "qt3dwindow.h"
 #include "scene.h"
 #include "player.h"
 
 using namespace TMC;
+
+// TODO: add some beautiful demo presets (for block generation, animations, gravity, liquids, explosions)
+// TODO: use exceptions for block adding, removing, movement and animation instead of qDebug. Write your own ones.
 
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);

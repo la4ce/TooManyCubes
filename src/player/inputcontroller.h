@@ -1,18 +1,32 @@
 #ifndef TMC_INPUTCONTROLLER_H
 #define TMC_INPUTCONTROLLER_H
 
-#include <Qt3DExtras>
-#include <Qt3DCore>
-#include <Qt3DRender>
-#include <Qt3DCore>
-#include <Qt3DInput>
 #include <QVector3D>
-#include <Qt3DLogic>
+#include <Qt3DCore/QEntity>
 
-#include "scene.h"
-#include "phantomblockcontroller.h"
+namespace Qt3DInput {
+    class QAction;
+    class QAxis;
+    class QAnalogAxisInput;
+    class QLogicalDevice;
+    class QKeyboardDevice;
+    class QMouseDevice;
+    class QActionInput;
+    class QButtonAxisInput;
+}
+
+namespace Qt3DRender {
+    class QCamera;
+}
+
+namespace Qt3DLogic {
+    class QFrameAction;
+}
 
 namespace TMC {
+
+class Scene;
+class PhantomBlockController;
 
 class InputController : public Qt3DCore::QEntity
 {

@@ -1,3 +1,7 @@
+#include <Qt3DExtras/QPhongMaterial>
+
+#include <cmath>
+
 #include "block.h"
 #include "customalphaphong.h"
 #include "phantommaterial.h"

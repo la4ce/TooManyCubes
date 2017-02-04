@@ -1,9 +1,11 @@
 #ifndef TMC_BLOCK_H
 #define TMC_BLOCK_H
 
-#include <Qt3DCore>
-#include <Qt3DRender>
-#include <Qt3DExtras>
+#include <Qt3DCore/QEntity>
+#include <Qt3DCore/QTransform>
+#include <Qt3DRender/QMesh>
+#include <Qt3DRender/QMaterial>
+#include <Qt3DExtras/QCuboidMesh>
 
 #include "vec3i.h"
 

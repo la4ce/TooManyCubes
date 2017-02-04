@@ -1,4 +1,9 @@
+#include <Qt3DRender/QCamera>
+
 #include "player.h"
+#include "scene.h"
+#include "inputcontroller.h"
+#include "phantomblockcontroller.h"
 
 namespace TMC {
 

@@ -1,6 +1,9 @@
 #include <Qt3DLogic>
+#include <Qt3DRender>
 
 #include "phantomblockcontroller.h"
+#include "scene.h"
+#include "phantomblock.h"
 
 namespace TMC {
 
@@ -15,7 +18,6 @@ PhantomBlockController::PhantomBlockController(Scene *scene, const Qt3DRender::Q
                      this, SLOT(onTriggered(float)));
 
     this->addComponent(m_frameAction);
-
 }
 
 PhantomBlockController::~PhantomBlockController() {
