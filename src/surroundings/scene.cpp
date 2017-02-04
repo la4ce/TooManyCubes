@@ -1,7 +1,6 @@
 #include <cmath>
 #include "scene.h"
 #include "blockanimation.h"
-#include "blockchain.h"
 
 namespace TMC {
 
@@ -27,9 +26,10 @@ void Scene::initScene() {
     addBlock(1.0, 0.0, -1.0);
     addBlock(1.0, 1.0, 0.0);
 
-    moveBlock(Vec3i(1.0, 1.0, 0.0), Vec3i(2.0, 2.0, 0.0));
+    //moveBlock(Vec3i(1.0, 1.0, 0.0), Vec3i(2.0, 2.0, 0.0));
 
-    animatedMove(Vec3i(2.0, 0.0, 0.0), AxisVec3i(XAXIS, 3));
+    animatedMove(Vec3i(2.0, 0.0, 0.0), AxisVec3i(YAXIS, 10));
+    animatedMove(Vec3i(1.0, 1.0, 0.0), AxisVec3i(XAXIS, -10));
 
     //removeBlock(Vec3i(1.0, 1.0, 0.0));
 }
@@ -80,6 +80,14 @@ void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
     m_blocksContainer.erase(blockPos);
 }
 
+void Scene::moveBlockchain(Blockchain blocksToMove, AxisVec3i shift) {
+    // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks, path, and destination for all blocks to move
+
+    // PRIORITYTODO: make a BlockchainController class which will perform all operations on Blockchains (translate all, move all in scene etc.)
+    // currently works only for blockchains with one block
+    this->moveBlock(blocksToMove.getBasePos(), shift + blocksToMove.getBasePos());
+}
+
 void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
     animatedMove(Blockchain(this, blockToMove, NO_SHIFT), animatedShift);
 }
@@ -87,14 +95,14 @@ void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
 void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
     // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks, path, and destination for all blocks to move
 
-    // self-destructed animation
+    // self-destructed animation with cleanup signal
     BlockAnimation *animation = new BlockAnimation(m_rootEntity, blocksToMove, animatedShift, DEFAULT_BLOCK_MOVE_DUR);
+    QObject::connect(animation, SIGNAL(cleanupTrigger(Blockchain, AxisVec3i)), SLOT(animationCleanup(Blockchain,AxisVec3i)));
+
     animation->animate();
 
-    // BLOCKER TODO: clean up after animation ends (with delay): move all blocks accordingly,
-    // freeze all blocks while animating and add placeholder blocks to animation end.
-
-    // TODO: split animation on one-block animations to not freeze all block's path during block animation (dynamic movement availability check).
+    // TODO: split animation on one-block animations to not freeze all block's path during block animation (dynamic movement availability check)
+    // TODO: freeze all blocks while animating and add placeholder blocks to animation end
 }
 
 /* We are able to place a block only if there is no block at pos
@@ -122,6 +130,11 @@ bool Scene::blockCouldBeRemoved(Vec3i pos) const {
 
 Qt3DCore::QEntity* Scene::getRootEntity() {
     return m_rootEntity;
+}
+
+void Scene::animationCleanup(Blockchain movedBlocks, AxisVec3i shift) {
+    qDebug() << "Cleaning up animation..." << endl;
+    this->moveBlockchain(movedBlocks, shift);
 }
 
 } // namespace TooManyCubes

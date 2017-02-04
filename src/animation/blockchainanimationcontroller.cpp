@@ -1,14 +1,15 @@
 #include <QtCore/QAbstractAnimation>
 #include <Qt3DCore/QTransform>
 
-#include "blockchainaxisshiftcontroller.h"
+#include "blockchainanimationcontroller.h"
 #include "axisvec3i.h"
+#include "scene.h"
 
 namespace TMC {
 
-BlockchainAxisShiftController::BlockchainAxisShiftController(QAbstractAnimation *parent, Blockchain chain)
+BlockchainAxisShiftController::BlockchainAxisShiftController(QAbstractAnimation *parent, Blockchain chain, AxisIndex axis)
     : QObject(parent)
-    , m_translationAxis(DEFAULT_AXIS)
+    , m_translationAxis(axis)
     , m_discreteShift(0)
     , m_translationMatrix()
     , m_chain(chain) {

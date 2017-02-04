@@ -3,11 +3,11 @@
 
 #include "vec3i.h"
 #include "axisvec3i.h"
-#include "scene.h"
 
 namespace TMC {
 
 class BlockchainAxisShiftController;
+class Scene;
 
 /* Blockchain represents coordinates and dimenstions of a 1x1xN
  * row of blocks by any axis, conveniently packed. Contains at least one block position.*/

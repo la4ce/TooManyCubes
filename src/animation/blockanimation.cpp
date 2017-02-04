@@ -1,21 +1,26 @@
 #include "blockanimation.h"
-#include "axisvec3i.h"
-#include "blockchain.h"
-#include "blockchainaxisshiftcontroller.h"
+#include "blockchainanimationcontroller.h"
 
 namespace TMC {
 
 BlockAnimation::BlockAnimation(QObject *parent, Blockchain blocks, AxisVec3i animatedShift, float animationLengthUnit)
     : QPropertyAnimation(parent)
-    , m_controller(new BlockchainAxisShiftController(this, blocks)){
+    , m_blocks(blocks)
+    , m_shift(animatedShift)
+    , m_controller(new BlockchainAxisShiftController(this, blocks, animatedShift.getAxis())){
 
     m_controller->setProperty("translationAxis", animatedShift.getAxis());
     this->setTargetObject(m_controller);
     this->setPropertyName("discreteShift");
     this->setStartValue(QVariant::fromValue(0.0f));
-    this->setEndValue(QVariant::fromValue((float)animatedShift.getValue()));
-    this->setDuration(animationLengthUnit * animatedShift.getValue() * 1000.0f);
+    this->setEndValue(QVariant::fromValue(static_cast<float>(animatedShift.getValue())));
+    this->setDuration(animationLengthUnit * abs(animatedShift.getValue()));
+    //this->setEasingCurve(QEasingCurve::InCubic);
     this->setLoopCount(1);
+
+    QObject::connect(this, SIGNAL(finished()), SLOT(finishedWrapper()));
+
+    // TODO: add couple different animation easings (Hint: ->setEasingCurve())
 }
 
 BlockAnimation::~BlockAnimation() {
@@ -26,5 +31,8 @@ void BlockAnimation::animate() {
     this->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
+void BlockAnimation::finishedWrapper() {
+    emit cleanupTrigger(m_blocks, m_shift);
+}
 
 }

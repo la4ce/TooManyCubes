@@ -1,5 +1,5 @@
-#ifndef BLOCKCHAINAXISSHIFTCONTROLLER_H
-#define BLOCKCHAINAXISSHIFTCONTROLLER_H
+#ifndef BLOCKCHAINANIMATIONCONTROLLER_H
+#define BLOCKCHAINANIMATIONCONTROLLER_H
 
 #include <QObject>
 #include <QMatrix4x4>
@@ -26,7 +26,7 @@ class BlockchainAxisShiftController : public QObject {
 public:
     /* We want parent to be QAbstractAnimation so BlockchainController always deleted
      * automatically when animation deletes. */
-    BlockchainAxisShiftController(QAbstractAnimation *parent, Blockchain chain);
+    BlockchainAxisShiftController(QAbstractAnimation *parent, Blockchain chain, AxisIndex axis);
     ~BlockchainAxisShiftController();
 
     float getDiscreteShift() const;
@@ -52,4 +52,4 @@ private:
 
 }
 
-#endif // BLOCKCHAINAXISSHIFTCONTROLLER_H
+#endif // BLOCKCHAINANIMATIONCONTROLLER_H

@@ -1,5 +1,6 @@
 #include "blockchain.h"
-#include "blockchainaxisshiftcontroller.h"
+#include "blockchainanimationcontroller.h"
+#include "scene.h"
 
 namespace TMC {
 
