@@ -14,7 +14,8 @@ namespace TMC {
 enum BlockType {
     DEFAULT_BLOCK = 1,
     DEFAULT_TRANSP_BLOCK,
-    PHANTOM_BLOCK
+    PHANTOM_BLOCK,
+    PLACEHOLDER_BLOCK
 };
 
 enum HidedState {
@@ -35,7 +36,6 @@ public:
     static QVector3D discreteToWorldCoordinates(Vec3i discreteCoordinates);
 
 public:
-    Block(Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK); // Hided object constructor (no pos)
     Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK, bool isHided = BLOCK_VISIBLE);
     virtual ~Block();
 
@@ -56,6 +56,7 @@ protected:
     Qt3DCore::QTransform *m_blockTransform;
 
 private:
+    void updateScale();
     void updateTranslation();
     void translateFromPos(QMatrix4x4 translMatr); // Only for animations, otherwise discretePos and transform's translation shouldn't diverge
 

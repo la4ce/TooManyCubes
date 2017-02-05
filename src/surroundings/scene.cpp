@@ -16,6 +16,8 @@ Scene::~Scene() {
     if (m_rootEntity != nullptr && m_rootEntity->parent() == nullptr) {
         delete m_rootEntity;
     }
+
+    qDebug() << "Scene destroyed.";
 }
 
 void Scene::initScene() {
@@ -101,7 +103,6 @@ void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
 
     animation->animate();
 
-    // TODO: split animation on one-block animations to not freeze all block's path during block animation (dynamic movement availability check)
     // TODO: freeze all blocks while animating and add placeholder blocks to animation end
 }
 

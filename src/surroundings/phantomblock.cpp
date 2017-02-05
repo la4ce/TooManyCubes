@@ -2,7 +2,8 @@
 
 namespace TMC {
 
-PhantomBlock::PhantomBlock(Qt3DCore::QEntity *parent, BlockType type) : Block(parent, type) {
+PhantomBlock::PhantomBlock(Qt3DCore::QEntity *parent)
+    : Block(Vec3i(0, 0, 0), parent, PHANTOM_BLOCK, BLOCK_HIDED) {
 }
 
 }
