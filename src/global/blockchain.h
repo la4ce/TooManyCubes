@@ -8,14 +8,16 @@
 
 namespace TMC {
 
-class BlockchainAxisShiftController;
+class BlockAnimationController;
 class Scene;
+
+// TODO: blockchain needs an iterator
 
 /* Blockchain represents coordinates and dimenstions of a 1x1xN
  * row of blocks by any axis, conveniently packed. Contains at least one block position.*/
 class Blockchain {
 public:
-    Blockchain(Scene *scene, Vec3i basePos, AxisVec3i range);
+    Blockchain(Vec3i basePos, AxisVec3i range);
 
     Vec3i getBasePos();
     void setBasePos(Vec3i newBasePos);
@@ -23,10 +25,7 @@ public:
     AxisVec3i getRange();
     void setRange(AxisVec3i newRange);
 
-    Scene *getScene() const;
-
 private:
-    Scene *const m_scene;
     Vec3i m_basePos; // Blockchain has a base block and it occupies some area by one axis specified in m_range
     AxisVec3i m_range;
 };

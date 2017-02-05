@@ -1,13 +1,14 @@
 #include "blockanimation.h"
-#include "blockchainanimationcontroller.h"
+#include "blockanimationcontroller.h"
+#include "scene.h"
 
 namespace TMC {
 
-BlockAnimation::BlockAnimation(QObject *parent, Blockchain blocks, AxisVec3i animatedShift, float animationLengthUnit)
-    : QPropertyAnimation(parent)
+BlockAnimation::BlockAnimation(Scene *scene, Blockchain blocks, AxisVec3i animatedShift, float animationLengthUnit)
+    : QPropertyAnimation(scene)
     , m_blocks(blocks)
     , m_shift(animatedShift)
-    , m_controller(new BlockchainAxisShiftController(this, blocks, animatedShift.getAxis())){
+    , m_controller(new BlockAnimationController(this, scene, blocks, animatedShift.getAxis())){
 
     m_controller->setProperty("translationAxis", animatedShift.getAxis());
     this->setTargetObject(m_controller);

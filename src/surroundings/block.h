@@ -23,11 +23,11 @@ enum HidedState {
     BLOCK_VISIBLE = false
 };
 
-class BlockchainAxisShiftController;
+class BlockAnimationController;
 
 /* Block is an atomic unit of surrounding in the game. */
 class Block {
-    friend class BlockchainAxisShiftController;
+    friend class BlockAnimationController;
 
 public:
     static constexpr float BLOCK_LENGTH = 1.0f; // Scene global atomic length unit

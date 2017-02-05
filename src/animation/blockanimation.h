@@ -8,14 +8,15 @@
 
 namespace TMC {
 
-class BlockchainAxisShiftController;
+class Scene;
+class BlockAnimationController;
 
 // Friend of TMC::Block
 class BlockAnimation : public QPropertyAnimation {
     Q_OBJECT
 
 public:
-    BlockAnimation(QObject *parent, Blockchain blocks, AxisVec3i animatedShift, float animationLengthUnit);
+    BlockAnimation(Scene *scene, Blockchain blocks, AxisVec3i animatedShift, float animationLengthUnit);
     ~BlockAnimation();
 
     void animate();
@@ -29,7 +30,7 @@ signals:
 private:
     Blockchain m_blocks;
     AxisVec3i m_shift;
-    BlockchainAxisShiftController *m_controller;
+    BlockAnimationController *m_controller;
 };
 
 }

@@ -2,8 +2,8 @@ INCLUDEPATH += $$PWD
 
 SOURCES += \
     $$PWD/blockanimation.cpp \
-    $$PWD/blockchainanimationcontroller.cpp
+    $$PWD/blockanimationcontroller.cpp
 
 HEADERS += \
     $$PWD/blockanimation.h \
-    $$PWD/blockchainanimationcontroller.h
+    $$PWD/blockanimationcontroller.h

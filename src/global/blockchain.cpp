@@ -1,12 +1,11 @@
 #include "blockchain.h"
-#include "blockchainanimationcontroller.h"
+#include "blockanimationcontroller.h"
 #include "scene.h"
 
 namespace TMC {
 
-Blockchain::Blockchain(Scene *scene, Vec3i basePos, AxisVec3i range)
-    : m_scene(scene)
-    , m_basePos(basePos)
+Blockchain::Blockchain(Vec3i basePos, AxisVec3i range)
+    : m_basePos(basePos)
     , m_range(range) {
 }
 
@@ -24,10 +23,6 @@ AxisVec3i Blockchain::getRange() {
 
 void Blockchain::setRange(AxisVec3i newRange) {
     m_range = newRange;
-}
-
-Scene *Blockchain::getScene() const {
-    return m_scene;
 }
 
 }

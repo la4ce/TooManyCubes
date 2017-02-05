@@ -89,14 +89,14 @@ void Scene::moveBlockchain(Blockchain blocksToMove, AxisVec3i shift) {
 }
 
 void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
-    animatedMove(Blockchain(this, blockToMove, NO_SHIFT), animatedShift);
+    animatedMove(Blockchain(blockToMove, NO_SHIFT), animatedShift);
 }
 
 void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
     // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks, path, and destination for all blocks to move
 
     // self-destructed animation with cleanup signal
-    BlockAnimation *animation = new BlockAnimation(m_rootEntity, blocksToMove, animatedShift, DEFAULT_BLOCK_MOVE_DUR);
+    BlockAnimation *animation = new BlockAnimation(this, blocksToMove, animatedShift, DEFAULT_BLOCK_MOVE_DUR);
     QObject::connect(animation, SIGNAL(cleanupTrigger(Blockchain, AxisVec3i)), SLOT(animationCleanup(Blockchain,AxisVec3i)));
 
 

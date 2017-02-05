@@ -1,5 +1,5 @@
-#ifndef BLOCKCHAINANIMATIONCONTROLLER_H
-#define BLOCKCHAINANIMATIONCONTROLLER_H
+#ifndef BLOCKANIMATIONCONTROLLER_H
+#define BLOCKANIMATIONCONTROLLER_H
 
 #include <QObject>
 #include <QMatrix4x4>
@@ -16,9 +16,9 @@ namespace TMC {
 
 class Vec3i;
 class AxisVec3i;
+class Scene;
 
-class BlockchainAxisShiftController : public QObject {
-
+class BlockAnimationController : public QObject {
     Q_OBJECT
     Q_PROPERTY(float discreteShift READ getDiscreteShift WRITE setDiscreteShift NOTIFY discreteShiftChanged)
     Q_PROPERTY(AxisIndex translationAxis READ getTranslationAxis WRITE setTranslationAxis NOTIFY translationAxisChanged)
@@ -26,8 +26,8 @@ class BlockchainAxisShiftController : public QObject {
 public:
     /* We want parent to be QAbstractAnimation so BlockchainController always deleted
      * automatically when animation deletes. */
-    BlockchainAxisShiftController(QAbstractAnimation *parent, Blockchain chain, AxisIndex axis);
-    ~BlockchainAxisShiftController();
+    BlockAnimationController(QAbstractAnimation *parent, Scene *scene, Blockchain chain, AxisIndex axis);
+    ~BlockAnimationController();
 
     float getDiscreteShift() const;
     void setDiscreteShift(float newShift);
@@ -42,6 +42,7 @@ signals:
 private:
     void updateBlockchainTranslations();
 
+    Scene *m_scene;
     AxisIndex m_translationAxis;
     float m_discreteShift;
 
@@ -49,7 +50,6 @@ private:
     Blockchain m_chain;
 };
 
-
 }
 
-#endif // BLOCKCHAINANIMATIONCONTROLLER_H
+#endif // BLOCKANIMATIONCONTROLLER_H

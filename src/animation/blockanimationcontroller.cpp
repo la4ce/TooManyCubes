@@ -1,29 +1,30 @@
 #include <QtCore/QAbstractAnimation>
 #include <Qt3DCore/QTransform>
 
-#include "blockchainanimationcontroller.h"
+#include "blockanimationcontroller.h"
 #include "axisvec3i.h"
 #include "scene.h"
 
 namespace TMC {
 
-BlockchainAxisShiftController::BlockchainAxisShiftController(QAbstractAnimation *parent, Blockchain chain, AxisIndex axis)
+BlockAnimationController::BlockAnimationController(QAbstractAnimation *parent, Scene *scene, Blockchain chain, AxisIndex axis)
     : QObject(parent)
+    , m_scene(scene)
     , m_translationAxis(axis)
     , m_discreteShift(0)
     , m_translationMatrix()
     , m_chain(chain) {
 }
 
-BlockchainAxisShiftController::~BlockchainAxisShiftController() {
+BlockAnimationController::~BlockAnimationController() {
     qDebug() << "BlockchainAnimationController destroyed.";
 }
 
-float BlockchainAxisShiftController::getDiscreteShift() const {
+float BlockAnimationController::getDiscreteShift() const {
     return m_discreteShift;
 }
 
-void BlockchainAxisShiftController::setDiscreteShift(float newDiscreteShift) {
+void BlockAnimationController::setDiscreteShift(float newDiscreteShift) {
     if (qFuzzyCompare(m_discreteShift, newDiscreteShift)) return;
 
     m_discreteShift = newDiscreteShift;
@@ -39,24 +40,24 @@ void BlockchainAxisShiftController::setDiscreteShift(float newDiscreteShift) {
     emit discreteShiftChanged();
 }
 
-AxisIndex BlockchainAxisShiftController::getTranslationAxis() const {
+AxisIndex BlockAnimationController::getTranslationAxis() const {
     return m_translationAxis;
 }
 
-void BlockchainAxisShiftController::setTranslationAxis(AxisIndex newTranslationAxis) {
+void BlockAnimationController::setTranslationAxis(AxisIndex newTranslationAxis) {
     if (m_translationAxis == newTranslationAxis) return;
 
     m_translationAxis = newTranslationAxis;
     emit translationAxisChanged();
 }
 
-void BlockchainAxisShiftController::updateBlockchainTranslations() {
+void BlockAnimationController::updateBlockchainTranslations() {
 
     AxisVec3i range = m_chain.getRange();
     Vec3i it = m_chain.getBasePos();
 
     do {
-        m_chain.getScene()->getBlock(it)->translateFromBasePos(m_translationMatrix);
+        m_scene->getBlock(it)->translateFromBasePos(m_translationMatrix);
         it = it + range.normalized();
     } while (it != (m_chain.getBasePos() + range));
 }
