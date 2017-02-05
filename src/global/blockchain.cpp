@@ -26,4 +26,8 @@ void Blockchain::setRange(AxisVec3i newRange) {
     m_range = newRange;
 }
 
+Scene *Blockchain::getScene() const {
+    return m_scene;
+}
+
 }

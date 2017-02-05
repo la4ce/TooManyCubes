@@ -58,7 +58,7 @@ protected:
 private:
     void updateScale();
     void updateTranslation();
-    void translateFromPos(QMatrix4x4 translMatr); // Only for animations, otherwise discretePos and transform's translation shouldn't diverge
+    void translateFromBasePos(QMatrix4x4 translMatr); // Only for animations, otherwise discretePos and transform's translation shouldn't diverge
 
     Qt3DExtras::QCuboidMesh *m_blockMesh;
     Qt3DRender::QMaterial *m_blockMaterial;

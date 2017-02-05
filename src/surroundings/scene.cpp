@@ -31,7 +31,7 @@ void Scene::initScene() {
     //moveBlock(Vec3i(1.0, 1.0, 0.0), Vec3i(2.0, 2.0, 0.0));
 
     animatedMove(Vec3i(2.0, 0.0, 0.0), AxisVec3i(YAXIS, 10));
-    animatedMove(Vec3i(1.0, 1.0, 0.0), AxisVec3i(XAXIS, -10));
+    //animatedMove(Vec3i(1.0, 1.0, 0.0), AxisVec3i(XAXIS, -10));
 
     //removeBlock(Vec3i(1.0, 1.0, 0.0));
 }
@@ -85,8 +85,6 @@ void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
 void Scene::moveBlockchain(Blockchain blocksToMove, AxisVec3i shift) {
     // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks, path, and destination for all blocks to move
 
-    // PRIORITYTODO: make a BlockchainController class which will perform all operations on Blockchains (translate all, move all in scene etc.)
-    // currently works only for blockchains with one block
     this->moveBlock(blocksToMove.getBasePos(), shift + blocksToMove.getBasePos());
 }
 
@@ -100,6 +98,7 @@ void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
     // self-destructed animation with cleanup signal
     BlockAnimation *animation = new BlockAnimation(m_rootEntity, blocksToMove, animatedShift, DEFAULT_BLOCK_MOVE_DUR);
     QObject::connect(animation, SIGNAL(cleanupTrigger(Blockchain, AxisVec3i)), SLOT(animationCleanup(Blockchain,AxisVec3i)));
+
 
     animation->animate();
 

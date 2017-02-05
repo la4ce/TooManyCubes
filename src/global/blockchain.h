@@ -1,6 +1,8 @@
 #ifndef TMC_BLOCKCHAIN_H
 #define TMC_BLOCKCHAIN_H
 
+#include <QMatrix4x4>
+
 #include "vec3i.h"
 #include "axisvec3i.h"
 
@@ -12,8 +14,6 @@ class Scene;
 /* Blockchain represents coordinates and dimenstions of a 1x1xN
  * row of blocks by any axis, conveniently packed. Contains at least one block position.*/
 class Blockchain {
-    friend BlockchainAxisShiftController;
-
 public:
     Blockchain(Scene *scene, Vec3i basePos, AxisVec3i range);
 
@@ -23,8 +23,10 @@ public:
     AxisVec3i getRange();
     void setRange(AxisVec3i newRange);
 
+    Scene *getScene() const;
+
 private:
-    Scene *m_scene;
+    Scene *const m_scene;
     Vec3i m_basePos; // Blockchain has a base block and it occupies some area by one axis specified in m_range
     AxisVec3i m_range;
 };

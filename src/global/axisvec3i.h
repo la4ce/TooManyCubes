@@ -30,7 +30,7 @@ public:
     int getValue() const;
     void setValue(int newValue);
 
-    AxisVec3i getNormal();
+    AxisVec3i normalized();
     AxisIndex getAxis() const;
     Vec3i getVec3i() const;
 

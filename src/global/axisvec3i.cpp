@@ -67,8 +67,10 @@ void AxisVec3i::setValue(int newValue) {
     }
 }
 
-AxisVec3i AxisVec3i::getNormal() {
-    return AxisVec3i(this->getAxis(), 1);
+AxisVec3i AxisVec3i::normalized() {
+    return (!this->x() && !this->y() && !this->z())
+            ? AxisVec3i(this->getAxis(), 0)
+            : AxisVec3i(this->getAxis(), 1);
 }
 
 AxisIndex AxisVec3i::getAxis() const {

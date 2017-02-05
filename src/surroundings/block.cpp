@@ -99,7 +99,8 @@ void Block::setDiscretePos(Vec3i newDiscretePos) {
     updateTranslation();
 }
 
-void Block::translateFromPos(QMatrix4x4 translMatr) {
+// Translate transform from it's base (according to m_discretePos) scene position
+void Block::translateFromBasePos(QMatrix4x4 translMatr) {
     if (m_blockTransform == nullptr) return;
 
     updateTranslation();
