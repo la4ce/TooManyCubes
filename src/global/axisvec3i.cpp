@@ -98,6 +98,14 @@ const AxisVec3i AxisVec3i::operator/=(const int scalar) {
     return AxisVec3i(this->getAxis(), this->getValue() / scalar);
 }
 
+const AxisVec3i operator+(const AxisVec3i &axisVec, const int scalar) {
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar);
+}
+
+const AxisVec3i operator+(const int scalar, const AxisVec3i &axisVec) {
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar);
+}
+
 const Vec3i operator+(const Vec3i &vec, const AxisVec3i &axisVec) {
     return vec + axisVec.m_vec;
 }
