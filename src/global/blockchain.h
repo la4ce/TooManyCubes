@@ -11,10 +11,10 @@ namespace TMC {
 class BlockAnimationController;
 class Scene;
 
-// TODO: blockchain needs an iterator
-
 /* Blockchain represents coordinates and dimenstions of a 1x1xN
- * row of blocks by any axis, conveniently packed. Contains at least one block position.*/
+ * row of blocks by any axis, conveniently packed.
+ * Blockchain is a Vec3i base position and AxisVec3i shift; NO_SHIFT
+ * specifies that this blockchain occupies only block in base position. */
 class Blockchain {
 public:
     Blockchain(Vec3i basePos, AxisVec3i range);
@@ -25,8 +25,35 @@ public:
     AxisVec3i getRange();
     void setRange(AxisVec3i newRange);
 
+    class const_iterator {
+    public:
+        typedef std::random_access_iterator_tag iterator_category;
+
+        const_iterator(Blockchain chain);
+
+        const_iterator operator++();
+        const_iterator operator++(int);
+
+        const_iterator operator--();
+        const_iterator operator--(int);
+
+        // TODO: add + and - operators
+
+        Vec3i operator*();
+
+        bool operator==(const const_iterator& it);
+        bool operator!=(const const_iterator& it);
+
+    private:
+        Vec3i m_curPos;
+        AxisVec3i m_forwardDir;
+    };
+
+    const_iterator begin() const;
+    const_iterator end() const;
+
 private:
-    Vec3i m_basePos; // Blockchain has a base block and it occupies some area by one axis specified in m_range
+    Vec3i m_basePos;
     AxisVec3i m_range;
 };
 
