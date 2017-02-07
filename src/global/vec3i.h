@@ -31,6 +31,9 @@ public:
     const Vec3i& operator+=(const Vec3i& vec);
     const Vec3i& operator-=(const Vec3i& vec);
 
+    const Vec3i& operator+=(const AxisVec3i& vec);
+    const Vec3i& operator-=(const AxisVec3i& vec);
+
     int operator[](std::size_t id);
 
     friend bool operator==(const Vec3i& left, const Vec3i& right);

@@ -2,6 +2,7 @@
 #include <Qt3DCore>
 
 #include "vec3i.h"
+#include "axisvec3i.h"
 
 namespace TMC {
 
@@ -53,6 +54,22 @@ const Vec3i& Vec3i::operator-=(const Vec3i& vec) {
     xp -= vec.xp;
     yp -= vec.yp;
     zp -= vec.zp;
+
+    return *this;
+}
+
+const Vec3i& Vec3i::operator+=(const AxisVec3i& vec) {
+    xp += vec.getVec3i().xp;
+    yp += vec.getVec3i().yp;
+    zp += vec.getVec3i().zp;
+
+    return *this;
+}
+
+const Vec3i& Vec3i::operator-=(const AxisVec3i& vec) {
+    xp -= vec.getVec3i().xp;
+    yp -= vec.getVec3i().yp;
+    zp -= vec.getVec3i().zp;
 
     return *this;
 }
