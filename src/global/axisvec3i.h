@@ -19,6 +19,9 @@ enum AxisIndex {
  * blockchains range (1x1xN regions of blocks) etc in a general safe way.*/
 class AxisVec3i {
 public:
+    static const AxisVec3i NO_SHIFT;
+
+public:
     AxisVec3i(AxisIndex axis, int value);
     AxisVec3i(Vec3i vec);
     AxisVec3i(int x, int y, int z);

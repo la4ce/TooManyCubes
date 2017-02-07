@@ -4,6 +4,9 @@
 
 namespace TMC {
 
+const AxisVec3i AxisVec3i::NO_SHIFT = AxisVec3i(DEFAULT_AXIS, 0);
+
+
 AxisVec3i::AxisVec3i(AxisIndex axis, int value) : m_vec(0) {
     switch (axis) {
         case XAXIS: // DEFAULT_AXIS

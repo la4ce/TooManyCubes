@@ -30,7 +30,6 @@ class Scene : public QObject {
 
 public:
     static constexpr float DEFAULT_BLOCK_MOVE_DUR = 0.25f * 1000.0f; // in milliseconds
-    static const AxisVec3i NO_SHIFT;
 
 public:
     Scene();

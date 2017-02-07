@@ -4,8 +4,6 @@
 
 namespace TMC {
 
-const AxisVec3i Scene::NO_SHIFT = AxisVec3i(DEFAULT_AXIS, 0);
-
 Scene::Scene() {
     m_rootEntity = new Qt3DCore::QEntity();
     initScene();
@@ -89,7 +87,7 @@ void Scene::moveBlockchain(Blockchain blocksToMove, AxisVec3i shift) {
 }
 
 void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
-    animatedMove(Blockchain(blockToMove, NO_SHIFT), animatedShift);
+    animatedMove(Blockchain(blockToMove, AxisVec3i::NO_SHIFT), animatedShift);
 }
 
 void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
