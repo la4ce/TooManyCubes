@@ -8,5 +8,6 @@ SOURCES += \
 HEADERS += \
     $$PWD/vec3i.h \
     $$PWD/axisvec3i.h \
-    $$PWD/blockchain.h
+    $$PWD/blockchain.h \
+    $$PWD/globalfunctions.h
 
