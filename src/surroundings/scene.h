@@ -30,6 +30,7 @@ class Scene : public QObject {
 
 public:
     static constexpr float DEFAULT_BLOCK_MOVE_DUR = 0.25f * 1000.0f; // in milliseconds
+    static Blockchain getAnimationPath(Blockchain movedBlocks, AxisVec3i shift);
 
 public:
     Scene();
@@ -41,14 +42,14 @@ public:
 
     void addBlock(int x, int y, int z, BlockType type = DEFAULT_BLOCK);
     void addBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
-    // TODO: void addBlockchain(Blockchain blocksToAdd, BlockType type = DEFAULT_BLOCK);
+    void addBlockchain(Blockchain blocksToAdd, BlockType type = DEFAULT_BLOCK);
 
     std::shared_ptr<Block> getBlock(int x, int y, int z);
     std::shared_ptr<Block> getBlock(Vec3i pos);
 
     void removeBlock(int x, int y, int z);
     void removeBlock(Vec3i pos);
-    // TODO: void removeBlockchain(Blockchain blocksToRemove);
+    void removeBlockchain(Blockchain blocksToRemove);
 
     void moveBlock(Vec3i blockPos, Vec3i newBlockPos);
     void moveBlockchain(Blockchain blocksToMove, AxisVec3i shift);

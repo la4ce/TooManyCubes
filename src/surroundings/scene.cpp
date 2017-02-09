@@ -1,8 +1,28 @@
 #include <cmath>
 #include "scene.h"
 #include "blockanimation.h"
+#include "globalfunctions.h"
 
 namespace TMC {
+
+Blockchain Scene::getAnimationPath(Blockchain movedBlocks, AxisVec3i shift) {
+    if (movedBlocks.getRange().getValue() == 0) {
+        // Single block, direction doesn't matter
+        return Blockchain(movedBlocks.getBasePos() + AxisVec3i(shift.getAxis(), GlobalFunctions::sgn(shift.getValue())), shift - 1);
+    } else {
+        if (movedBlocks.getRange().getAxis() != shift.getAxis()) {
+            // throw exception
+        }
+
+        if (GlobalFunctions::sgn(movedBlocks.getRange().getValue()) == GlobalFunctions::sgn(shift.getValue())) {
+            // Need to subtract blockchain range from animation shift to get path
+            return Blockchain(movedBlocks.getBasePos() + (movedBlocks.getRange() + 1), shift - 1);
+        } else {
+            // Since basePos of blockchain is leading in direciton of animation, need to subtract only it to get path
+            return Blockchain(movedBlocks.getBasePos() + AxisVec3i(shift.getAxis(), 1), shift - 1);
+        }
+    }
+}
 
 Scene::Scene() {
     m_rootEntity = new Qt3DCore::QEntity();
@@ -26,10 +46,10 @@ void Scene::initScene() {
     addBlock(1.0, 0.0, -1.0);
     addBlock(1.0, 1.0, 0.0);
 
-    //moveBlock(Vec3i(1.0, 1.0, 0.0), Vec3i(2.0, 2.0, 0.0));
+    moveBlock(Vec3i(1.0, 0.0, 1.0), Vec3i(3.0, 0.0, 0.0));
 
     animatedMove(Vec3i(2.0, 0.0, 0.0), AxisVec3i(YAXIS, 10));
-    //animatedMove(Vec3i(1.0, 1.0, 0.0), AxisVec3i(XAXIS, -10));
+    animatedMove(Vec3i(1.0, 1.0, 0.0), AxisVec3i(XAXIS, -10));
 
     //removeBlock(Vec3i(1.0, 1.0, 0.0));
 }
@@ -47,6 +67,12 @@ void Scene::addBlock(Vec3i pos, BlockType type) {
     m_blocksContainer.emplace(pos, std::unique_ptr<Block>(new Block(pos, m_rootEntity, type)));
 }
 
+void Scene::addBlockchain(Blockchain blocksToAdd, BlockType type) {
+    for (Blockchain::const_iterator it = blocksToAdd.begin(); it != blocksToAdd.end(); ++it) {
+        this->addBlock(*it, type);
+    }
+}
+
 std::shared_ptr<Block> Scene::getBlock(int x, int y, int z) {
     Vec3i pos(x, y, z);
     return m_blocksContainer[pos];
@@ -62,6 +88,12 @@ void Scene::removeBlock(int x, int y, int z) {
 
 void Scene::removeBlock(Vec3i pos) {
     m_blocksContainer.erase(pos);
+}
+
+void Scene::removeBlockchain(Blockchain blocksToRemove) {
+    for (Blockchain::const_iterator it = blocksToRemove.begin(); it != blocksToRemove.end(); ++it) {
+        this->removeBlock(*it);
+    }
 }
 
 void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
@@ -92,13 +124,17 @@ void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
 
 void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
     // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks, path, and destination for all blocks to move
+    // TODO: need to check that we are moving by axis of blockchain
 
     // self-destructed animation with cleanup signal
     BlockAnimation *animation = new BlockAnimation(this, blocksToMove, animatedShift, DEFAULT_BLOCK_MOVE_DUR);
+
     QObject::connect(animation, SIGNAL(cleanupTrigger(Blockchain, AxisVec3i)), SLOT(animationCleanup(Blockchain,AxisVec3i)));
 
+    this->addBlockchain(getAnimationPath(blocksToMove, animatedShift), PLACEHOLDER_BLOCK);
 
     animation->animate();
+
 
     // TODO: freeze all blocks while animating and add placeholder blocks to animation end
 }
@@ -131,6 +167,11 @@ Qt3DCore::QEntity* Scene::getRootEntity() {
 
 void Scene::animationCleanup(Blockchain movedBlocks, AxisVec3i shift) {
     qDebug() << "Cleaning up animation.";
+
+    // Removing placeholders
+    this->removeBlockchain(getAnimationPath(movedBlocks, shift));
+
+    // Moving blocks positions in scene
     this->moveBlockchain(movedBlocks, shift);
 }
 
