@@ -1,6 +1,7 @@
 #include <Qt3DCore>
 
 #include "axisvec3i.h"
+#include "globalfunctions.h"
 
 namespace TMC {
 
@@ -73,7 +74,7 @@ void AxisVec3i::setValue(int newValue) {
 AxisVec3i AxisVec3i::normalized() {
     return (!this->x() && !this->y() && !this->z())
             ? AxisVec3i(this->getAxis(), 0)
-            : AxisVec3i(this->getAxis(), 1);
+            : AxisVec3i(this->getAxis(), GlobalFunctions::sgn(getValue()));
 }
 
 AxisIndex AxisVec3i::getAxis() const {
@@ -90,20 +91,49 @@ Vec3i AxisVec3i::getVec3i() const {
     return m_vec;
 }
 
-const AxisVec3i AxisVec3i::operator*=(const int scalar) {
-    return AxisVec3i(this->getAxis(), this->getValue() * scalar);
+const AxisVec3i& AxisVec3i::operator+() {
+    return *this;
 }
 
-const AxisVec3i AxisVec3i::operator/=(const int scalar) {
-    return AxisVec3i(this->getAxis(), this->getValue() / scalar);
+const AxisVec3i& AxisVec3i::operator-() {
+    this->setValue(-this->getValue());
+    return *this;
+}
+
+const AxisVec3i& AxisVec3i::operator+=(const int scalar) {
+    this->setValue(this->getValue() + scalar * GlobalFunctions::sgn(this->getValue()));
+    return *this;
+}
+
+const AxisVec3i& AxisVec3i::operator-=(const int scalar) {
+    this->setValue(this->getValue() - scalar * GlobalFunctions::sgn(this->getValue()));
+    return *this;
+}
+
+const AxisVec3i& AxisVec3i::operator*=(const int scalar) {
+    this->setValue(this->getValue() * scalar);
+    return *this;
+}
+
+const AxisVec3i& AxisVec3i::operator/=(const int scalar) {
+    this->setValue(this->getValue() / scalar);
+    return *this;
 }
 
 const AxisVec3i operator+(const AxisVec3i &axisVec, const int scalar) {
-    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar);
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar * GlobalFunctions::sgn(axisVec.getValue()));
 }
 
 const AxisVec3i operator+(const int scalar, const AxisVec3i &axisVec) {
-    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar);
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar * GlobalFunctions::sgn(axisVec.getValue()));
+}
+
+const AxisVec3i operator-(const AxisVec3i &axisVec, const int scalar) {
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() - scalar * GlobalFunctions::sgn(axisVec.getValue()));
+}
+
+const AxisVec3i operator-(const int scalar, const AxisVec3i &axisVec) {
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() - scalar * GlobalFunctions::sgn(axisVec.getValue()));
 }
 
 const Vec3i operator+(const Vec3i &vec, const AxisVec3i &axisVec) {
