@@ -8,6 +8,7 @@ using namespace TMC;
 
 // TODO: add some beautiful demo presets (for block generation, animations, gravity, liquids, explosions)
 // TODO: use exceptions for block adding, removing, movement and animation instead of qDebug. Write your own ones.
+// TODO: add ping-pong animations for nice demo scenes
 
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
