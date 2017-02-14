@@ -121,7 +121,7 @@ void InputController::init() {
 
 
     QObject::connect(m_frameAction, SIGNAL(triggered(float)),
-                     this, SLOT(onTriggered(float)));
+                     this, SLOT(update(float)));
 
     // Disable the logical device when the entity is disabled
     QObject::connect(this, &Qt3DCore::QEntity::enabledChanged,
@@ -131,7 +131,7 @@ void InputController::init() {
     this->addComponent(m_logicalDevice);
 }
 
-void InputController::onTriggered(float dt) {
+void InputController::update(float dt) {
     if (m_camera != nullptr) {
 
         // Camera translation
@@ -192,7 +192,6 @@ float InputController::lookSpeed() const {
     return this->m_lookSpeed;
 }
 
-// Note: this block had calls to QEntityPrivate, just in case
 void InputController::setCamera(Qt3DRender::QCamera *camera) {
     if (this->m_camera != camera) {
         if (camera && !camera->parent())

@@ -62,7 +62,6 @@ public:
     friend QDebug operator<<(QDebug dbg, const AxisVec3i &axisVec);
 
 private:
-    // TODO: consider changing class' data representation
     Vec3i m_vec;
 };
 

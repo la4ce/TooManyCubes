@@ -59,11 +59,10 @@ public:
     void animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift);
 
     bool blockCouldBePlaced(Vec3i pos) const;
-    bool blockCouldBeRemoved(Vec3i pos) const;
+    bool blockCouldBeRemoved(Vec3i pos);
 
     // TODO: void blockchainCouldBePlaced(Blockchain blocksToPlace);
     // TODO: void blockchainCouldBeRemoved(Blockchain blocksToRemove);
-    // TODO: void blockchainCouldBeMoved(Blockchain blocksToMove, AxisVec3i shift);
 
     Qt3DCore::QEntity* getRootEntity();
 

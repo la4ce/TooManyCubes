@@ -11,7 +11,7 @@ Blockchain Scene::getAnimationPath(Blockchain movedBlocks, AxisVec3i shift) {
         return Blockchain(movedBlocks.getBasePos() + AxisVec3i(shift.getAxis(), GlobalFunctions::sgn(shift.getValue())), shift - 1);
     } else {
         if (movedBlocks.getRange().getAxis() != shift.getAxis()) {
-            // throw exception
+            // EXCEPTION REQUIRED
         }
 
         if (GlobalFunctions::sgn(movedBlocks.getRange().getValue()) == GlobalFunctions::sgn(shift.getValue())) {
@@ -64,39 +64,45 @@ void Scene::addBlock(int x, int y, int z, BlockType type) {
 
 void Scene::addBlock(Vec3i pos, BlockType type) {
     // Inserts new block only if no block in pos
-    m_blocksContainer.emplace(pos, std::unique_ptr<Block>(new Block(pos, m_rootEntity, type)));
+    m_blocksContainer.emplace(pos, std::unique_ptr<Block>(new Block(pos, m_rootEntity, type))); // Redirect to addBlockchain
 }
 
 void Scene::addBlockchain(Blockchain blocksToAdd, BlockType type) {
+    // EXCEPTION REQUIRED
     for (Blockchain::const_iterator it = blocksToAdd.begin(); it != blocksToAdd.end(); ++it) {
         this->addBlock(*it, type);
     }
 }
 
 std::shared_ptr<Block> Scene::getBlock(int x, int y, int z) {
-    Vec3i pos(x, y, z);
-    return m_blocksContainer[pos];
+    // EXCEPTION REQUIRED
+    return this->getBlock(Vec3i(x, y, z));
 }
 
 std::shared_ptr<Block> Scene::getBlock(Vec3i pos) {
+    // EXCEPTION REQUIRED
     return m_blocksContainer[pos];
 }
 
 void Scene::removeBlock(int x, int y, int z) {
+    // EXCEPTION REQUIRED
     this->removeBlock(Vec3i(x, y, z));
 }
 
 void Scene::removeBlock(Vec3i pos) {
+    // EXCEPTION REQUIRED
     m_blocksContainer.erase(pos);
 }
 
 void Scene::removeBlockchain(Blockchain blocksToRemove) {
+    // EXCEPTION REQUIRED
     for (Blockchain::const_iterator it = blocksToRemove.begin(); it != blocksToRemove.end(); ++it) {
         this->removeBlock(*it);
     }
 }
 
 void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
+    // EXCEPTION REQUIRED
     if (!this->hasBlock(blockPos)) {
         qDebug() << "Trying to move a nonexistent block: " << blockPos;
         return;
@@ -113,8 +119,8 @@ void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
 }
 
 void Scene::moveBlockchain(Blockchain blocksToMove, AxisVec3i shift) {
-    // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks, path, and destination for all blocks to move
-
+    // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks and destination for all blocks to move via blockchainCouldBeMoved
+    // EXCEPTION REQUIRED: occupied blocks (OccupiedPositionException); no blocks to move(BlocksAbsenceException)
     this->moveBlock(blocksToMove.getBasePos(), shift + blocksToMove.getBasePos());
 }
 
@@ -125,7 +131,7 @@ void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
 void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
     // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks, path, and destination for all blocks to move
     // TODO: need to check that we are moving by axis of blockchain
-
+    // EXCEPTION REQUIRED
     // self-destructed animation with cleanup signal
     BlockAnimation *animation = new BlockAnimation(this, blocksToMove, animatedShift, DEFAULT_BLOCK_MOVE_DUR);
 
@@ -157,8 +163,8 @@ bool Scene::blockCouldBePlaced(Vec3i pos) const {
     return false;
 }
 
-bool Scene::blockCouldBeRemoved(Vec3i pos) const {
-    return hasBlock(pos);
+bool Scene::blockCouldBeRemoved(Vec3i pos) {
+    return hasBlock(pos) && !m_blocksContainer[pos]->isLocked();
 }
 
 Qt3DCore::QEntity* Scene::getRootEntity() {

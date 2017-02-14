@@ -95,7 +95,7 @@ signals:
     void lookSpeedChanged();
 
 public slots:
-    void onTriggered(float);
+    void update(float);
 
 };
 

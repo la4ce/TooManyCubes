@@ -29,6 +29,7 @@ AxisVec3i::AxisVec3i(Vec3i vec) {
 
     if (nonNulCount > 1) {
         m_vec = Vec3i(0);
+        // EXCEPTION REQUIRED (AxisVec3iException)
         qDebug() << "Trying to create AxisVec3i from Vec3i with more than one non zero component." << vec;
     } else {
         m_vec = vec;

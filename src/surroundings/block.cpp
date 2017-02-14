@@ -8,10 +8,11 @@
 
 namespace TMC {
 
-Block::Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type, bool isHided)
+Block::Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type, HidedState isHided, LockedState isLocked)
     : m_type(type)
     , m_discretePos(discretePos)
     , m_hided(isHided)
+    , m_locked(isLocked)
     , m_blockEntity(new Qt3DCore::QEntity())
     , m_blockTransform(nullptr)
     , m_blockMesh(nullptr)
@@ -87,6 +88,15 @@ void Block::setHided(bool hided) {
     // TODO: make this a method that is notified when m_hided changes
     updateScale();
 }
+
+bool Block::isLocked() const {
+    return m_locked;
+}
+
+void Block::setLocked(bool isLocked) {
+    m_locked = isLocked;
+}
+
 
 Vec3i Block::getDiscretePos() const {
     return m_discretePos;

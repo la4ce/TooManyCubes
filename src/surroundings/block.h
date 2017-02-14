@@ -19,8 +19,13 @@ enum BlockType {
 };
 
 enum HidedState {
-    BLOCK_HIDED = true,
-    BLOCK_VISIBLE = false
+    BLOCK_VISIBLE = false,
+    BLOCK_HIDED = true
+};
+
+enum LockedState {
+    BLOCK_UNLOCKED = false,
+    BLOCK_LOCKED = true
 };
 
 class BlockAnimationController;
@@ -36,12 +41,15 @@ public:
     static QVector3D discreteToWorldCoordinates(Vec3i discreteCoordinates);
 
 public:
-    Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK, bool isHided = BLOCK_VISIBLE);
+    Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type = DEFAULT_BLOCK, HidedState isHided = BLOCK_VISIBLE, LockedState isLocked = BLOCK_UNLOCKED);
     virtual ~Block();
 
     BlockType getBlockType() const;
     bool isHided() const;
     void setHided(bool hided);
+
+    bool isLocked() const;
+    void setLocked(bool isLocked);
 
     Vec3i getDiscretePos() const;
     void setDiscretePos(Vec3i newDiscretePos);
@@ -51,6 +59,7 @@ protected:
     Vec3i m_discretePos;
 
     bool m_hided;
+    bool m_locked;
 
     Qt3DCore::QEntity *m_blockEntity;
     Qt3DCore::QTransform *m_blockTransform;
