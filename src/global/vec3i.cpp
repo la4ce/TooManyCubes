@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream>
+
 #include <Qt3DCore>
 
 #include "vec3i.h"
@@ -28,6 +30,12 @@ void Vec3i::setY(int y) {
 
 void Vec3i::setZ(int z) {
     zp = z;
+}
+
+std::string Vec3i::toString() const {
+    std::ostringstream ss;
+    ss << this;
+    return ss.str();
 }
 
 const Vec3i& Vec3i::operator+() {

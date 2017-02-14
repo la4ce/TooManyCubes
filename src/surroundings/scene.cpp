@@ -120,7 +120,7 @@ void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
 
 void Scene::moveBlockchain(Blockchain blocksToMove, AxisVec3i shift) {
     // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks and destination for all blocks to move via blockchainCouldBeMoved
-    // EXCEPTION REQUIRED: occupied blocks (OccupiedPositionException); no blocks to move(BlocksAbsenceException)
+    // EXCEPTION REQUIRED: occupied blocks (OccupiedPositionException); no blocks to move(BlockAbsenceException)
     this->moveBlock(blocksToMove.getBasePos(), shift + blocksToMove.getBasePos());
 }
 

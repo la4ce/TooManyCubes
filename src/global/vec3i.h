@@ -2,6 +2,8 @@
 #define TMC_VEC3I_H
 
 #include <iostream>
+#include <string>
+
 #include <QVector3D>
 
 namespace TMC {
@@ -24,6 +26,8 @@ public:
     void setX(int x);
     void setY(int y);
     void setZ(int z);
+
+    std::string toString() const;
 
     const Vec3i& operator+();
     const Vec3i& operator-();

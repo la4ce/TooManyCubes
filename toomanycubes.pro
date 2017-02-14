@@ -5,6 +5,7 @@ include(src/global/global.pri)
 include(src/materials/materials.pri)
 include(src/player/player.pri)
 include(src/animation/animation.pri)
+include(src/exceptions/exceptions.pri)
 
 SOURCES += \
     src/main.cpp \
