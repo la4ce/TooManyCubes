@@ -34,6 +34,8 @@ public:
     void setValue(int newValue);
 
     AxisVec3i normalized();
+    AxisVec3i axisNormal();
+
     AxisIndex getAxis() const;
     Vec3i getVec3i() const;
 
@@ -45,6 +47,9 @@ public:
 
     const AxisVec3i& operator*=(const int scalar);
     const AxisVec3i& operator/=(const int scalar);
+
+    friend bool operator==(const AxisVec3i& left, const AxisVec3i& right);
+    friend bool operator!=(const AxisVec3i& left, const AxisVec3i& right);
 
     friend const AxisVec3i operator+(const AxisVec3i &axisVec, const int scalar);
     friend const AxisVec3i operator+(const int scalar, const AxisVec3i &axisVec);

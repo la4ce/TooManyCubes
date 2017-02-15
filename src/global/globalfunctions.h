@@ -10,6 +10,10 @@ public:
     static int sgn(int a) {
         return (a > 0) - (a < 0);
     }
+
+    static int posZeroSgn(int a) {
+        return (a >= 0) - (a < 0);
+    }
 };
 
 }

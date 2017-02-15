@@ -53,13 +53,9 @@ void BlockAnimationController::setTranslationAxis(AxisIndex newTranslationAxis) 
 
 void BlockAnimationController::updateBlockchainTranslations() {
 
-    AxisVec3i range = m_chain.getRange();
-    Vec3i it = m_chain.getBasePos();
-
-    do {
-        m_scene->getBlock(it)->translateFromBasePos(m_translationMatrix);
-        it = it + range.normalized();
-    } while (it != (m_chain.getBasePos() + range));
+    for (Blockchain::const_iterator it = m_chain.begin(); it != m_chain.end(); ++it) {
+        m_scene->getBlock(*it)->translateFromBasePos(m_translationMatrix);
+    }
 }
 
 }

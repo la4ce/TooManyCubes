@@ -36,8 +36,7 @@ Blockchain::const_iterator Blockchain::end() const {
 // ------- CONST ITERATOR -------
 Blockchain::const_iterator::const_iterator(Blockchain chain)
     : m_curPos(chain.getBasePos())
-    , m_forwardDir(chain.getRange().normalized()) {
-    // Iterating wouldn't chaige m_curPos if blockchain specified with NO_SHIFT
+    , m_forwardDir(chain.getRange().axisNormal()) {
 }
 
 Blockchain::const_iterator Blockchain::const_iterator::operator++() {

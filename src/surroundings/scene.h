@@ -39,10 +39,14 @@ public:
     void initScene();
 
     bool hasBlock(Vec3i pos) const;
+    bool isBlockLocked(Vec3i pos);
 
-    void addBlock(int x, int y, int z, BlockType type = DEFAULT_BLOCK);
-    void addBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
-    void addBlockchain(Blockchain blocksToAdd, BlockType type = DEFAULT_BLOCK);
+    void addBlock(Vec3i newBlockPos, std::shared_ptr<Block> existentBlock);
+
+    void createBlock(int x, int y, int z, BlockType type = DEFAULT_BLOCK);
+    void createBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
+    void createBlockchain(Blockchain blocksToAdd, BlockType type = DEFAULT_BLOCK);
+
 
     std::shared_ptr<Block> getBlock(int x, int y, int z);
     std::shared_ptr<Block> getBlock(Vec3i pos);

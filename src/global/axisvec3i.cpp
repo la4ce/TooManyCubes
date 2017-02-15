@@ -2,6 +2,7 @@
 
 #include "axisvec3i.h"
 #include "globalfunctions.h"
+#include "axisvec3iexception.h"
 
 namespace TMC {
 
@@ -29,8 +30,7 @@ AxisVec3i::AxisVec3i(Vec3i vec) {
 
     if (nonNulCount > 1) {
         m_vec = Vec3i(0);
-        // EXCEPTION REQUIRED (AxisVec3iException)
-        qDebug() << "Trying to create AxisVec3i from Vec3i with more than one non zero component." << vec;
+        throw AxisVec3iException();
     } else {
         m_vec = vec;
     }
@@ -73,9 +73,11 @@ void AxisVec3i::setValue(int newValue) {
 }
 
 AxisVec3i AxisVec3i::normalized() {
-    return (!this->x() && !this->y() && !this->z())
-            ? AxisVec3i(this->getAxis(), 0)
-            : AxisVec3i(this->getAxis(), GlobalFunctions::sgn(getValue()));
+    return AxisVec3i(this->getAxis(), GlobalFunctions::sgn(getValue()));
+}
+
+AxisVec3i AxisVec3i::axisNormal() {
+    return AxisVec3i(this->getAxis(), GlobalFunctions::posZeroSgn(getValue()));
 }
 
 AxisIndex AxisVec3i::getAxis() const {
@@ -102,12 +104,12 @@ const AxisVec3i& AxisVec3i::operator-() {
 }
 
 const AxisVec3i& AxisVec3i::operator+=(const int scalar) {
-    this->setValue(this->getValue() + scalar * GlobalFunctions::sgn(this->getValue()));
+    this->setValue(this->getValue() + scalar * GlobalFunctions::posZeroSgn(this->getValue()));
     return *this;
 }
 
 const AxisVec3i& AxisVec3i::operator-=(const int scalar) {
-    this->setValue(this->getValue() - scalar * GlobalFunctions::sgn(this->getValue()));
+    this->setValue(this->getValue() - scalar * GlobalFunctions::posZeroSgn(this->getValue()));
     return *this;
 }
 
@@ -121,20 +123,28 @@ const AxisVec3i& AxisVec3i::operator/=(const int scalar) {
     return *this;
 }
 
+bool operator==(const AxisVec3i& left, const AxisVec3i& right) {
+    return left.m_vec == right.m_vec;
+}
+
+bool operator!=(const AxisVec3i& left, const AxisVec3i& right) {
+    return left.m_vec != right.m_vec;
+}
+
 const AxisVec3i operator+(const AxisVec3i &axisVec, const int scalar) {
-    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar * GlobalFunctions::sgn(axisVec.getValue()));
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar * GlobalFunctions::posZeroSgn(axisVec.getValue()));
 }
 
 const AxisVec3i operator+(const int scalar, const AxisVec3i &axisVec) {
-    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar * GlobalFunctions::sgn(axisVec.getValue()));
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() + scalar * GlobalFunctions::posZeroSgn(axisVec.getValue()));
 }
 
 const AxisVec3i operator-(const AxisVec3i &axisVec, const int scalar) {
-    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() - scalar * GlobalFunctions::sgn(axisVec.getValue()));
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() - scalar * GlobalFunctions::posZeroSgn(axisVec.getValue()));
 }
 
 const AxisVec3i operator-(const int scalar, const AxisVec3i &axisVec) {
-    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() - scalar * GlobalFunctions::sgn(axisVec.getValue()));
+    return AxisVec3i(axisVec.getAxis(), axisVec.getValue() - scalar * GlobalFunctions::posZeroSgn(axisVec.getValue()));
 }
 
 const Vec3i operator+(const Vec3i &vec, const AxisVec3i &axisVec) {

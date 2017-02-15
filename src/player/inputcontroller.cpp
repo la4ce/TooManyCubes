@@ -159,7 +159,7 @@ void InputController::update(float dt) {
                 Vec3i phantomBlockPos = m_phantomBlockController->getPhantomBlockPos();
 
                 if (m_scene->blockCouldBePlaced(phantomBlockPos)) {
-                    m_scene->addBlock(phantomBlockPos);
+                    m_scene->createBlock(phantomBlockPos);
                 } else if (m_scene->blockCouldBeRemoved(phantomBlockPos)) {
                     m_scene->removeBlock(phantomBlockPos);
                 }
