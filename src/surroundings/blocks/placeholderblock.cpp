@@ -4,8 +4,8 @@
 
 namespace TMC {
 
-PlaceholderBlock::PlaceholderBlock(Qt3DCore::QEntity *parent)
-    : Block(Vec3i(0, 0, 0), parent, PLACEHOLDER_BLOCK, BLOCK_HIDED) {
+PlaceholderBlock::PlaceholderBlock(Vec3i pos, Qt3DCore::QEntity *parent)
+    : Block(pos, parent, PLACEHOLDER_BLOCK, BLOCK_HIDED, BLOCK_LOCKED) {
 
 }
 

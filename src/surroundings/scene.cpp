@@ -9,6 +9,7 @@
 #include "lockedblockexception.h"
 #include "occupiedposexception.h"
 #include "badanimationparams.h"
+#include "placeholderblock.h"
 
 namespace TMC {
 
@@ -56,7 +57,7 @@ void Scene::initScene() {
     moveBlock(Vec3i(1.0, 0.0, 1.0), Vec3i(3.0, 0.0, 0.0));
 
     //animatedMove(Vec3i(2.0, 0.0, 0.0), AxisVec3i(YAXIS, 10));
-    animatedMove(Vec3i(1.0, 1.0, 0.0), AxisVec3i(XAXIS, -10));
+    animatedMove(Vec3i(1.0, 1.0, 0.0), AxisVec3i(XAXIS, -100));
 
     //removeBlock(Vec3i(1.0, 1.0, 0.0));
 }
@@ -85,7 +86,15 @@ void Scene::createBlock(int x, int y, int z, BlockType type) {
 void Scene::createBlock(Vec3i pos, BlockType type) {
     if (hasBlock(pos)) throw OccupiedPosException(pos);
 
-    m_blocksContainer.emplace(pos, std::shared_ptr<Block>(new Block(pos, m_rootEntity, type)));
+    switch (type) {
+        case PLACEHOLDER_BLOCK:
+            m_blocksContainer.emplace(pos, std::shared_ptr<Block>(new PlaceholderBlock(pos, m_rootEntity)));
+            break;
+        default:
+            m_blocksContainer.emplace(pos, std::shared_ptr<Block>(new Block(pos, m_rootEntity, type)));
+            break;
+    }
+
 }
 
 void Scene::createBlockchain(Blockchain blocksToAdd, BlockType type) {
@@ -166,11 +175,14 @@ void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
 
     QObject::connect(animation, SIGNAL(cleanupTrigger(Blockchain, AxisVec3i)), SLOT(animationCleanup(Blockchain, AxisVec3i)));
 
+    // Locking blocks
+    for (Blockchain::const_iterator it = blocksToMove.begin(); it != blocksToMove.end(); ++it) {
+        m_blocksContainer[*it]->setLocked(true);
+    }
     createBlockchain(getAnimationPath(blocksToMove, animatedShift), PLACEHOLDER_BLOCK);
 
     animation->animate();
 
-    // TODO: freeze all blocks while animating and add placeholder blocks to animation end
 }
 
 /* We are able to place a block only if there is no block at pos
@@ -204,6 +216,11 @@ void Scene::animationCleanup(Blockchain movedBlocks, AxisVec3i shift) {
 
     // Removing placeholders
     removeBlockchain(getAnimationPath(movedBlocks, shift));
+
+    // Unlocking blocks
+    for (Blockchain::const_iterator it = movedBlocks.begin(); it != movedBlocks.end(); ++it) {
+        m_blocksContainer[*it]->setLocked(false);
+    }
 
     // Moving blocks positions in scene
     moveBlockchain(movedBlocks, shift);
