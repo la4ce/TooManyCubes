@@ -158,9 +158,9 @@ void InputController::update(float dt) {
             if (!(leftClickPressed.elapsed() > CLICK_DURATION)) {
                 Vec3i phantomBlockPos = m_phantomBlockController->getPhantomBlockPos();
 
-                if (m_scene->blockCouldBePlaced(phantomBlockPos)) {
+                if (m_scene->blockCouldBePlacedManually(phantomBlockPos)) {
                     m_scene->createBlock(phantomBlockPos);
-                } else if (m_scene->blockCouldBeRemoved(phantomBlockPos)) {
+                } else if (m_scene->blockCouldBeRemovedManually(phantomBlockPos)) {
                     m_scene->removeBlock(phantomBlockPos);
                 }
             }

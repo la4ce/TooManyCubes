@@ -62,8 +62,8 @@ public:
     void animatedMove(Vec3i blockToMove, AxisVec3i animatedShift);
     void animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift);
 
-    bool blockCouldBePlaced(Vec3i pos) const;
-    bool blockCouldBeRemoved(Vec3i pos);
+    bool blockCouldBePlacedManually(Vec3i pos);
+    bool blockCouldBeRemovedManually(Vec3i pos);
 
     // TODO: void blockchainCouldBePlaced(Blockchain blocksToPlace);
     // TODO: void blockchainCouldBeRemoved(Blockchain blocksToRemove);

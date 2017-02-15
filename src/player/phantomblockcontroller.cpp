@@ -33,7 +33,7 @@ void PhantomBlockController::onTriggered(float) {
         Vec3i newDiscretePos = Block::worldToDiscreteCoordinates(
                     m_camera->position() + m_camera->viewVector() / m_camera->viewVector().length() * PHANTOM_BLOCK_DISTANCE);
 
-        HidedState hidedState = m_scene->blockCouldBePlaced(newDiscretePos) ? BLOCK_VISIBLE : BLOCK_HIDED;
+        HidedState hidedState = m_scene->blockCouldBePlacedManually(newDiscretePos) ? BLOCK_VISIBLE : BLOCK_HIDED;
 
         m_phantomBlock->setHided(hidedState);
         m_phantomBlock->setDiscretePos(newDiscretePos);

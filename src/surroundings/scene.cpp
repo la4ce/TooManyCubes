@@ -170,7 +170,7 @@ void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
     // EXCEPTION REQUIRED
 
 
-    // self-destructed animation with cleanup signal
+    // Self-destructed animation with cleanup signal
     BlockAnimation *animation = new BlockAnimation(this, blocksToMove, animatedShift, DEFAULT_BLOCK_MOVE_DUR);
 
     QObject::connect(animation, SIGNAL(cleanupTrigger(Blockchain, AxisVec3i)), SLOT(animationCleanup(Blockchain, AxisVec3i)));
@@ -179,15 +179,16 @@ void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
     for (Blockchain::const_iterator it = blocksToMove.begin(); it != blocksToMove.end(); ++it) {
         m_blocksContainer[*it]->setLocked(true);
     }
+
+    // Creating placeholders on animation path to prevent block intersections
     createBlockchain(getAnimationPath(blocksToMove, animatedShift), PLACEHOLDER_BLOCK);
 
     animation->animate();
-
 }
 
 /* We are able to place a block only if there is no block at pos
  * and if there are face-adjacent blocks nearby. */
-bool Scene::blockCouldBePlaced(Vec3i pos) const {
+bool Scene::blockCouldBePlacedManually(Vec3i pos) {
     const int CHECK_NUM = 7;
     const Vec3i shifts[] = { Vec3i(-1, 0, 0), Vec3i(1, 0, 0), // x face-adjacent
                              Vec3i(0, -1, 0), Vec3i(0, 1, 0), // y face-adjacent
@@ -197,13 +198,14 @@ bool Scene::blockCouldBePlaced(Vec3i pos) const {
     if (hasBlock(pos)) return false;
 
     for (int i = 0; i < CHECK_NUM; i++) {
-        if (hasBlock(pos + shifts[i])) return true;
+        if (hasBlock(pos + shifts[i]) &&
+                m_blocksContainer[pos + shifts[i]]->getBlockType() != PLACEHOLDER_BLOCK) return true;
     }
 
     return false;
 }
 
-bool Scene::blockCouldBeRemoved(Vec3i pos) {
+bool Scene::blockCouldBeRemovedManually(Vec3i pos) {
     return hasBlock(pos) && !m_blocksContainer[pos]->isLocked();
 }
 
