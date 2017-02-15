@@ -72,10 +72,6 @@ void AxisVec3i::setValue(int newValue) {
     }
 }
 
-AxisVec3i AxisVec3i::normalized() {
-    return AxisVec3i(this->getAxis(), GlobalFunctions::sgn(getValue()));
-}
-
 AxisVec3i AxisVec3i::axisNormal() {
     return AxisVec3i(this->getAxis(), GlobalFunctions::posZeroSgn(getValue()));
 }
