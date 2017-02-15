@@ -6,15 +6,12 @@
 
 namespace TMC {
 
-class OccupiedPosException : public SceneException{
+class OccupiedPosException : public SceneException {
 public:
     OccupiedPosException(Vec3i occupiedPos);
     ~OccupiedPosException() = default;
 
     const char *what() const noexcept override;
-
-private:
-    Vec3i m_occupiedPos;
 };
 
 }

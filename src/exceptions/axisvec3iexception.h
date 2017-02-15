@@ -8,6 +8,7 @@ namespace TMC {
 class AxisVec3iException : public std::runtime_error {
 public:
     AxisVec3iException();
+    ~AxisVec3iException() = default;
 };
 
 }

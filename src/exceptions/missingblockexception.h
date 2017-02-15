@@ -13,8 +13,6 @@ public:
 
     const char *what() const noexcept override;
 
-private:
-    Vec3i m_pos;
 };
 
 }

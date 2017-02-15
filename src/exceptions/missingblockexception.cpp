@@ -3,7 +3,7 @@
 namespace TMC {
 
 MissingBlockException::MissingBlockException(Vec3i pos)
-    : m_pos(pos) {
+    : SceneException(pos) {
 }
 
 const char *MissingBlockException::what() const noexcept {

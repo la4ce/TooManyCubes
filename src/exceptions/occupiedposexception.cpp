@@ -5,11 +5,11 @@
 namespace TMC {
 
 OccupiedPosException::OccupiedPosException(Vec3i occupiedPos)
-    : m_occupiedPos(occupiedPos) {
+    : SceneException(occupiedPos) {
 }
 
 const char *OccupiedPosException::what() const noexcept {
-    return ("Occupied position: " + m_occupiedPos.toString() + ".").c_str();
+    return ("Inserting block on occupied position: " + m_pos.toString() + ".").c_str();
 }
 
 }
