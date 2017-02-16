@@ -13,22 +13,25 @@
 
 namespace TMC {
 
+/* Returns the animation path of a shifted blockchain, excluding starting
+ * positions and including end positions (basically where placeholders should be placed). */
 Blockchain Scene::getAnimationPath(Blockchain movedBlocks, AxisVec3i shift) {
+    // Checking if single-block blockchain, direction wouldn't matter then
     if (movedBlocks.getRange().getValue() == 0) {
-        // Single block, direction doesn't matter
         return Blockchain(movedBlocks.getBasePos() + AxisVec3i(shift.getAxis(), GlobalFunctions::sgn(shift.getValue())), shift - 1);
-    } else {
-        if (movedBlocks.getRange().getAxis() != shift.getAxis()) {
-            throw BadAnimationParams();
-        }
+    }
 
-        if (GlobalFunctions::sgn(movedBlocks.getRange().getValue()) == GlobalFunctions::sgn(shift.getValue())) {
-            // Need to subtract blockchain range from animation shift to get path
-            return Blockchain(movedBlocks.getBasePos() + (movedBlocks.getRange() + 1), shift - 1);
-        } else {
-            // Since basePos of blockchain is leading in direciton of animation, need to subtract only it to get path
-            return Blockchain(movedBlocks.getBasePos() + AxisVec3i(shift.getAxis(), 1), shift - 1);
-        }
+    // Animation could be performed only by axis of blockchain (if it is not a single-block blockchain)
+    if (movedBlocks.getRange().getAxis() != shift.getAxis()) {
+        throw BadAnimationParams();
+    }
+
+    if (GlobalFunctions::sgn(movedBlocks.getRange().getValue()) == GlobalFunctions::sgn(shift.getValue())) {
+        // Need to subtract blockchain range from animation shift to get path
+        return Blockchain(movedBlocks.getBasePos() + (movedBlocks.getRange() + 1), shift - 1);
+    } else {
+        // Since basePos of blockchain is leading in direciton of animation, need to subtract only it to get path
+        return Blockchain(movedBlocks.getBasePos() + AxisVec3i(shift.getAxis(), 1), shift - 1);
     }
 }
 
@@ -50,14 +53,18 @@ void Scene::initScene() {
     createBlock(0.0, 0.0, 0.0);
     createBlock(1.0, 0.0, 0.0);
     createBlock(2.0, 0.0, 0.0);
+
     createBlock(1.0, 0.0, 1.0);
     createBlock(1.0, 0.0, -1.0);
-    createBlock(1.0, 1.0, 0.0);
 
-    moveBlock(Vec3i(1.0, 0.0, 1.0), Vec3i(3.0, 0.0, 0.0));
+    createBlock(1.0, 1.0, 0.0);
+    createBlock(1.0, 2.0, 0.0);
+
+    //moveBlock(Vec3i(1.0, 0.0, 1.0), Vec3i(3.0, 0.0, 0.0));
 
     //animatedMove(Vec3i(2.0, 0.0, 0.0), AxisVec3i(YAXIS, 10));
-    animatedMove(Vec3i(1.0, 1.0, 0.0), AxisVec3i(XAXIS, -100));
+    animatedMove(Blockchain(Vec3i(1.0, 1.0, 0.0), AxisVec3i(YAXIS, 1)), AxisVec3i(YAXIS, 10));
+    animatedMove(Blockchain(Vec3i(0.0, 0.0, 0.0), AxisVec3i(XAXIS, 2)), AxisVec3i(XAXIS, 5));
 
     //removeBlock(Vec3i(1.0, 1.0, 0.0));
 }
@@ -94,7 +101,6 @@ void Scene::createBlock(Vec3i pos, BlockType type) {
             m_blocksContainer.emplace(pos, std::shared_ptr<Block>(new Block(pos, m_rootEntity, type)));
             break;
     }
-
 }
 
 void Scene::createBlockchain(Blockchain blocksToAdd, BlockType type) {
@@ -120,6 +126,8 @@ void Scene::removeBlock(int x, int y, int z) {
 void Scene::removeBlock(Vec3i pos) {
     if (!hasBlock(pos)) throw MissingBlockException(pos);
 
+    if (m_blocksContainer[pos]->isLocked()) throw LockedBlockException(pos);
+
     m_blocksContainer.erase(pos);
 }
 
@@ -143,12 +151,21 @@ void Scene::moveBlock(Vec3i blockPos, Vec3i newBlockPos) {
 }
 
 void Scene::moveBlockchain(Blockchain blocksToMove, AxisVec3i shift) {
+    // Checker
+    for (Blockchain::const_iterator it = blocksToMove.begin(); it != blocksToMove.end(); ++it) {
+        if (!hasBlock(*it)) throw MissingBlockException(*it);
+
+        if (hasBlock(*it + shift)) throw OccupiedPosException(*it);
+
+        if (isBlockLocked(*it + shift)) throw LockedBlockException(*it);
+    }
+
     std::list<std::shared_ptr<Block>> tempContainer;
 
     // Removing blocks from scene (but their objects are not deleted)
     for (Blockchain::const_iterator it = blocksToMove.begin(); it != blocksToMove.end(); ++it) {
         tempContainer.push_back(m_blocksContainer[*it]);
-        removeBlock(*it); // Will throw exception if no block
+        removeBlock(*it);
     }
 
     // Adding blocks back to scene on new pos
@@ -162,12 +179,21 @@ void Scene::animatedMove(Vec3i blockToMove, AxisVec3i animatedShift) {
     animatedMove(Blockchain(blockToMove, AxisVec3i::NO_SHIFT), animatedShift);
 }
 
-void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
+void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {            
     if (animatedShift == AxisVec3i::NO_SHIFT) return;
 
-    // TODO: need a complex checker (as a part of TMC::Scene) of occupied blocks, path, and destination for all blocks to move
-    // TODO: need to check that we are moving by axis of blockchain
-    // EXCEPTION REQUIRED
+    // Validating animation
+    Blockchain animationPath = getAnimationPath(blocksToMove, animatedShift); // Could throw BadAnimationParams
+
+    for (Blockchain::const_iterator it = blocksToMove.begin(); it != blocksToMove.end(); ++it) {
+        if (!hasBlock(*it)) throw MissingBlockException(*it);
+
+        if (isBlockLocked(*it)) throw LockedBlockException(*it);
+    }
+
+    for (Blockchain::const_iterator it = animationPath.begin(); it != animationPath.end(); ++it) {
+        if (hasBlock(*it)) throw OccupiedPosException(*it);
+    }
 
 
     // Self-destructed animation with cleanup signal
@@ -181,13 +207,13 @@ void Scene::animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift) {
     }
 
     // Creating placeholders on animation path to prevent block intersections
-    createBlockchain(getAnimationPath(blocksToMove, animatedShift), PLACEHOLDER_BLOCK);
+    createBlockchain(animationPath, PLACEHOLDER_BLOCK);
 
     animation->animate();
 }
 
 /* We are able to place a block only if there is no block at pos
- * and if there are face-adjacent blocks nearby. */
+ * and if there are face-adjacent blocks nearby. Manually - means via input controller. */
 bool Scene::blockCouldBePlacedManually(Vec3i pos) {
     const int CHECK_NUM = 7;
     const Vec3i shifts[] = { Vec3i(-1, 0, 0), Vec3i(1, 0, 0), // x face-adjacent
@@ -205,6 +231,7 @@ bool Scene::blockCouldBePlacedManually(Vec3i pos) {
     return false;
 }
 
+// Manually - means via input controller.
 bool Scene::blockCouldBeRemovedManually(Vec3i pos) {
     return hasBlock(pos) && !m_blocksContainer[pos]->isLocked();
 }
@@ -215,6 +242,13 @@ Qt3DCore::QEntity *Scene::getRootEntity() {
 
 void Scene::animationCleanup(Blockchain movedBlocks, AxisVec3i shift) {
     qDebug() << "Cleaning up animation.";
+
+    Blockchain animationPath = getAnimationPath(movedBlocks, shift);
+
+    // Unlocking placeholders
+    for (Blockchain::const_iterator it = animationPath.begin(); it != animationPath.end(); ++it) {
+        m_blocksContainer[*it]->setLocked(false);
+    }
 
     // Removing placeholders
     removeBlockchain(getAnimationPath(movedBlocks, shift));

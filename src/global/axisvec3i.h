@@ -66,6 +66,7 @@ public:
     friend QDebug operator<<(QDebug dbg, const AxisVec3i &axisVec);
 
 private:
+    // TODO: data representation needs refactoring
     Vec3i m_vec;
 };
 

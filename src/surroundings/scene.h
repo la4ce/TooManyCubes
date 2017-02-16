@@ -58,15 +58,11 @@ public:
     void moveBlock(Vec3i blockPos, Vec3i newBlockPos);
     void moveBlockchain(Blockchain blocksToMove, AxisVec3i shift);
 
-    // TODO: void Scene::animatedMove(Vec3i blockToMovePos, Vec3i newPos);
     void animatedMove(Vec3i blockToMove, AxisVec3i animatedShift);
     void animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift);
 
     bool blockCouldBePlacedManually(Vec3i pos);
     bool blockCouldBeRemovedManually(Vec3i pos);
-
-    // TODO: void blockchainCouldBePlaced(Blockchain blocksToPlace);
-    // TODO: void blockchainCouldBeRemoved(Blockchain blocksToRemove);
 
     Qt3DCore::QEntity* getRootEntity();
 
