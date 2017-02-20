@@ -14,7 +14,11 @@ class Scene;
 /* Blockchain represents coordinates and dimenstions of a 1x1xN
  * row of blocks by any axis, conveniently packed.
  * Blockchain is a Vec3i base position and AxisVec3i shift; NO_SHIFT
- * specifies that this blockchain occupies only block in base position. */
+ * specifies that this blockchain occupies only block in base position.
+ *
+ * A concept of Blockchain would be really helpful for animating blocks
+ * affected by gravity, but gravity is not implemented yet. */
+
 class Blockchain {
 public:
     Blockchain(Vec3i basePos, AxisVec3i range);

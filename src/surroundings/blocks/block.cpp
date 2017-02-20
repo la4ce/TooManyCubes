@@ -20,12 +20,16 @@ Block::Block(Vec3i discretePos, Qt3DCore::QEntity *parent, BlockType type, Hided
 
     m_blockEntity->setParent(parent);
 
+    QObject::connect(this, SIGNAL(hidedChanged()),
+                                  this, SLOT(updateScale()));
+
     if (type != PLACEHOLDER_BLOCK) {
         m_blockTransform = new Qt3DCore::QTransform();
         m_blockMesh = new Qt3DExtras::QCuboidMesh();
 
+        // Calling these methods manually
         this->updateScale();
-        this->updateTranslation();
+        this->updateBaseTranslation();
 
         m_blockTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0, 0, 0), 0.0f));
 
@@ -84,9 +88,7 @@ void Block::setHided(bool hided) {
     if (m_hided == hided) return;
 
     m_hided = hided;
-
-    // TODO: make this a method that is notified when m_hided changes
-    updateScale();
+    emit hidedChanged();
 }
 
 bool Block::isLocked() const {
@@ -97,7 +99,6 @@ void Block::setLocked(bool isLocked) {
     m_locked = isLocked;
 }
 
-
 Vec3i Block::getDiscretePos() const {
     return m_discretePos;
 }
@@ -106,14 +107,14 @@ void Block::setDiscretePos(Vec3i newDiscretePos) {
     if (m_discretePos == newDiscretePos) return;
 
     m_discretePos = newDiscretePos;
-    updateTranslation();
+    updateBaseTranslation();
 }
 
 // Translate transform from it's base (according to m_discretePos) scene position
 void Block::translateFromBasePos(QMatrix4x4 translMatr) {
     if (m_blockTransform == nullptr) return;
 
-    updateTranslation();
+    updateBaseTranslation();
     m_blockTransform->setMatrix(m_blockTransform->matrix() * translMatr);
 }
 
@@ -124,8 +125,8 @@ void Block::updateScale() {
     m_blockTransform->setScale(transfScale);
 }
 
-// TODO: make this function notified when m_discretePos changed. Safer.
-void Block::updateTranslation() {
+// Calculates transform's translation according to block's position in scene
+void Block::updateBaseTranslation() {
     if (m_blockTransform == nullptr) return;
 
     QVector3D newTranslation = this->discreteToWorldCoordinates(m_discretePos);

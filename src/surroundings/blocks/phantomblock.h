@@ -9,8 +9,6 @@ namespace TMC {
 class PhantomBlock : public Block {
 public:
     PhantomBlock(Qt3DCore::QEntity *parent);
-
-    // TODO: if no new custom behaviour relatively to TMC::Block expected - remove class
 };
 
 }

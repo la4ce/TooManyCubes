@@ -31,7 +31,12 @@ enum LockedState {
 class BlockAnimationController;
 
 /* Block is an atomic unit of surrounding in the game. */
-class Block {
+class Block : public QObject {
+    Q_OBJECT
+
+    Q_PROPERTY(bool hided READ isHided WRITE setHided NOTIFY hidedChanged)
+    Q_PROPERTY(bool locked READ isLocked WRITE setLocked NOTIFY lockedChanged)
+
     friend class BlockAnimationController;
 
 public:
@@ -65,12 +70,19 @@ protected:
     Qt3DCore::QTransform *m_blockTransform;
 
 private:
-    void updateScale();
-    void updateTranslation();
+
     void translateFromBasePos(QMatrix4x4 translMatr); // Only for animations, otherwise discretePos and transform's translation shouldn't diverge
 
     Qt3DExtras::QCuboidMesh *m_blockMesh;
     Qt3DRender::QMaterial *m_blockMaterial;
+
+private slots:
+    void updateScale();
+    void updateBaseTranslation();
+
+signals:
+    void hidedChanged();
+    void lockedChanged();
 };
 
 }

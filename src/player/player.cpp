@@ -10,7 +10,7 @@ namespace TMC {
 Player::Player(Scene *scene, Qt3DRender::QCamera *viewCamera)
     : m_playerCamera(viewCamera)
     , m_phantomBlockController(new PhantomBlockController(scene, viewCamera))
-    , m_inputController(new InputController(scene, m_phantomBlockController)) { // TODO: check if it's okay to do like this
+    , m_inputController(new InputController(scene, m_phantomBlockController)) {
 
     initPlayerCamera();
     initInputController();

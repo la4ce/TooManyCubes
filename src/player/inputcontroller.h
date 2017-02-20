@@ -28,8 +28,7 @@ namespace TMC {
 class Scene;
 class PhantomBlockController;
 
-class InputController : public Qt3DCore::QEntity
-{
+class InputController : public Qt3DCore::QEntity {
     Q_OBJECT
 
     Q_PROPERTY(Qt3DRender::QCamera *camera READ camera WRITE setCamera NOTIFY cameraChanged)
@@ -96,7 +95,6 @@ signals:
 
 public slots:
     void update(float);
-
 };
 
 }
