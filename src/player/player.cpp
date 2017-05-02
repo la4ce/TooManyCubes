@@ -8,7 +8,8 @@
 namespace TMC {
 
 Player::Player(Scene *scene, Qt3DRender::QCamera *viewCamera)
-    : m_playerCamera(viewCamera)
+    : QObject(scene)
+    , m_playerCamera(viewCamera)
     , m_phantomBlockController(new PhantomBlockController(scene, viewCamera))
     , m_inputController(new InputController(scene, m_phantomBlockController)) {
 

@@ -1,26 +1,16 @@
-#include <QGuiApplication>
+#include <QApplication>
 
-#include "qt3dwindow.h"
+#include "mainwindow.h"
 #include "scene.h"
-#include "player.h"
 
 using namespace TMC;
 
-// TODO: add some beautiful demo presets (for block generation, animations, gravity, liquids, explosions)
-// TODO: add ping-pong animations for nice demo scenes
-
 int main(int argc, char* argv[]) {
-    QGuiApplication app(argc, argv);
-    //QGuiApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
-
-    Qt3DExtras::Qt3DWindow view;
+    QApplication app(argc, argv);
     Scene scene;
-    Player player(&scene, view.camera());
+    MainWindow window(&scene);
 
-    view.setRootEntity(scene.getRootEntity());
-
-    //view.showFullScreen();
-    view.show();
-
+    window.show();
+    window.resize(800, 600);
     return app.exec();
 }

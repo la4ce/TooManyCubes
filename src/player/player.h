@@ -1,6 +1,8 @@
 #ifndef TMC_PLAYER_H
 #define TMC_PLAYER_H
 
+#include <QObject>
+
 namespace Qt3DRender {
     class QCamera;
 }
@@ -11,7 +13,9 @@ class Scene;
 class InputController;
 class PhantomBlockController;
 
-class Player {
+class Player : public QObject {
+    Q_OBJECT
+
 public:
     Player(Scene *scene, Qt3DRender::QCamera *viewCamera);
 

@@ -64,7 +64,7 @@ void Scene::initScene() {
 
     //animatedMove(Vec3i(2.0, 0.0, 0.0), AxisVec3i(YAXIS, 10));
     animatedMove(Blockchain(Vec3i(1.0, 1.0, 0.0), AxisVec3i(YAXIS, 1)), AxisVec3i(YAXIS, 10));
-    animatedMove(Blockchain(Vec3i(0.0, 0.0, 0.0), AxisVec3i(XAXIS, 2)), AxisVec3i(XAXIS, 5));
+    animatedMove(Blockchain(Vec3i(0.0, 0.0, 0.0), AxisVec3i(XAXIS, 2)), AxisVec3i(XAXIS, 20));
 
     //removeBlock(Vec3i(1.0, 1.0, 0.0));
 }
