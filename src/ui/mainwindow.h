@@ -16,6 +16,6 @@ private:
     Scene *mScene;
 };
 
-}
+} // namespace TMC
 
 #endif // MAINWINDOW_H

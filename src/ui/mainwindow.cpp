@@ -1,21 +1,30 @@
+#include <QToolBar>
+
 #include "mainwindow.h"
 #include "qt3dwindow.h"
 #include "scene.h"
 #include "player.h"
+#include "quickactionspanel.h"
 
 namespace TMC {
 
 MainWindow::MainWindow(Scene *scene, QWidget *parent)
     : QMainWindow(parent)
     , mScene(scene) {
-    Qt3DExtras::Qt3DWindow *view = new Qt3DExtras::Qt3DWindow();
+    auto *qt3DWindow = new Qt3DExtras::Qt3DWindow();
+    qt3DWindow->setRootEntity(scene->getRootEntity());
 
-    Player *player = new Player(scene, view->camera()); // tied to scene
+    // TODO: not a good place for Player creation, move when refactoring
+    Player *player = new Player(scene, qt3DWindow->camera()); // tied to scene
 
-    view->setRootEntity(scene->getRootEntity());
+    QWidget *container = QWidget::createWindowContainer(qt3DWindow, this);
+    this->setCentralWidget(container);
 
-    QWidget *container = QWidget::createWindowContainer(view, this);
-    this->setCentralWidget(container); // took ownership over Qt3DWindow
+//    auto qToolBar = new QToolBar();
+//    addToolBar(Qt::RightToolBarArea, qToolBar);
+
+    auto quickActionsPanel = new QuickActionsPanel();
+    addDockWidget(Qt::TopDockWidgetArea, quickActionsPanel);
 }
 
-}
+} // namespace TMC
