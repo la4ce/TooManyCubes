@@ -3,18 +3,21 @@
 #include "quickactionspanel.h"
 #include "basequickactiontab.h"
 #include "filetab.h"
+#include "edittab.h"
 
 namespace TMC {
 
 QuickActionsPanel::QuickActionsPanel(QWidget *parent) {
     setFeatures(QDockWidget::NoDockWidgetFeatures);
 
-    // Populating
+    // Populating panel
     auto tabWidget = new QTabWidget();
 
-    auto firstTab = new FileTab();
+    auto fileTab = new FileTab();
+    auto editTab = new EditTab();
 
-    tabWidget->addTab(firstTab, firstTab->getTabName());
+    tabWidget->addTab(fileTab, fileTab->getTabName());
+    tabWidget->addTab(editTab, editTab->getTabName());
 
     setWidget(tabWidget);
 }

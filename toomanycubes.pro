@@ -13,3 +13,6 @@ include(src/ui/ui.pri)
 SOURCES += \
     src/main.cpp \
 
+RESOURCES += \
+    resources/res.qrc
+
