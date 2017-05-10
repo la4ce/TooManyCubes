@@ -16,6 +16,8 @@ public:
 protected:
     BaseQuickActionTab(QWidget *parent, const QString &tabName);
 
+    void paintEvent(QPaintEvent *) override;
+
     QHBoxLayout *m_layout;
 
 private:

@@ -9,6 +9,7 @@ namespace TMC {
 
 QuickActionsPanel::QuickActionsPanel(QWidget *parent) {
     setFeatures(QDockWidget::NoDockWidgetFeatures);
+    setTitleBarWidget(new QWidget()); // empty bar
 
     // Populating panel
     auto tabWidget = new QTabWidget();

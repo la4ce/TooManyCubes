@@ -20,6 +20,7 @@ EditTab::EditTab(QWidget *parent)
     m_layout->addWidget(undoButton);
     m_layout->addWidget(redoButton);
     m_layout->addWidget(cutButton);
+
 }
 
 } // namespace TMC

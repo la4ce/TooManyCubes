@@ -1,0 +1,46 @@
+QToolButton { 
+	background-color: rgb(82, 82, 82);
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    min-height: 48px;
+    min-width: 36px;
+    max-height: 48px;
+    max-width: 36px;
+    icon-size: 28px;
+}
+
+QToolButton:hover {
+    background-color: rgb(134, 134, 134);
+    border-style: inset;
+}
+
+QTabWidget::tab-bar {
+    alignment: left;
+}
+
+QTabBar::tab {
+	background-color: rgb(82, 82, 82);
+    border: none;
+    padding: 2px;
+    padding-top: 8px;
+}
+
+QTabWidget::pane {
+	background-color: rgb(82, 82, 82);
+    border: none;
+    padding-left: 6px;
+}
+
+QDockWidget {
+    min-height: 80px; 
+    max-height: 80px; 
+}
+
+QMainWindow {
+	background-color: rgb(82, 82, 82);
+    border: none;
+}
+
+
+

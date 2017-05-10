@@ -20,8 +20,8 @@ MainWindow::MainWindow(Scene *scene, QWidget *parent)
     QWidget *container = QWidget::createWindowContainer(qt3DWindow, this);
     this->setCentralWidget(container);
 
-//    auto qToolBar = new QToolBar();
-//    addToolBar(Qt::RightToolBarArea, qToolBar);
+//    QString tabStyle = "QWidget { padding: 0px; margin: 0px; background-color: rgb(100, 100, 82); }";
+//    setStyleSheet(tabStyle);
 
     auto quickActionsPanel = new QuickActionsPanel();
     addDockWidget(Qt::TopDockWidgetArea, quickActionsPanel);
