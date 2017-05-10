@@ -1,4 +1,5 @@
 #include <QTabWidget>
+#include <QFile>
 
 #include "quickactionspanel.h"
 #include "basequickactiontab.h"
@@ -10,6 +11,12 @@ namespace TMC {
 QuickActionsPanel::QuickActionsPanel(QWidget *parent) {
     setFeatures(QDockWidget::NoDockWidgetFeatures);
     setTitleBarWidget(new QWidget()); // empty bar
+
+    QFile stylesFile(":/styles/quick_actions_panel.css");
+    stylesFile.open(QFile::ReadOnly);
+    QString quickActionsPanelStyles = QLatin1String(stylesFile.readAll());
+
+    setStyleSheet(quickActionsPanelStyles);
 
     // Populating panel
     auto tabWidget = new QTabWidget();
