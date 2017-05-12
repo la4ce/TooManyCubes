@@ -1,5 +1,5 @@
 QToolButton { 
-	background-color: rgb(82, 82, 82);
+    background-color: rgb(82, 82, 82);
     border: none;
     margin: 0px;
     padding: 0px;
@@ -7,7 +7,7 @@ QToolButton {
     min-width: 36px;
     max-height: 48px;
     max-width: 36px;
-    icon-size: 28px;
+    icon-size: 24px;
 }
 
 QToolButton:hover {
@@ -31,9 +31,8 @@ QTabBar::tab {
     padding-right: 8px;
     padding-top: 4px;
     padding-bottom: 4px;
-
     margin-top: 10px;
-    font: 12px;
+    font-size: 12px;
 }
 
 QTabBar::tab::selected, QTabBar::tab::hover {
@@ -42,7 +41,7 @@ QTabBar::tab::selected, QTabBar::tab::hover {
 }
 
 QTabWidget::pane {
-	background-color: rgb(82, 82, 82);
+    background-color: rgb(82, 82, 82);
     border: none;
     padding-left: 6px;
 }

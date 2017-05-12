@@ -16,3 +16,5 @@ SOURCES += \
 RESOURCES += \
     resources/res.qrc
 
+DISTFILES +=
+

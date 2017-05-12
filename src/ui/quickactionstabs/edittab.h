@@ -7,7 +7,7 @@ namespace TMC {
 
 class EditTab : public BaseQuickActionTab {
 public:
-    EditTab(QWidget *parent = 0);
+    EditTab(QWidget *parent = nullptr);
 };
 
 } // namespace TMC

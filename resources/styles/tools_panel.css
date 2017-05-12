@@ -1,0 +1,44 @@
+QToolButton { 
+    background-color: rgb(82, 82, 82);
+    border: none;
+    margin: 0px;
+    padding: 4px;
+/*    min-height: 32px;
+    min-width: 32px;
+    max-height: 32px;
+    max-width: 32px;*/
+    icon-size: 22px;
+}
+
+QToolButton:hover {
+    background-color: rgb(134, 134, 134);
+    border-style: inset;
+}
+
+QToolButton:pressed {
+    padding-top: 2px;
+}
+
+QGroupBox {
+    background-color: rgb(82, 82, 82);
+    border: none;
+    padding: 0px;
+    margin-top: 28px;
+    font-size: 12px;
+}
+
+QGroupBox::title {
+    color: rgb(155, 155, 155);
+    background-color: rgb(54, 54, 54);
+    text-align: left;
+    subcontrol-origin: margin;
+    subcontrol-position: top left; 
+    margin: 0px;
+    padding: 6 6 6 6px;
+}
+
+QDockWidget {
+    background-color: rgb(54, 54, 54);
+    border: none;
+}
+

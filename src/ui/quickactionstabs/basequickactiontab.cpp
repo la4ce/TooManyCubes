@@ -12,7 +12,7 @@ BaseQuickActionTab::BaseQuickActionTab(QWidget *parent, const QString &tabName)
     , m_tabName(tabName) {
 
     m_layout->setAlignment(Qt::AlignLeft);
-    //m_layout->setSizeConstraint(QLayout::Set);
+//    m_layout->setSizeConstraint(QHBoxLayout::SetFixedSize);
     m_layout->setMargin(0);
     m_layout->setSpacing(2);
 

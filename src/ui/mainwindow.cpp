@@ -5,6 +5,7 @@
 #include "scene.h"
 #include "player.h"
 #include "quickactionspanel.h"
+#include "toolspanel.h"
 
 namespace TMC {
 
@@ -25,6 +26,9 @@ MainWindow::MainWindow(Scene *scene, QWidget *parent)
 
     auto quickActionsPanel = new QuickActionsPanel();
     addDockWidget(Qt::TopDockWidgetArea, quickActionsPanel);
+
+    auto toolsPanel = new ToolsPanel();
+    addDockWidget(Qt::LeftDockWidgetArea, toolsPanel);
 }
 
 } // namespace TMC

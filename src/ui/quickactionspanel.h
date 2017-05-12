@@ -7,7 +7,7 @@ namespace TMC {
 
 class QuickActionsPanel : public QDockWidget {
 public:
-    QuickActionsPanel(QWidget *parent = 0);
+    QuickActionsPanel(QWidget *parent = nullptr);
 };
 
 } // namespace TMC
