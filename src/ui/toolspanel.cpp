@@ -9,11 +9,6 @@
 namespace TMC {
 
 ToolsPanel::ToolsPanel(const QString &title, QWidget *parent) : QGroupBox(title, parent) {
-    QFile stylesFile(":/styles/tools_panel.css");
-    stylesFile.open(QFile::ReadOnly);
-    QString toolsPanelStyles = QLatin1String(stylesFile.readAll());
-
-    setStyleSheet(toolsPanelStyles);
 
     auto button1 = new QToolButton();
     button1->setIcon(QIcon(":/icons/new_file_ic.png"));

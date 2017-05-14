@@ -13,7 +13,5 @@
         <file>icons/undo_ic@2x.png</file>
         <file>icons/cut_ic@2x.png</file>
         <file>icons/new_file_ic@2x.png</file>
-        <file>styles/quick_actions_panel.css</file>
-        <file>styles/tools_panel.css</file>
     </qresource>
 </RCC>

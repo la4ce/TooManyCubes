@@ -23,8 +23,6 @@ MainWindow::MainWindow(Scene *scene, QWidget *parent)
     auto centralWidget = new QWidget();
     auto gridLayout = new QGridLayout();
 
-    QWidget *sceneWindowContainer = QWidget::createWindowContainer(qt3DWindow, this);
-
     gridLayout->setColumnStretch(0, 0);
     gridLayout->setColumnStretch(1, 1);
     gridLayout->setRowStretch(0, 0);
@@ -33,8 +31,17 @@ MainWindow::MainWindow(Scene *scene, QWidget *parent)
     gridLayout->setSpacing(0);
     gridLayout->setContentsMargins(0, 0, 0, 0);
 
-    gridLayout->addWidget(new QuickActionsPanel(), 0, 0, 1, -1);
-    gridLayout->addWidget(new ToolsPanel(tr("Tools")), 1, 0, -1, 1, Qt::AlignTop);
+    auto quickActionPanel = new QuickActionsPanel();
+    quickActionPanel->setObjectName("QuickActionsPanel");
+
+    auto toolsPanel = new ToolsPanel(tr("Tools"));
+    toolsPanel->setObjectName("ToolsPanel");
+
+    QWidget *sceneWindowContainer = QWidget::createWindowContainer(qt3DWindow, this);
+    sceneWindowContainer->setObjectName("sceneWindow");
+
+    gridLayout->addWidget(quickActionPanel, 0, 0, 1, -1);
+    gridLayout->addWidget(toolsPanel, 1, 0, -1, 1, Qt::AlignTop);
     gridLayout->addWidget(sceneWindowContainer, 1, 1, -1, -1);
 
     centralWidget->setLayout(gridLayout);

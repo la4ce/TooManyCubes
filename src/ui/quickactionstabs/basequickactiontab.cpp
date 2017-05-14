@@ -14,6 +14,7 @@ BaseQuickActionTab::BaseQuickActionTab(QWidget *parent, const QString &tabName)
     m_layout->setAlignment(Qt::AlignLeft);
     m_layout->setSizeConstraint(QHBoxLayout::SetMinimumSize);
     m_layout->setMargin(0);
+    m_layout->setContentsMargins(0, 0, 0, 0);
     m_layout->setSpacing(2);
 
     setLayout(m_layout);
