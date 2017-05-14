@@ -1,4 +1,5 @@
 #include <QToolBar>
+#include <QGridLayout>
 
 #include "mainwindow.h"
 #include "qt3dwindow.h"
@@ -18,17 +19,27 @@ MainWindow::MainWindow(Scene *scene, QWidget *parent)
     // TODO: not a good place for Player creation, move when refactoring
     Player *player = new Player(scene, qt3DWindow->camera()); // tied to scene
 
-    QWidget *container = QWidget::createWindowContainer(qt3DWindow, this);
-    this->setCentralWidget(container);
+    // UI
+    auto centralWidget = new QWidget();
+    auto gridLayout = new QGridLayout();
 
-//    QString tabStyle = "QWidget { padding: 0px; margin: 0px; background-color: rgb(100, 100, 82); }";
-//    setStyleSheet(tabStyle);
+    QWidget *sceneWindowContainer = QWidget::createWindowContainer(qt3DWindow, this);
 
-    auto quickActionsPanel = new QuickActionsPanel();
-    addDockWidget(Qt::TopDockWidgetArea, quickActionsPanel);
+    gridLayout->setColumnStretch(0, 0);
+    gridLayout->setColumnStretch(1, 1);
+    gridLayout->setRowStretch(0, 0);
+    gridLayout->setRowStretch(1, 1);
 
-    auto toolsPanel = new ToolsPanel();
-    addDockWidget(Qt::LeftDockWidgetArea, toolsPanel);
+    gridLayout->setSpacing(0);
+    gridLayout->setContentsMargins(0, 0, 0, 0);
+
+    gridLayout->addWidget(new QuickActionsPanel(), 0, 0, 1, -1);
+    gridLayout->addWidget(new ToolsPanel(tr("Tools")), 1, 0, -1, 1, Qt::AlignTop);
+    gridLayout->addWidget(sceneWindowContainer, 1, 1, -1, -1);
+
+    centralWidget->setLayout(gridLayout);
+
+    this->setCentralWidget(centralWidget);
 }
 
 } // namespace TMC

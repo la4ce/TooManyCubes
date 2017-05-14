@@ -8,10 +8,7 @@
 
 namespace TMC {
 
-ToolsPanel::ToolsPanel(QWidget *parent) {
-    setFeatures(QDockWidget::NoDockWidgetFeatures);
-    setTitleBarWidget(new QWidget()); // empty bar
-
+ToolsPanel::ToolsPanel(const QString &title, QWidget *parent) : QGroupBox(title, parent) {
     QFile stylesFile(":/styles/tools_panel.css");
     stylesFile.open(QFile::ReadOnly);
     QString toolsPanelStyles = QLatin1String(stylesFile.readAll());
@@ -49,7 +46,7 @@ ToolsPanel::ToolsPanel(QWidget *parent) {
 
     gridLayout->setSpacing(2);
     gridLayout->setMargin(10);
-    gridLayout->setSizeConstraint(QGridLayout::SetFixedSize);
+    gridLayout->setSizeConstraint(QGridLayout::SetMinimumSize);
 
     gridLayout->addWidget(button1, 0, 0, Qt::AlignCenter);
     gridLayout->addWidget(button2, 0, 1, Qt::AlignCenter);
@@ -61,10 +58,7 @@ ToolsPanel::ToolsPanel(QWidget *parent) {
     gridLayout->addWidget(button8, 2, 1, Qt::AlignCenter);
     gridLayout->addWidget(button9, 2, 2, Qt::AlignCenter);
 
-    auto groupBox = new QGroupBox(tr("Tools"));
-    groupBox->setLayout(gridLayout);
-
-    setWidget(groupBox);
+    setLayout(gridLayout);
 }
 
 } // namespace TMC

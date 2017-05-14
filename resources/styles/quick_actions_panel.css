@@ -46,7 +46,3 @@ QTabWidget::pane {
     padding-left: 6px;
 }
 
-QDockWidget {
-    min-height: 80px; 
-    max-height: 80px; 
-}

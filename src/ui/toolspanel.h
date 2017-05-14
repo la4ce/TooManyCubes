@@ -1,13 +1,13 @@
 #ifndef TOOLSPANEL_H
 #define TOOLSPANEL_H
 
-#include <QDockWidget>
+#include <QGroupBox>
 
 namespace TMC {
 
-class ToolsPanel : public QDockWidget {
+class ToolsPanel : public QGroupBox {
 public:
-    ToolsPanel(QWidget *parent = nullptr);
+    ToolsPanel(const QString &title, QWidget *parent = nullptr);
 };
 
 } // namespace TMC

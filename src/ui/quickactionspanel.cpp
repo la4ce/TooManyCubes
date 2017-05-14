@@ -8,9 +8,7 @@
 
 namespace TMC {
 
-QuickActionsPanel::QuickActionsPanel(QWidget *parent) {
-    setFeatures(QDockWidget::NoDockWidgetFeatures);
-    setTitleBarWidget(new QWidget()); // empty bar
+QuickActionsPanel::QuickActionsPanel(QWidget *parent) : QTabWidget(parent) {
 
     QFile stylesFile(":/styles/quick_actions_panel.css");
     stylesFile.open(QFile::ReadOnly);
@@ -19,15 +17,11 @@ QuickActionsPanel::QuickActionsPanel(QWidget *parent) {
     setStyleSheet(quickActionsPanelStyles);
 
     // Populating panel
-    auto tabWidget = new QTabWidget();
-
     auto fileTab = new FileTab();
     auto editTab = new EditTab();
 
-    tabWidget->addTab(fileTab, fileTab->getTabName());
-    tabWidget->addTab(editTab, editTab->getTabName());
-
-    setWidget(tabWidget);
+    addTab(fileTab, fileTab->getTabName());
+    addTab(editTab, editTab->getTabName());
 }
 
 } // namespace TMC

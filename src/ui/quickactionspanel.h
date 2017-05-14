@@ -1,11 +1,11 @@
 #ifndef QUICKACTIONSPANEL_H
 #define QUICKACTIONSPANEL_H
 
-#include <QDockWidget>
+#include <QTabWidget>
 
 namespace TMC {
 
-class QuickActionsPanel : public QDockWidget {
+class QuickActionsPanel : public QTabWidget {
 public:
     QuickActionsPanel(QWidget *parent = nullptr);
 };
