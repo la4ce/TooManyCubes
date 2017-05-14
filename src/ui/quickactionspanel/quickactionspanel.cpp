@@ -2,7 +2,7 @@
 #include <QFile>
 
 #include "quickactionspanel.h"
-#include "basequickactiontab.h"
+#include "basequickactionstab.h"
 #include "filetab.h"
 #include "edittab.h"
 

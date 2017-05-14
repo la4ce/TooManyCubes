@@ -2,11 +2,11 @@
 #include <QStyleOption>
 #include <QPainter>
 
-#include "basequickactiontab.h"
+#include "basequickactionstab.h"
 
 namespace TMC {
 
-BaseQuickActionTab::BaseQuickActionTab(QWidget *parent, const QString &tabName)
+BaseQuickActionsTab::BaseQuickActionsTab(QWidget *parent, const QString &tabName)
     : QWidget(parent)
     , m_layout(new QHBoxLayout())
     , m_tabName(tabName) {
@@ -20,14 +20,14 @@ BaseQuickActionTab::BaseQuickActionTab(QWidget *parent, const QString &tabName)
     setLayout(m_layout);
 }
 
-void BaseQuickActionTab::paintEvent(QPaintEvent *) {
+void BaseQuickActionsTab::paintEvent(QPaintEvent *) {
     QStyleOption opt;
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
 
-const QString BaseQuickActionTab::getTabName() {
+const QString BaseQuickActionsTab::getTabName() {
     return m_tabName;
 }
 

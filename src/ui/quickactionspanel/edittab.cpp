@@ -6,7 +6,7 @@
 namespace TMC {
 
 EditTab::EditTab(QWidget *parent)
-    : BaseQuickActionTab(parent, "Edit") {
+    : BaseQuickActionsTab(parent, "Edit") {
 
     auto undoButton = new QToolButton();
     undoButton->setIcon(QIcon(":/icons/undo_ic.png"));

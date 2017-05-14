@@ -6,7 +6,7 @@
 namespace TMC {
 
 FileTab::FileTab(QWidget *parent)
-    : BaseQuickActionTab(parent, "File") {
+    : BaseQuickActionsTab(parent, "File") {
     auto newButton = new QToolButton();
     newButton->setIcon(QIcon(":/icons/new_file_ic.png"));
     newButton->setToolTip(tr("New File"));

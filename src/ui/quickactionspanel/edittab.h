@@ -1,11 +1,11 @@
 #ifndef EDITTAB_H
 #define EDITTAB_H
 
-#include "basequickactiontab.h"
+#include "basequickactionstab.h"
 
 namespace TMC {
 
-class EditTab : public BaseQuickActionTab {
+class EditTab : public BaseQuickActionsTab {
 public:
     EditTab(QWidget *parent = nullptr);
 };

@@ -42,7 +42,13 @@ MainWindow::MainWindow(Scene *scene, QWidget *parent)
 
     gridLayout->addWidget(quickActionPanel, 0, 0, 1, -1);
     gridLayout->addWidget(toolsPanel, 1, 0, -1, 1, Qt::AlignTop);
+
+    auto sceneLayout = new QGridLayout();
     gridLayout->addWidget(sceneWindowContainer, 1, 1, -1, -1);
+
+    sceneLayout->setSpacing(0);
+    sceneLayout->setContentsMargins(4, 4, 4, 4);
+    sceneLayout->addWidget(sceneWindowContainer, 0, 0);
 
     centralWidget->setLayout(gridLayout);
 

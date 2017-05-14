@@ -1,11 +1,11 @@
 #ifndef FILETAB_H
 #define FILETAB_H
 
-#include "basequickactiontab.h"
+#include "basequickactionstab.h"
 
 namespace TMC {
 
-class FileTab : public BaseQuickActionTab {
+class FileTab : public BaseQuickActionsTab {
 public:
     FileTab(QWidget *parent = nullptr);
 };

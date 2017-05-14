@@ -1,5 +1,5 @@
-#ifndef BASEQUICKACTIONTAB_H
-#define BASEQUICKACTIONTAB_H
+#ifndef BASEQUICKACTIONSTAB_H
+#define BASEQUICKACTIONSTAB_H
 
 #include <QWidget>
 
@@ -7,14 +7,14 @@ class QHBoxLayout;
 
 namespace TMC {
 
-class BaseQuickActionTab : public QWidget {
+class BaseQuickActionsTab : public QWidget {
     Q_OBJECT
 
 public:
     const QString getTabName();
 
 protected:
-    BaseQuickActionTab(QWidget *parent, const QString &tabName);
+    BaseQuickActionsTab(QWidget *parent, const QString &tabName);
 
     void paintEvent(QPaintEvent *) override;
 
@@ -26,4 +26,4 @@ private:
 
 } // namespace TMC
 
-#endif // BASEQUICKACTIONTAB_H
+#endif // BASEQUICKACTIONSTAB_H

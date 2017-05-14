@@ -7,11 +7,5 @@
         <file>icons/undo_ic.png</file>
         <file>icons/new_file_ic.png</file>
         <file>styles/app_styles.css</file>
-        <file>icons/open_file_ic@2x.png</file>
-        <file>icons/save_ic@2x.png</file>
-        <file>icons/redo_ic@2x.png</file>
-        <file>icons/undo_ic@2x.png</file>
-        <file>icons/cut_ic@2x.png</file>
-        <file>icons/new_file_ic@2x.png</file>
     </qresource>
 </RCC>
