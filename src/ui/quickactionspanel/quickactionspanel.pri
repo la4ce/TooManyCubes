@@ -1,5 +1,3 @@
-QT += core gui
-
 INCLUDEPATH += $$PWD
 
 SOURCES += \

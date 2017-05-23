@@ -7,5 +7,9 @@
         <file>icons/undo_ic.png</file>
         <file>icons/new_file_ic.png</file>
         <file>styles/app_styles.css</file>
+        <file>icons/pencil_ic.png</file>
+        <file>icons/zoom_ic.png</file>
+        <file>icons/crop_ic.png</file>
+        <file>icons/paint_ic.png</file>
     </qresource>
 </RCC>

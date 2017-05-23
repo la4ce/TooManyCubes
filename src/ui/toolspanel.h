@@ -6,8 +6,9 @@
 namespace TMC {
 
 class ToolsPanel : public QGroupBox {
+    Q_OBJECT
 public:
-    ToolsPanel(const QString &title, QWidget *parent = nullptr);
+    explicit ToolsPanel(const QString &title, QWidget *parent = nullptr);
 };
 
 } // namespace TMC

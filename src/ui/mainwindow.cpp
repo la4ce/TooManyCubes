@@ -7,6 +7,7 @@
 #include "player.h"
 #include "quickactionspanel.h"
 #include "toolspanel.h"
+#include "colorselectorpanel.h"
 
 namespace TMC {
 
@@ -27,6 +28,7 @@ MainWindow::MainWindow(Scene *scene, QWidget *parent)
     gridLayout->setColumnStretch(1, 1);
     gridLayout->setRowStretch(0, 0);
     gridLayout->setRowStretch(1, 1);
+    gridLayout->setRowStretch(2, 0);
 
     gridLayout->setSpacing(0);
     gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -37,18 +39,21 @@ MainWindow::MainWindow(Scene *scene, QWidget *parent)
     auto toolsPanel = new ToolsPanel(tr("Tools"));
     toolsPanel->setObjectName("ToolsPanel");
 
+    auto colorSelectorPanel = new ColorSelectorPanel();
+
     QWidget *sceneWindowContainer = QWidget::createWindowContainer(qt3DWindow, this);
-    sceneWindowContainer->setObjectName("sceneWindow");
+    sceneWindowContainer->setObjectName("SceneWindow");
 
     gridLayout->addWidget(quickActionPanel, 0, 0, 1, -1);
-    gridLayout->addWidget(toolsPanel, 1, 0, -1, 1, Qt::AlignTop);
+    gridLayout->addWidget(toolsPanel, 1, 0, 1, 1, Qt::AlignTop);
+    gridLayout->addWidget(sceneWindowContainer, 1, 1, 1, 1);
+    gridLayout->addWidget(colorSelectorPanel, 2, 1, -1, -1);
 
-    auto sceneLayout = new QGridLayout();
-    gridLayout->addWidget(sceneWindowContainer, 1, 1, -1, -1);
-
-    sceneLayout->setSpacing(0);
-    sceneLayout->setContentsMargins(4, 4, 4, 4);
-    sceneLayout->addWidget(sceneWindowContainer, 0, 0);
+    // TODO: add margin to 3d window
+//    auto sceneLayout = new QGridLayout();
+//    sceneLayout->setSpacing(0);
+//    sceneLayout->setContentsMargins(4, 4, 4, 4);
+//    sceneLayout->addWidget(sceneWindowContainer, 0, 0);
 
     centralWidget->setLayout(gridLayout);
 

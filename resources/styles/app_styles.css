@@ -90,14 +90,37 @@ QGroupBox::title {
     padding: 6 6 6 6px;
 }
 
+/* ----- Color Selector ----- */
+QFrame#ColorCell { 
+    min-width: 12px;
+    min-height: 12px;
+    max-width: 12px;
+    max-height: 12px;
+    border: none;
+}
+
+QFrame#ColorCell:hover {
+    border: 1px solid rgb(220, 220, 220);                
+}
+
+QFrame#ActiveColorSwitcher {
+    min-width: 30px;
+    min-height: 26px;
+    max-width: 30px;
+    max-height: 26px;
+    border: 2px solid rgb(150, 150, 150);
+    border-radius: 2px;
+    padding: 0px;
+}
+
+/*QFrame#ActiveColorSwitcher:hover {
+    border: 4px solid rgb(250, 150, 150);
+}*/
 /* ----- 3D Scene Window ----- */
-QWidget#sceneWindow {
+QWidget#SceneWindow {
     min-height: 300px;
     min-width: 400px;
 }
-
-
-
 
 
 

@@ -7,7 +7,7 @@ namespace TMC {
 
 class FileTab : public BaseQuickActionsTab {
 public:
-    FileTab(QWidget *parent = nullptr);
+    explicit FileTab(QWidget *parent = nullptr);
 };
 
 } // namespace TMC
