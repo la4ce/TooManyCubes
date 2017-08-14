@@ -49,12 +49,6 @@ MainWindow::MainWindow(Scene *scene, QWidget *parent)
     gridLayout->addWidget(sceneWindowContainer, 1, 1, 1, 1);
     gridLayout->addWidget(colorSelectorPanel, 2, 1, -1, -1);
 
-    // TODO: add margin to 3d window
-//    auto sceneLayout = new QGridLayout();
-//    sceneLayout->setSpacing(0);
-//    sceneLayout->setContentsMargins(4, 4, 4, 4);
-//    sceneLayout->addWidget(sceneWindowContainer, 0, 0);
-
     centralWidget->setLayout(gridLayout);
 
     this->setCentralWidget(centralWidget);

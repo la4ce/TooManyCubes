@@ -12,6 +12,16 @@ public:
 
     void setPrimaryColor(const QColor &color);
     void setSecondaryColor(const QColor &color);
+
+    const QColor &getPrimaryColor();
+    const QColor &getSecondaryColor();
+
+private:
+    QColor primaryColor;
+    QColor secondaryColor;
+
+    QFrame *m_primaryFrame;
+    QFrame *m_secondaryFrame;
 };
 
 } // namespace TMC
