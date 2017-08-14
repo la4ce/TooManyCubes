@@ -6,7 +6,6 @@ include(src/surroundings/surroundings.pri)
 include(src/global/global.pri)
 include(src/materials/materials.pri)
 include(src/player/player.pri)
-include(src/animation/animation.pri)
 include(src/exceptions/exceptions.pri)
 include(src/ui/ui.pri)
 

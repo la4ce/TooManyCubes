@@ -4,8 +4,6 @@
 #include <unordered_map>
 
 #include "block.h"
-#include "axisvec3i.h"
-#include "blockchain.h"
 
 namespace std {
 template <>
@@ -30,7 +28,6 @@ class Scene : public QObject {
 
 public:
     static constexpr float DEFAULT_BLOCK_MOVE_DUR = 0.25f * 1000.0f; // in milliseconds
-    static Blockchain getAnimationPath(Blockchain movedBlocks, AxisVec3i shift);
 
 public:
     Scene();
@@ -45,21 +42,14 @@ public:
 
     void createBlock(int x, int y, int z, BlockType type = DEFAULT_BLOCK);
     void createBlock(Vec3i pos, BlockType type = DEFAULT_BLOCK);
-    void createBlockchain(Blockchain blocksToAdd, BlockType type = DEFAULT_BLOCK);
-
 
     std::shared_ptr<Block> getBlock(int x, int y, int z);
     std::shared_ptr<Block> getBlock(Vec3i pos);
 
     void removeBlock(int x, int y, int z);
     void removeBlock(Vec3i pos);
-    void removeBlockchain(Blockchain blocksToRemove);
 
     void moveBlock(Vec3i blockPos, Vec3i newBlockPos);
-    void moveBlockchain(Blockchain blocksToMove, AxisVec3i shift);
-
-    void animatedMove(Vec3i blockToMove, AxisVec3i animatedShift);
-    void animatedMove(Blockchain blocksToMove, AxisVec3i animatedShift);
 
     bool blockCouldBePlacedManually(Vec3i pos);
     bool blockCouldBeRemovedManually(Vec3i pos);
@@ -73,8 +63,6 @@ private:
     Qt3DCore::QEntity* m_rootEntity;
     BlocksContainer m_blocksContainer;
 
-private slots:
-    void animationCleanup(Blockchain movedBlocks, AxisVec3i shift);
 };
 
 } // namespace TooManyCubes
